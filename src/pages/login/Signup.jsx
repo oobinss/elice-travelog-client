@@ -18,6 +18,7 @@ const SignupHeader = styled.h2`
 	font-size: 30px;
 	position: relative;
 	top: 50px;
+	left: 200px;
 `;
 const SignupInput = styled.input`
 	width: 300px;
@@ -26,6 +27,7 @@ const SignupInput = styled.input`
 	box-sizing: border-box;
 	position: relative;
 	top: 100px;
+	left: 100px;
 	margin-bottom: 25px;
 	color: #5f6caf;
 	background-color: #edf7fa;
@@ -53,10 +55,7 @@ const InvalidInput = styled.p`
 	color: #ff8364;
 	position: relative;
 	top: 80px;
-	left: -50px;
-	&: nth-of-type(2) {
-		left: -70px;
-	}
+	left: 110px;
 `;
 
 function Signup() {

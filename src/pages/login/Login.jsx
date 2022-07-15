@@ -20,7 +20,7 @@ const LoginHeader = styled.h2`
 	font-size: 30px;
 	position: relative;
 	top: 50px;
-	left: 0px;
+	left: 211px;
 `;
 const EmailLoginButton = styled(NavLink)`
 	display: block;
@@ -46,7 +46,7 @@ const SignupButton = styled(NavLink)`
 	font-size: 18px;
 	position: relative;
 	bottom: -140px;
-	left: 0px;
+	left: 220px;
 `;
 
 function Login() {
