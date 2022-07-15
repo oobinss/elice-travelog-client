@@ -70,15 +70,15 @@ export default KakaoLogin;
 
 const SocialButton = styled.button`
 	display: block;
-	width: 300px;
-	height: 55px;
-	font-size: 18px;
+	width: 19rem;
+	height: 3.2rem;
+	font-size: 1rem;
 	text-align: center;
-	line-height: 55px;
+	line-height: 3.2rem;
 	position: relative;
-	top: 90px;
-	left: 100px;
-	margin: 15px 0;
+	top: 5rem;
+	left: 5.5rem;
+	margin: 0.8rem 0;
 	background-color: #f7e317;
 	color: #381e1f;
 	border: none;

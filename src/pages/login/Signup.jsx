@@ -7,28 +7,28 @@ const SignupSection = styled.section`
 	background-color: white;
 `;
 const SignupContainer = styled.article`
-	width: 500px;
-	height: 550px;
-	margin: 100px auto;
+	width: 30rem;
+	height: 35rem;
+	margin: 6rem auto;
 	box-shadow: 1px 1px 22px 2px rgba(0, 0, 0, 0.25);
 	border-radius: 38px;
 `;
 const SignupHeader = styled.h2`
 	color: #5f6caf;
-	font-size: 30px;
+	font-size: 2rem;
 	position: relative;
-	top: 50px;
-	left: 200px;
+	top: 3rem;
+	left: 12rem;
 `;
 const SignupInput = styled.input`
-	width: 300px;
-	height: 40px;
-	padding: 15px;
+	width: 18rem;
+	height: 2.5rem;
+	padding: 0.8rem;
 	box-sizing: border-box;
 	position: relative;
-	top: 100px;
-	left: 100px;
-	margin-bottom: 25px;
+	top: 6rem;
+	left: 6rem;
+	margin-bottom: 1.8rem;
 	color: #5f6caf;
 	background-color: #edf7fa;
 	border-radius: 10px;
@@ -36,26 +36,26 @@ const SignupInput = styled.input`
 `;
 const SignupButton = styled.button`
 	display: block;
-	width: 300px;
-	height: 55px;
-	font-size: 18px;
+	width: 18rem;
+	height: 3.2rem;
+	font-size: 1rem;
 	text-align: center;
-	line-height: 55px;
-	margin-bottom: 25px;
+	line-height: 3.2rem;
+	margin-bottom: 1.5rem;
 	position: relative;
-	top: 130px;
-	left: 100px;
+	top: 8rem;
+	left: 6rem;
 	background-color: #5f6caf;
 	color: #fff;
 	border: none;
 	border-radius: 22px;
 `;
 const InvalidInput = styled.p`
-	font-size: 13px;
+	font-size: 0.7rem;
 	color: #ff8364;
 	position: relative;
-	top: 80px;
-	left: 110px;
+	top: 4.8rem;
+	left: 6.8rem;
 `;
 
 function Signup() {

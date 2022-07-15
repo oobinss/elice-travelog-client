@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import KakaoLogin from './Kakao.js';
+import KakaoLogin from './Kakao.jsx';
 
 const LoginSection = styled.section`
 	width: 100vw;
@@ -9,30 +9,30 @@ const LoginSection = styled.section`
 	background-color: white;
 `;
 const LoginContainer = styled.article`
-	width: 500px;
-	height: 400px;
-	margin: 100px auto;
+	width: 30rem;
+	height: 25rem;
+	margin: 6rem auto;
 	box-shadow: 1px 1px 22px 2px rgba(0, 0, 0, 0.25);
-	border-radius: 38px;
+	border-radius: 2.5rem;
 `;
 const LoginHeader = styled.h2`
 	color: #5f6caf;
-	font-size: 30px;
+	font-size: 2rem;
 	position: relative;
-	top: 50px;
-	left: 211px;
+	top: 3rem;
+	left: 12rem;
 `;
 const EmailLoginButton = styled(NavLink)`
 	display: block;
-	width: 300px;
-	height: 55px;
-	font-size: 18px;
+	width: 19rem;
+	height: 3.2rem;
+	font-size: 1rem;
 	text-align: center;
-	line-height: 55px;
+	line-height: 3.2rem;
 	position: relative;
-	top: 100px;
-	left: 100px;
-	margin: 15px 0;
+	top: 6rem;
+	left: 5.5rem;
+	margin: 0.8rem 0;
 	background-color: #5f6caf;
 	text-decoration: none;
 	color: #fff;
@@ -43,10 +43,10 @@ const EmailLoginButton = styled(NavLink)`
 const SignupButton = styled(NavLink)`
 	color: #5f6caf;
 	text-decoration: none;
-	font-size: 18px;
+	font-size: 1rem;
 	position: relative;
-	bottom: -140px;
-	left: 220px;
+	bottom: -9rem;
+	left: 13rem;
 `;
 
 function Login() {
