@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-//import { NavLink } from 'react-router-dom';
 
 const LoginSection = styled.section`
 	width: 100vw;

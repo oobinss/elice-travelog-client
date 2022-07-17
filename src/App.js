@@ -13,10 +13,10 @@ import Title from './pages/main/Title.jsx';
 
 function App() {
 	return (
-		<div className="App">
+		<div>
 			<RecoilRoot>
 				<Reset />
-				{window.location.pathname === '/intro' ? '' : <Navbar />}
+				{window.location.pathname !== '/intro' && <Navbar />}
 				<Routes>
 					<Route path="/" element={<Main />} />
 					<Route path="/intro" element={<Title />} />

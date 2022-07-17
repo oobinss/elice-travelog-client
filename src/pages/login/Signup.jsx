@@ -64,9 +64,11 @@ function Signup() {
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 
-	const emailValidation = ['@', '.'].every(str => email.includes(str));
-	const passwordValidation = password.length >= 8 ? false : true;
-	const passwordConfirmValidation = password == passwordConfirm ? false : true;
+	const emailRegex =
+		/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	const emailValidation = emailRegex.test(email);
+	const passwordValidation = password.length < 8;
+	const passwordConfirmValidation = password !== passwordConfirm;
 
 	const handleSubmit = e => {
 		if (name === '' || !emailValidation || passwordValidation || passwordConfirmValidation) {
@@ -93,6 +95,7 @@ function Signup() {
 						name="email"
 						value={email}
 						onChange={e => {
+							console.log(emailValidation);
 							setEmail(e.target.value);
 						}}
 						placeholder="이메일을 입력해 주세요."
