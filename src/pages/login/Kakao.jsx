@@ -59,11 +59,7 @@ const KakaoLogin = () => {
 		}
 		console.log(Kakao.isInitialized());
 	}, []);
-	return (
-		<div>
-			<SocialButton onClick={loginWithKakao}>카카오로 로그인</SocialButton>
-		</div>
-	);
+	return <SocialButton onClick={loginWithKakao}>카카오로 로그인</SocialButton>;
 };
 
 export default KakaoLogin;
