@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const SignupSection = styled.section`
 	width: 100vw;
@@ -8,7 +9,7 @@ const SignupSection = styled.section`
 `;
 const SignupContainer = styled.article`
 	width: 30rem;
-	height: 35rem;
+	height: 40rem;
 	margin: 6rem auto;
 	box-shadow: 1px 1px 22px 2px rgba(0, 0, 0, 0.25);
 	border-radius: 38px;
@@ -61,6 +62,7 @@ const InvalidInput = styled.p`
 function Signup() {
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
+	const [age, setAge] = useState('');
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 
@@ -69,12 +71,44 @@ function Signup() {
 	const emailValidation = emailRegex.test(email);
 	const passwordValidation = password.length < 8;
 	const passwordConfirmValidation = password !== passwordConfirm;
+	const ageValidation = age.length < 1;
 
-	const handleSubmit = e => {
-		if (name === '' || !emailValidation || passwordValidation || passwordConfirmValidation) {
-			return e.preventDefault();
-		} else {
-			console.log('successs');
+	let ageData = 0;
+
+	const getAgeInfo = input => {
+		const date = new Date().getFullYear();
+		const birth = parseInt(input.slice(0, 4));
+
+		ageData = date - birth + 1;
+	};
+
+	const handleSubmit = async e => {
+		e.preventDefault();
+		if (name === '') {
+			alert('이름을 확인해 주세요.');
+		} else if (!emailValidation) {
+			alert('이메일을 확인해 주세요.');
+		} else if (passwordValidation || passwordConfirmValidation) {
+			alert('비밀번호를 확인해 주세요.');
+		} else if (ageValidation) {
+			alert('연령 정보를 확인해 주세요');
+		}
+
+		getAgeInfo(age);
+
+		if (emailValidation && !passwordConfirmValidation && !passwordValidation) {
+			try {
+				const data = { nickname: name, email, password, age: ageData };
+				await axios({
+					method: 'post',
+					url: 'http://localhost:8000/api/users/register',
+					data: data,
+				});
+				window.location.href = '/login';
+			} catch (err) {
+				console.error(err.stack);
+				alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
+			}
 		}
 	};
 
@@ -123,6 +157,19 @@ function Signup() {
 					{passwordConfirmValidation && (
 						<InvalidInput> * 비밀번호가 일치하지 않습니다.</InvalidInput>
 					)}
+
+					<SignupInput
+						name="date"
+						value={age}
+						type="date"
+						min="1900-01-01"
+						max="9999-12-31"
+						onChange={e => {
+							setAge(e.target.value);
+						}}
+						placeholder="생년월일을 입력해 주세요."
+					/>
+					{ageValidation && <InvalidInput> * 생년월일 정보가 없습니다.</InvalidInput>}
 					<SignupButton onClick={handleSubmit}>회원가입</SignupButton>
 				</form>
 			</SignupContainer>
