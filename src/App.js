@@ -18,8 +18,8 @@ function App() {
 				<Reset />
 				{window.location.pathname !== '/' && <Navbar />}
 				<Routes>
-					<Route path="/main" element={<Main />} />
 					<Route path="/" element={<Title />} />
+					<Route path="/main" element={<Main />} />
 					<Route path="/login" element={<Login />} />
 					<Route path="/loginForEmail" element={<LoginForEmail />} />
 					<Route path="/signup" element={<Signup />} />
