@@ -91,12 +91,12 @@ function Signup() {
 		} else if (passwordValidation || passwordConfirmValidation) {
 			alert('비밀번호를 확인해 주세요.');
 		} else if (ageValidation) {
-			alert('연령 정보를 확인해 주세요');
+			alert('생년월일 정보를 확인해 주세요');
 		}
 
 		getAgeInfo(age);
 
-		if (emailValidation && !passwordConfirmValidation && !passwordValidation) {
+		if (emailValidation && !passwordConfirmValidation && !passwordValidation && !ageValidation) {
 			try {
 				const data = { nickname: name, email, password, age: ageData };
 				await axios({
@@ -129,7 +129,6 @@ function Signup() {
 						name="email"
 						value={email}
 						onChange={e => {
-							console.log(emailValidation);
 							setEmail(e.target.value);
 						}}
 						placeholder="이메일을 입력해 주세요."

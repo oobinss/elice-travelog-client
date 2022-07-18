@@ -56,8 +56,8 @@ function LoginForEmail() {
 		<LoginSection>
 			<LoginContainer>
 				<LoginHeader>로그인</LoginHeader>
-				<LoginInput name="email" placeholder="이메일을 입력해 주세요." />
-				<LoginInput name="password" placeholder="비밀번호를 입력해 주세요." />
+				<LoginInput type="text" name="email" placeholder="이메일을 입력해 주세요." />
+				<LoginInput type="password" name="password" placeholder="비밀번호를 입력해 주세요." />
 				<LoginButton>로그인</LoginButton>
 			</LoginContainer>
 		</LoginSection>
