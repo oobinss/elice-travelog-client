@@ -23,7 +23,10 @@ export default function SearchMap(kakaoMap, place, setPlaceInfo, searchOptions) 
         position: new kakao.maps.LatLng(place.y, place.x) 
     });
 
-    let infowindow = new kakao.maps.InfoWindow({zIndex:1});
+    let infowindow = new kakao.maps.InfoWindow({
+            zIndex: 1,
+            removable: true,
+    });
     
     kakao.maps.event.addListener(marker, 'click', function() {
         infowindow.setContent(`<div class="infoWindow"> 
