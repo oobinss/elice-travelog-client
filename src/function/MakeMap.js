@@ -1,5 +1,3 @@
-
-
 export default function MakeMap() {
     const container = document.getElementById('map');
     const options = {
