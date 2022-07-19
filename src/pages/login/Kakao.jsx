@@ -58,7 +58,7 @@ const loginWithKakao = () => {
 const KakaoLogin = () => {
 	useEffect(() => {
 		if (!Kakao.isInitialized()) {
-			Kakao.init('4250425773c5e88299b3b27481abdace');
+			Kakao.init(process.env.REACT_APP_KAKAO_LOGIN_API_KEY);
 		}
 		console.log(Kakao.isInitialized());
 	}, []);
