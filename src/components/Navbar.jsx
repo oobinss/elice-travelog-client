@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 const Nav = styled.nav`
 	width: 100vw;
-	height: 5rem;
+	height: 5vh;
 	background-color: #fff;
 	display: flex;
 	align-items: center;

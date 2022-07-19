@@ -34,10 +34,10 @@ const ListHeader = styled.h2`
 const WritingsidebarContainer = styled.div`
 	width: 30rem;
 	height: 100%;
-	position: fixed;
 	background-color: #edf7fa;
 	box-shadow: 0 40px 22px 2px rgba(0, 0, 0, 0.25);
 	overflow: scroll;
+	position: fixed;
 `;
 const SidebarListBox = styled.div`
 	display: flex;
