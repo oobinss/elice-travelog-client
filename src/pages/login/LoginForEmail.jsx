@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { loginState } from '../../recoil/Atom';
+import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const LoginSection = styled.section`
 	width: 100vw;
@@ -52,13 +55,70 @@ const LoginInput = styled.input`
 `;
 
 function LoginForEmail() {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [isloggedIn, setIsLoggedIn] = useRecoilState(loginState);
+
+	//이메일과 비밀번호 올바른 형식인지 검사
+	const emailRegex =
+		/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	const emailValidation = emailRegex.test(email);
+	const passwordValidation = password.length < 8;
+
+	const handleLoginButton = async e => {
+		e.preventDefault();
+		const loginData = { email, password };
+
+		if (!emailValidation || passwordValidation) {
+			alert('이메일 또는 비밀번호를 확인해 주세요.');
+		}
+
+		//모든 유효성 검사를 통과한다면 백에 회원가입 요청
+		if (emailValidation && !passwordValidation) {
+			try {
+				const result = await axios({
+					method: 'post',
+					url: 'http://localhost:8000/api/users',
+					data: loginData,
+				});
+
+				//로그인 성공시 토큰을 로컬 스토리지에 저장
+				//세션이 만료되어도 로그인을 유지하기 위해 로컬 스토리지를 사용
+				localStorage.setItem('token', result.data.token);
+				setIsLoggedIn(true);
+
+				//로그인 성공하면 redirect
+				window.location.href = '/';
+			} catch (err) {
+				console.log(err);
+				alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.Error}`);
+			}
+		}
+	};
+
 	return (
 		<LoginSection>
 			<LoginContainer>
 				<LoginHeader>로그인</LoginHeader>
-				<LoginInput type="text" name="email" placeholder="이메일을 입력해 주세요." />
-				<LoginInput type="password" name="password" placeholder="비밀번호를 입력해 주세요." />
-				<LoginButton>로그인</LoginButton>
+				<LoginInput
+					type="text"
+					value={email}
+					onChange={e => {
+						setEmail(e.target.value);
+					}}
+					name="email"
+					placeholder="이메일을 입력해 주세요."
+				/>
+				<LoginInput
+					type="password"
+					value={password}
+					onChange={e => {
+						setPassword(e.target.value);
+					}}
+					name="password"
+					placeholder="비밀번호를 입력해 주세요."
+				/>
+				<LoginButton onClick={handleLoginButton}>로그인</LoginButton>
 			</LoginContainer>
 		</LoginSection>
 	);

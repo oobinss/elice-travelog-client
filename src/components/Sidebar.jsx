@@ -6,16 +6,12 @@ import { ImSearch, ImLibrary } from 'react-icons/im';
 import { IoMdCafe } from 'react-icons/io';
 import { TbStar } from 'react-icons/tb';
 import { useRecoilState } from 'recoil';
-import { extendbarState, 
-		placeState, 
-		mainInputValueState,
-		customState
-		} from '../recoil/Atom';
+import { extendbarState, placeState, mainInputValueState, customState } from '../recoil/Atom';
 
 function Sidebar() {
 	const [close, setClose] = useRecoilState(extendbarState);
 	const [, setPlace] = useRecoilState(placeState);
-	const [mainInputValue, ] = useRecoilState(mainInputValueState);
+	const [mainInputValue] = useRecoilState(mainInputValueState);
 	const [custom, setCustom] = useRecoilState(customState);
 
 	return (
@@ -23,14 +19,16 @@ function Sidebar() {
 			<div className="sidebar">
 				<div className="filterBox">
 					<div className="searchBox">
-						<ImSearch className="icon"
-						 style={{marginTop: '30px', backgroundColor: '#d9d9d9'}}
-						 onClick={() => setClose(!close)} />
+						<ImSearch
+							className="icon"
+							style={{ marginTop: '30px', backgroundColor: '#d9d9d9' }}
+							onClick={() => setClose(!close)}
+						/>
 					</div>
 					<div className="restaurantBox">
 						<BiRestaurant
 							className="icon"
-							style={{backgroundColor: '#0029fe'}}
+							style={{ backgroundColor: '#0029fe' }}
 							onClick={() => {
 								setPlace(mainInputValue + ' 맛집');
 							}}
@@ -39,7 +37,7 @@ function Sidebar() {
 					<div className="landmarkBox">
 						<ImLibrary
 							className="icon"
-							style={{backgroundColor:'#039b00'}}
+							style={{ backgroundColor: '#039b00' }}
 							onClick={() => {
 								setPlace(mainInputValue + ' 관광지');
 							}}
@@ -48,24 +46,25 @@ function Sidebar() {
 					<div className="cafeBox">
 						<IoMdCafe
 							className="icon"
-							style={{backgroundColor: '#e05836'}}
+							style={{ backgroundColor: '#e05836' }}
 							onClick={() => {
 								setPlace(mainInputValue + ' 카페');
 							}}
 						/>
 					</div>
 					<div className="favoriteBox">
-						<TbStar 
-						className="icon" 
-						style={{backgroundColor: '#ffb877'}}
-						onClick={() => {
-							setCustom((custom) => {
-								if(custom == true) {
-								return false;
-								};
-								return true;
-							});
-						}} />
+						<TbStar
+							className="icon"
+							style={{ backgroundColor: '#ffb877' }}
+							onClick={() => {
+								setCustom(custom => {
+									if (custom == true) {
+										return false;
+									}
+									return true;
+								});
+							}}
+						/>
 					</div>
 				</div>
 				<Extendbar />
@@ -109,6 +108,6 @@ const SidebarStyle = styled.div`
 	.icon:active {
 		filter: invert(80%);
 	}
-`
+`;
 
 export default Sidebar;

@@ -31,11 +31,11 @@ export default function searchMap(kakaoMap, place, setPlaceInfo, searchOptions) 
 
 		kakao.maps.event.addListener(marker, 'click', function () {
 			infowindow.setContent(`<div class="infoWindow"> 
-            <div>${place.place_name}</div>
-            <div>${place.address_name}</div>
-            <div>${place.phone}</div>
-            <a href=${place.place_url} target='_blank' style='color:#5f6caf;'>카카오 지도로 보기</a> 
-            </div>`);
+        <div>${place.place_name}</div>
+        <div>${place.address_name}</div>
+        <div>${place.phone}</div>
+        <a href=${place.place_url} target='_blank' style='color:#5f6caf;'>카카오 지도로 보기</a> 
+        </div>`);
 			infowindow.open(kakaoMap, marker);
 		});
 	}

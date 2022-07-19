@@ -24,11 +24,14 @@ const loginWithKakao = () => {
 					console.log(email);
 					console.log(`responsed img: ${profile.profile_image_url}`);
 					console.log(profile.nickname);
+					console.log(ACCESS_TOKEN);
+					console.log(response.access_token);
 
 					axios({
 						method: 'post',
 						url: '/oauth',
 						data: {
+							token: ACCESS_TOKEN,
 							id: email,
 							nickname: profile.nickname,
 							image: profile.profile_image_url,

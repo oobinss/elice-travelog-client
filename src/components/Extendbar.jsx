@@ -12,8 +12,8 @@ function Extendbar() {
 		<ExtendbarStyle>
 			<div className={close ? 'extendbar close' : 'extendbar'}>
 				<Searchbar />
-				<div className='infoBoxContainer'>
-					<PlaceInfo/>
+				<div className="infoBoxContainer">
+					<PlaceInfo />
 				</div>
 				<BsCaretLeftSquare id="closeBtn" onClick={() => setClose(true)} />
 			</div>

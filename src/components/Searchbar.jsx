@@ -23,10 +23,10 @@ function Searchbar() {
 		setmainInputValue(e.target.value);
 	};
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setPlace(mainInputValue);
-  };
+	const handleSubmit = e => {
+		e.preventDefault();
+		setPlace(mainInputValue);
+	};
 
 	return (
 		<SearchBarContainer>

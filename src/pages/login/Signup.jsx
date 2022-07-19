@@ -66,6 +66,7 @@ function Signup() {
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 
+	//입력된 정보가 올바른 형식인지 검사
 	const emailRegex =
 		/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	const emailValidation = emailRegex.test(email);
@@ -75,6 +76,7 @@ function Signup() {
 
 	let ageData = 0;
 
+	//입력받은 생년월일로 연령대 계산
 	const getAgeInfo = input => {
 		const date = new Date().getFullYear();
 		const birth = parseInt(input.slice(0, 4));
@@ -96,6 +98,7 @@ function Signup() {
 
 		getAgeInfo(age);
 
+		//모든 유효성 검사를 통과한다면 백에 회원가입 요청
 		if (emailValidation && !passwordConfirmValidation && !passwordValidation && !ageValidation) {
 			try {
 				const data = { nickname: name, email, password, age: ageData };
