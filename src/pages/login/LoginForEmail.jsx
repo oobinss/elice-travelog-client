@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { loginState } from '../../recoil/Atom';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -57,7 +57,7 @@ const LoginInput = styled.input`
 function LoginForEmail() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-	const [isloggedIn, setIsLoggedIn] = useRecoilState(loginState);
+	const setIsLoggedIn = useSetRecoilState(loginState);
 
 	//이메일과 비밀번호 올바른 형식인지 검사
 	const emailRegex =
