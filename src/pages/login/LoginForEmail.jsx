@@ -90,8 +90,7 @@ function LoginForEmail() {
 				//로그인 성공하면 redirect
 				window.location.href = '/';
 			} catch (err) {
-				console.log(err);
-				alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.Error}`);
+				alert(err.response.data.error);
 			}
 		}
 	};
