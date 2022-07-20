@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import KakaoLogin from './Kakao.jsx';
+import KakaoLogin from './KakaoLogin.jsx';
 
 const LoginSection = styled.section`
 	width: 100vw;
