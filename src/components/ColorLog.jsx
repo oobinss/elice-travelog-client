@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
 function ColorLog() {
-  return <div>ColorLog</div>;
+	return <div>ColorLog</div>;
 }
 
 export default ColorLog;

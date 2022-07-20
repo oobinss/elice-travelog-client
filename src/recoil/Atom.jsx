@@ -15,9 +15,9 @@ export const extendbarState = atom({
 	default: 'true',
 });
 
-export const customState = atom({
-	key: 'customState',
-	default: 'false',
+export const bookmarkState = atom({
+	key: 'bookmarkState',
+	default: [],
 });
 
 export const placeInfoState = atom({

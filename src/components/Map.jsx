@@ -31,17 +31,23 @@ const MapContainer = styled.div`
 		height: 100%;
 	}
 
-	.infoWindow {
+	.customOverlay {
+		background-color: white;
 		padding: 1rem;
 		width: 20rem;
 		height: 10rem;
 		line-height: 2rem;
-		border: 2px solid #5f6caf;
-		border-radius: 0.5rem;
 		font-weight: bold;
+		border: none;
 	}
-	.exit {
+
+	.toggleSwitch {
 		float: right;
+		color: #ddd;
+	}
+
+	#toggle:checked ~ .toggleSwitch {
+		color: rgb(255, 184, 119);
 	}
 `;
 

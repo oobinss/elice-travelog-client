@@ -12,9 +12,7 @@ function Extendbar() {
 		<ExtendbarStyle>
 			<div className={close ? 'extendbar close' : 'extendbar'}>
 				<Searchbar />
-				<div className="infoBoxContainer">
-					<PlaceInfo />
-				</div>
+				<PlaceInfo />
 				<BsCaretLeftSquare id="closeBtn" onClick={() => setClose(true)} />
 			</div>
 		</ExtendbarStyle>
@@ -26,9 +24,9 @@ const ExtendbarStyle = styled.div`
 		display: flex;
 		flex-flow: column;
 		position: absolute;
-		top: -80px;
+		top: -5rem;
 		left: 64px;
-		width: 300px;
+		width: 20rem;
 		height: 100vh;
 		background-color: #edf7fa;
 	}
@@ -45,12 +43,6 @@ const ExtendbarStyle = styled.div`
 		opacity: 0.9;
 		padding: 0;
 		left: 260px;
-	}
-
-	.infoBoxContainer {
-		position: absolute;
-		overflow: scroll;
-		top: 80px;
 	}
 `;
 
