@@ -10,11 +10,8 @@ import Navbar from './components/Navbar.jsx';
 import Signup from './pages/login/Signup.jsx';
 import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 import Title from './pages/title/Title.jsx';
-<<<<<<< HEAD
 import ColorLog from './components/ColorLog';
-=======
 import Kakao from './pages/login/Kakao.jsx';
->>>>>>> 1be7b7026f6f1de9b78cada1a34ce54bcc8c5b4e
 
 function App() {
 	return (
@@ -29,11 +26,8 @@ function App() {
 					<Route path="/loginForEmail" element={<LoginForEmail />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/writing" element={<Writing />} />
-<<<<<<< HEAD
 					<Route path="/colorlog" element={<ColorLog />} />
-=======
 					<Route path="/oauth" element={<Kakao />} />
->>>>>>> 1be7b7026f6f1de9b78cada1a34ce54bcc8c5b4e
 				</Routes>
 			</RecoilRoot>
 		</div>
