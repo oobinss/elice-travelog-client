@@ -11,17 +11,6 @@ const mockData = [
 	{ address_name: '서울 종로구 평창동' },
 	{ address_name: '서울 종로구 평창동' },
 	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
-	{ address_name: '서울 종로구 평창동' },
 	{ address_name: '강원 강릉시 저동 91' },
 	{ address_name: '강원 강릉시 저동 94' },
 	{ address_name: '강원 강릉시 저동 90' },
@@ -201,11 +190,9 @@ const SvgContainer = styled.div`
 const Svg = styled.svg`
 	width: 70%;
 	height: 100%;
-	fill: #ccc;
 `;
 
 const Path = styled.path`
-	fill: #ccc;
 	:hover {
 		fill: #5f6caf !important;
 	}

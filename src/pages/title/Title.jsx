@@ -30,10 +30,10 @@ const mockData = [
 ];
 
 function Title() {
-	const [isloggedIn, setIsLoggedIn] = useRecoilState(loginState);
+	const [isloggedIn] = useRecoilState(loginState);
+	const [inputValue, setInputValue] = useState('');
 	useEffect(() => {
 		if (localStorage.getItem('token')) console.log('exist!');
-		console.log(isloggedIn);
 	}, []);
 	const scrolling = () => {
 		const viewHight = window.innerHeight;
@@ -43,6 +43,13 @@ function Title() {
 			behavior: 'smooth',
 		});
 	};
+	const clickSearch = () => {
+		window.location.href = `/main?place=${inputValue}`;
+	};
+	const inputSearch = e => {
+		setInputValue(e.target.value);
+	};
+
 	return (
 		<div>
 			<TitleContainer>
@@ -64,7 +71,14 @@ function Title() {
 				</VideoContainer>
 			</TitleContainer>
 			<SearchSection>
-				<SearchbarIntro />
+				<SearchbarIntro
+					title="어디로 떠나세요?"
+					inputWidth="30rem"
+					containerWidth="50rem"
+					value={inputValue}
+					clickMethod={clickSearch}
+					changeMethod={inputSearch}
+				/>
 				<CardContainer>
 					{mockData.map(i => {
 						return <TitleCard key={`Title-card-${i.id}`} place={i.place} img={i.img} />;
