@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const mockData = [
@@ -22,55 +22,52 @@ const mockData = [
 	{ address_name: '서울 종로구 평창동' },
 	{ address_name: '서울 종로구 평창동' },
 	{ address_name: '서울 종로구 평창동' },
+	{ address_name: '강원 강릉시 저동 91' },
 	{ address_name: '강원 강릉시 저동 94' },
-	{ address_name: '강원 강릉시 저동 94' },
-	{ address_name: '강원 강릉시 저동 94' },
-	{ address_name: '강원 강릉시 저동 94' },
-	{ address_name: '강원 강릉시 저동 94' },
+	{ address_name: '강원 강릉시 저동 90' },
+	{ address_name: '강원 강릉시 저동 98' },
+	{ address_name: '강원 강릉시 저동 9ㅅ' },
 	{ address_name: '부산 기장군 기장읍 시랑리 산 46' },
 	{ address_name: '경기 수원시 장안구 영화동 320-2' },
 ];
 
 const cityObj = {
-	서울: 0,
-	부산: 0,
-	대구: 0,
-	인천: 0,
-	광주: 0,
-	대전: 0,
-	울산: 0,
-	경기: 0,
-	강원: 0,
-	충북: 0,
-	충남: 0,
-	전북: 0,
-	전남: 0,
-	경북: 0,
-	경남: 0,
-	제주특별자치도: 0,
-	세종특별자치시: 0,
+	서울: { posts: [], color: '' },
+	부산: { posts: [], color: '' },
+	대구: { posts: [], color: '' },
+	인천: { posts: [], color: '' },
+	광주: { posts: [], color: '' },
+	대전: { posts: [], color: '' },
+	울산: { posts: [], color: '' },
+	경기: { posts: [], color: '' },
+	강원: { posts: [], color: '' },
+	충북: { posts: [], color: '' },
+	충남: { posts: [], color: '' },
+	전북: { posts: [], color: '' },
+	전남: { posts: [], color: '' },
+	경북: { posts: [], color: '' },
+	경남: { posts: [], color: '' },
+	제주특별자치도: { posts: [], color: '' },
+	세종특별자치시: { posts: [], color: '' },
 };
 mockData.forEach(i => {
 	const cityName = i.address_name.split(' ')[0];
-	console.log(cityObj[cityName]);
-	cityObj[cityName] += 1;
+	cityObj[cityName].posts.push(i);
 });
 
-console.log(cityObj);
 Object.keys(cityObj).forEach(i => {
-	if (cityObj[i] === 0) {
-		cityObj[i] = '#ccc';
-	} else if (cityObj[i] === 1) {
-		cityObj[i] = '#FFB677';
-	} else if (cityObj[i] > 1 && cityObj[i] <= 4) {
-		cityObj[i] = '#FF9457';
-	} else if (cityObj[i] > 4 && cityObj[i] < 9) {
-		cityObj[i] = '#FF8364';
+	if (cityObj[i].posts.length === 0) {
+		cityObj[i].color = '#ccc';
+	} else if (cityObj[i].posts.length === 1) {
+		cityObj[i].color = '#FFB677';
+	} else if (cityObj[i].posts.length > 1 && cityObj[i].posts.length <= 4) {
+		cityObj[i].color = '#FF9457';
+	} else if (cityObj[i].posts.length > 4 && cityObj[i].posts.length < 9) {
+		cityObj[i].color = '#FF8364';
 	} else {
-		cityObj[i] = '#FF572D';
+		cityObj[i].color = '#FF572D';
 	}
 });
-console.log(cityObj);
 
 function ColorLog() {
 	const Seoul = useRef();
@@ -91,24 +88,26 @@ function ColorLog() {
 	const Jeju = useRef();
 	const Sejong = useRef();
 
+	console.log(cityObj);
+
 	useEffect(() => {
-		Seoul.current.style.fill = cityObj['서울'];
-		Busan.current.style.fill = cityObj['부산'];
-		Daegu.current.style.fill = cityObj['대구'];
-		Incheon.current.style.fill = cityObj['인천'];
-		Gwangju.current.style.fill = cityObj['광주'];
-		Daejeon.current.style.fill = cityObj['대전'];
-		Ulsan.current.style.fill = cityObj['울산'];
-		Gyeonggi.current.style.fill = cityObj['경기'];
-		Gangwon.current.style.fill = cityObj['강원'];
-		NorthChungcheong.current.style.fill = cityObj['충북'];
-		SouthChungcheong.current.style.fill = cityObj['충남'];
-		NorthJeolla.current.style.fill = cityObj['전북'];
-		SouthJeolla.current.style.fill = cityObj['전남'];
-		NorthGyeongsang.current.style.fill = cityObj['경북'];
-		SouthGyeongsang.current.style.fill = cityObj['경남'];
-		Jeju.current.style.fill = cityObj['제주특별자치도'];
-		Sejong.current.style.fill = cityObj['세종특별자치시'];
+		Seoul.current.style.fill = cityObj['서울'].color;
+		Busan.current.style.fill = cityObj['부산'].color;
+		Daegu.current.style.fill = cityObj['대구'].color;
+		Incheon.current.style.fill = cityObj['인천'].color;
+		Gwangju.current.style.fill = cityObj['광주'].color;
+		Daejeon.current.style.fill = cityObj['대전'].color;
+		Ulsan.current.style.fill = cityObj['울산'].color;
+		Gyeonggi.current.style.fill = cityObj['경기'].color;
+		Gangwon.current.style.fill = cityObj['강원'].color;
+		NorthChungcheong.current.style.fill = cityObj['충북'].color;
+		SouthChungcheong.current.style.fill = cityObj['충남'].color;
+		NorthJeolla.current.style.fill = cityObj['전북'].color;
+		SouthJeolla.current.style.fill = cityObj['전남'].color;
+		NorthGyeongsang.current.style.fill = cityObj['경북'].color;
+		SouthGyeongsang.current.style.fill = cityObj['경남'].color;
+		Jeju.current.style.fill = cityObj['제주특별자치도'].color;
+		Sejong.current.style.fill = cityObj['세종특별자치시'].color;
 	}, []);
 
 	return (
