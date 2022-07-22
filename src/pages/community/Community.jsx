@@ -1,52 +1,70 @@
-import React, { useState } from 'react';
-import PostBox from '../../components/PostBox';
-import SearchbarIntro from '../../components/SearchbarIntro';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import Companion from './Companion'
+import Qna from './Qna'
 function Community() {
-	const [inputValue, setInputValue] = useState('');
+  const [travel, setTravel] = useState(false)
+  const [companion, setCompanion] = useState(true)
+  const [qna, setQna] = useState(false)
 
-	const handleChange = e => {
-		setInputValue(e.target.value);
-	};
-	const handleClick = () => {
-		console.log(inputValue);
-	};
-	return (
-		<div>
-			<TabMenuUl>
-				<TabMenuLi>여행하기</TabMenuLi>
-				<TabMenuLi>동행 구해요</TabMenuLi>
-				<TabMenuLi>Q & A</TabMenuLi>
-			</TabMenuUl>
-			<SearchbarIntro
-				title=""
-				containerWidth="60rem"
-				containerHeight="5rem"
-				inputWidth="40rem"
-				titlePadding="0"
-				value={inputValue}
-				changeMethod={handleChange}
-				clickMethod={handleClick}
-			/>
-			<PostBox />
-		</div>
-	);
+  return (
+    <div>
+      <TabMenuUl>
+        <TabMenuLi
+          className={travel}
+          onClick={() => {
+            setTravel(true)
+            setCompanion(false)
+            setQna(false)
+          }}
+        >
+          여행하기
+        </TabMenuLi>
+        <TabMenuLi
+          className={companion}
+          onClick={() => {
+            setTravel(false)
+            setCompanion(true)
+            setQna(false)
+          }}
+        >
+          동행 구해요
+        </TabMenuLi>
+        <TabMenuLi
+          className={qna}
+          onClick={() => {
+            setTravel(false)
+            setCompanion(false)
+            setQna(true)
+          }}
+        >
+          Q & A
+        </TabMenuLi>
+      </TabMenuUl>
+      {companion && <Companion />}
+      {qna && <Qna />}
+    </div>
+  )
 }
 
-export default Community;
+export default Community
 
 const TabMenuUl = styled.ul`
-	width: 60vw;
-	margin: 60px auto 0;
-	display: flex;
-	justify-content: space-between;
-`;
+  width: 45rem;
+  margin: 60px auto 0;
+  display: flex;
+  justify-content: space-between;
+`
 
 const TabMenuLi = styled.li`
-	width: 11rem;
-	height: 4rem;
-	border-radius: 22px;
-	background-color: #edf7fa;
-	text-align: center;
-	line-height: 4rem;
-`;
+  width: 11rem;
+  height: 4rem;
+  border-radius: 22px;
+  background-color: #edf7fa;
+  text-align: center;
+  line-height: 4rem;
+  &.true {
+    background-color: #5f6caf;
+    color: #fff;
+  }
+`

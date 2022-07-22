@@ -76,7 +76,6 @@ function Navbar() {
   const navigate = useNavigate()
   useEffect(() => {
     if (localStorage.getItem('token')) setIsLoggedIn(true)
-    console.log(isLoggedIn)
   }, [])
   return (
     <Nav>
@@ -89,10 +88,10 @@ function Navbar() {
       </LogoContainer>
       <NavUl>
         <NavLi>
-          <NavLink to="/">community</NavLink>
+          <NavLink to="/community">community</NavLink>
         </NavLi>
         <NavLi>
-          <NavLink to="/">my page</NavLink>
+          <NavLink to="/mypage">my page</NavLink>
         </NavLi>
         {!isLoggedIn ? (
           <NavLi>
