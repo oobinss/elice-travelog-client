@@ -2,8 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import styled from 'styled-components'
 
-// import axios from 'axios';
-
+// import axios from 'axios'
+// 작성된 글들을 가져오는 작업을 하기 위해 axios 사용할 예정
 const MyPage = () => {
   const [Image, setImage] = useState('img/default.png')
   return (

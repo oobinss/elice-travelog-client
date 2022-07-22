@@ -58,7 +58,7 @@ const InvalidInput = styled.p`
   top: 4.8rem;
   left: 6.8rem;
 `
-
+//회원 정보 변경창에 들어가기전 패스워드 확인
 function PasswordCheck() {
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
@@ -72,13 +72,13 @@ function PasswordCheck() {
       alert('비밀번호를 확인해 주세요.')
     }
 
-    //모든 유효성 검사를 통과한다면 백에 회원가입 요청
+    //회원가입 요청
     if (!passwordConfirmValidation && !passwordValidation) {
       try {
         const data = { password }
         await axios({
-          method: 'post',
-          url: 'http://localhost:8000/api/users/register',
+          method: 'get',
+          url: 'http://localhost:8000/api/users',
           data: data,
         })
         window.location.href = '/login'

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import DaumPostcodeEmbed from 'react-daum-postcode'
+import { NavLink } from 'react-router-dom'
 
 const SignupSection = styled.section`
   width: 100vw;
@@ -68,7 +69,40 @@ const AddressButton = styled.button`
   border: none;
   border-radius: 22px;
 `
-
+const NavUl = styled.ul`
+  display: flex;
+  align-items: center;
+  margin-right: 3rem;
+`
+const NavLi = styled.li`
+  margin: 0 2rem;
+  color: #5f6caf;
+`
+const MenuUl = styled(NavUl)`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 15vw;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  left: -0.5rem;
+  top: 11rem;
+  background-color: #edf7fa;
+`
+const MenuLi = styled(NavLi)`
+  color: #5f6caf;
+  margin: 0;
+  height: 3rem;
+  width: 15vw;
+  line-height: 3rem;
+  color: black;
+  cursor: pointer;
+  font-size: 22px;
+  &:hover {
+    background-color: #5f6caf;
+    color: #ffffff;
+  }
+`
 function EditProfile() {
   const [name, setName] = useState('')
   const [nickname, setNickname] = useState('')
@@ -81,20 +115,31 @@ function EditProfile() {
 
   const handleSubmit = async e => {
     e.preventDefault()
-
-    //모든 유효성 검사를 통과한다면 백에 회원가입 요청
-    try {
-      const data = { name, nickname, phonenumber, address, address2, formData }
-      await axios({
-        method: 'post',
-        url: 'http://localhost:8000/api/users/register',
-        data: data,
-      })
-      window.location.href = '/login'
-    } catch (err) {
-      console.error(err.stack)
-      alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`)
+    const token = window.localStorage.getItem('token')
+    const config = {
+      headers: { Authorization: `Bearer ${token}` },
+      params: { password: token },
     }
+
+    try {
+      const data = await axios.get('http://localhost:8000/api/users', config)
+      console.log(data)
+    } catch (err) {}
+
+    // 회원 정보 수정 변경된 값 다시 post -> 아직 미구현
+    //모든 유효성 검사를 통과한다면 백에 회원가입 요청
+    // try {
+    //   const data = { name, nickname, phonenumber, address, address2, formData }
+    //   await axios({
+    //     method: 'post',
+    //     url: 'http://localhost:8000/api/users/register',
+    //     data: data,
+    //   })
+    //   window.location.href = '/login'
+    // } catch (err) {
+    //   console.error(err.stack)
+    //   alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`)
+    // }
   }
 
   //DaumPostcode
@@ -126,63 +171,85 @@ function EditProfile() {
   }
 
   return (
-    <SignupSection>
-      <SignupContainer>
-        <SignupHeader>회원 정보 수정</SignupHeader>
-        <form>
-          <SignupInput
-            name="name"
-            value={name}
-            onChange={e => {
-              setName(e.target.value)
-            }}
-            placeholder="이름을 입력해 주세요."
-          />
-          <SignupInput
-            name="nickname"
-            onChange={e => {
-              setNickname(e.target.value)
-            }}
-            placeholder="닉네임을 입력해 주세요."
-          />
-          <SignupInput
-            name="phonenumber"
-            placeholder="휴대폰 번호를 입력해 주세요."
-            onChange={e => {
-              setPhoneNumber(e.target.value)
-            }}
-          />
-          <SignupInput name="address" placeholder="주소를 입력해 주세요." value={address} />
-          <AddressButton
-            onClick={e => {
-              e.preventDefault()
-              setPopup(!popup)
-            }}
-          >
-            주소 찾기
-            {!popup && (
-              <DaumPostcodeEmbed style={postCodeStyle} onComplete={handleComplete} autoClose />
-            )}
-          </AddressButton>
-          <SignupInput
-            type="text"
-            name="address2"
-            onChange={e => {
-              setAddress2(e.target.value)
-            }}
-            placeholder="상세 주소를 입력해 주세요."
-          />
-          <SignupInput
-            type="file"
-            name="image"
-            onChange={e => {
-              formData.append('images', e.target.files[0])
-            }}
-          />
-          <SignupButton onClick={handleSubmit}>변경</SignupButton>
-        </form>
-      </SignupContainer>
-    </SignupSection>
+    <>
+      <MenuUl>
+        <MenuLi>
+          <NavLink to="/editprofile">회원정보 수정</NavLink>
+        </MenuLi>
+        <MenuLi>
+          <NavLink to="#">비밀번호 변경</NavLink>
+        </MenuLi>
+
+        <MenuLi
+          onclick={() => {
+            if (window.confirm('회원 탈퇴하시겠습니까?')) {
+              //axios.active:false? 처리 -> 미구현
+            } else {
+              return
+            }
+          }}
+        >
+          회원탈퇴
+        </MenuLi>
+      </MenuUl>
+      <SignupSection>
+        <SignupContainer>
+          <SignupHeader>회원 정보 수정</SignupHeader>
+          <form>
+            <SignupInput
+              name="name"
+              value={name}
+              onChange={e => {
+                setName(e.target.value)
+              }}
+              placeholder="이름을 입력해 주세요."
+            />
+            <SignupInput
+              name="nickname"
+              onChange={e => {
+                setNickname(e.target.value)
+              }}
+              placeholder="닉네임을 입력해 주세요."
+            />
+            <SignupInput
+              name="phonenumber"
+              placeholder="휴대폰 번호를 입력해 주세요."
+              onChange={e => {
+                setPhoneNumber(e.target.value)
+              }}
+            />
+            <SignupInput name="address" placeholder="주소를 입력해 주세요." value={address} />
+            <AddressButton
+              onClick={e => {
+                e.preventDefault()
+                setPopup(!popup)
+              }}
+            >
+              주소 찾기
+              {!popup && (
+                <DaumPostcodeEmbed style={postCodeStyle} onComplete={handleComplete} autoClose />
+              )}
+            </AddressButton>
+            <SignupInput
+              type="text"
+              name="address2"
+              onChange={e => {
+                setAddress2(e.target.value)
+              }}
+              placeholder="상세 주소를 입력해 주세요."
+            />
+            <SignupInput
+              type="file"
+              name="image"
+              onChange={e => {
+                formData.append('images', e.target.files[0])
+              }}
+            />
+            <SignupButton onClick={handleSubmit}>변경</SignupButton>
+          </form>
+        </SignupContainer>
+      </SignupSection>
+    </>
   )
 }
 

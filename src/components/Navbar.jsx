@@ -110,9 +110,6 @@ function Navbar() {
                 <MenuLi>
                   <NavLink to="/editprofile">회원 정보 수정</NavLink>
                 </MenuLi>
-                <MenuLi>
-                  <NavLink to="#">비밀 번호 변경</NavLink>
-                </MenuLi>
                 <MenuLi>여행 페이지 이동</MenuLi>
                 <MenuLi>
                   <NavLink to="/mypage">마이페이지</NavLink>
