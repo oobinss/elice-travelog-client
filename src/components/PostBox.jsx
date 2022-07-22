@@ -21,7 +21,7 @@ const PostContainer = styled.div`
 	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
 	position: relative;
 	top: 10rem;
-	left: 9.9rem;
+	left: calc(50vw - 30rem);
 `;
 
 const PostImg = styled.img`

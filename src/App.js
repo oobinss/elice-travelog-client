@@ -12,7 +12,7 @@ import { RecoilRoot, atom, selector, useRecoilState, useRecoilValue } from 'reco
 import Title from './pages/title/Title.jsx';
 import ColorLog from './components/ColorLog';
 import Kakao from './pages/login/Kakao.jsx';
-import Companion from './pages/community/Companion';
+import Community from './pages/community/Community';
 
 function App() {
 	return (
@@ -29,7 +29,7 @@ function App() {
 					<Route path="/writing" element={<Writing />} />
 					<Route path="/colorlog" element={<ColorLog />} />
 					<Route path="/oauth" element={<Kakao />} />
-					<Route path="/community" element={<Companion />} />
+					<Route path="/community" element={<Community />} />
 				</Routes>
 			</RecoilRoot>
 		</div>
