@@ -12,9 +12,7 @@ function QnAWriting() {
     textarea,
   }
 
-  const clickHandler = () => {
-    console.log(data)
-  }
+  const clickHandler = () => {}
   const navigateHandler = () => {
     navigate('/community')
   }

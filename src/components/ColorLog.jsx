@@ -49,11 +49,9 @@ function ColorLog() {
     SouthGyeongsang.current.style.fill = cityObj['경남'].color
     Jeju.current.style.fill = cityObj['제주특별자치도'].color
     Sejong.current.style.fill = cityObj['세종특별자치시'].color
-    console.log(isClick)
   }, [])
 
   const clickHandler = e => {
-    // console.log(cityObj[isClick.id]);
     setIsClick({
       state: true,
       id: e.target.id,

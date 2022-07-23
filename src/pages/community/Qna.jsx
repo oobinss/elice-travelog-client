@@ -8,9 +8,7 @@ function Qna() {
   const handleChange = e => {
     setInputValue(e.target.value)
   }
-  const handleClick = () => {
-    console.log(inputValue)
-  }
+  const handleClick = () => {}
   return (
     <div>
       <SearchbarIntro

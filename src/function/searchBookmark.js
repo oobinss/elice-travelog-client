@@ -9,7 +9,6 @@ export default function searchBookmark(kakaoMap, searchOptions) {
 
   function placesSearchCB(data, status, pagination) {
     if (status === kakao.maps.services.Status.OK) {
-      console.log(data)
       let bounds = new kakao.maps.LatLngBounds()
       for (let i = 0; i < data.length; i++) {
         displayMarker(data[i])
