@@ -2,7 +2,7 @@ import overlayContents from './overlayContents'
 
 const { kakao } = window
 
-export default function searchMap(kakaoMap, place, setPlaceInfo, searchOptions) {
+export default function searchBookmark(kakaoMap, searchOptions) {
   const places = new kakao.maps.services.Places()
 
   places.keywordSearch(place, placesSearchCB, searchOptions)

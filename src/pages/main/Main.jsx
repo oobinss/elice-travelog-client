@@ -1,14 +1,14 @@
-import React from 'react';
-import Sidebar from '../../components/Sidebar.jsx';
-import Map from '../../components/Map.jsx';
+import React from 'react'
+import Sidebar from './Sidebar.jsx'
+import Map from '../../components/Map.jsx'
 
 function Main() {
-	return (
-		<div className="main">
-			<Sidebar />
-			<Map />
-		</div>
-	);
+  return (
+    <>
+      <Sidebar />
+      <Map />
+    </>
+  )
 }
 
-export default Main;
+export default Main
