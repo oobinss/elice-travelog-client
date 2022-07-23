@@ -20,8 +20,8 @@ const SearchInput = styled.input`
 	outline: 0;
 `;
 const SearchForm = styled.form`
-	display: flex;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 3fr 1fr;
 `;
 function WritingSearchbar() {
 	const [inputValue, setInputValue] = useState(null);
@@ -31,7 +31,6 @@ function WritingSearchbar() {
 	const handleSubmit = e => {
 		e.preventDefault();
 		setInputValue(inputValue);
-		console.log({ inputValue });
 	};
 
 	return (
