@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ImSearch } from 'react-icons/im'
+import { NavLink } from 'react-router-dom'
 
 function SearchbarIntro({
   containerWidth,
@@ -9,29 +10,34 @@ function SearchbarIntro({
   titlePadding,
   title,
   value,
+  visibleOption,
   changeMethod,
   clickMethod,
   inputLeft,
+  clickurl,
+  inputTop,
+  searchTop,
 }) {
   return (
-    <div>
-      <SearchBarContainer
-        style={{
-          width: containerWidth,
-          height: containerHeight,
-          left: `calc(50vw - ${containerWidth}/2)`,
-          top: containerHeight,
-        }}
-      >
-        <SearchBarTitle style={{ paddingTop: titlePadding }}>{title}</SearchBarTitle>
-        <SearchBarInput
-          style={{ width: inputWidth, left: inputLeft }}
-          value={value}
-          onChange={changeMethod}
-        />
-        <Search onClick={clickMethod} style={{ left: inputLeft }} />
-      </SearchBarContainer>
-    </div>
+    <SearchBarContainer
+      style={{
+        width: containerWidth,
+        height: containerHeight,
+        left: `calc(50vw - ${containerWidth}/2)`,
+        top: containerHeight,
+      }}
+    >
+      <SearchBarTitle style={{ paddingTop: titlePadding }}>{title}</SearchBarTitle>
+      <SearchBarInput
+        style={{ width: inputWidth, left: inputLeft, top: inputTop }}
+        value={value}
+        onChange={changeMethod}
+      />
+      <Search onClick={clickMethod} style={{ left: inputLeft, top: searchTop }} />
+      <Writing style={{ visibility: visibleOption }} to={`/${clickurl}`}>
+        글쓰기
+      </Writing>
+    </SearchBarContainer>
   )
 }
 
@@ -53,7 +59,7 @@ const SearchBarTitle = styled.p`
 const SearchBarInput = styled.input`
   height: 1.7rem;
   position: relative;
-  top: 1.5rem;
+  top: 2rem;
   left: 9rem;
   border: none;
   border-radius: 10px;
@@ -61,9 +67,24 @@ const SearchBarInput = styled.input`
 const Search = styled(ImSearch)`
   position: relative;
   padding-left: 1rem;
-  top: 1.8rem;
+  top: 2rem;
   left: 10rem;
   cursor: pointer;
+`
+const Writing = styled(NavLink)`
+  visibility: hidden;
+  display: block;
+  width: 5rem;
+  height: 3rem;
+  background-color: #5f6caf;
+  text-align: center;
+  line-height: 3rem;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  position: absolute;
+  top: 1rem;
+  left: 38rem;
 `
 
 export default SearchbarIntro
