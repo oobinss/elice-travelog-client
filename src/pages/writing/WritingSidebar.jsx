@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { TbStar } from 'react-icons/tb'
-import WritingSearchbar from './WritingSearchbar'
-import WritingList from './WritingList'
-import { atom, selector, useRecoilState } from 'recoil'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { TbStar } from 'react-icons/tb';
+import WritingSearchbar from './WritingSearchbar';
+import WritingList from './WritingList';
+import { atom } from 'recoil';
 
 const SidebarTitleBox = styled.div`
   margin: 1rem;

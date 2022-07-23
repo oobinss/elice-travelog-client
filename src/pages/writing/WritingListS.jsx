@@ -1,8 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { IoIosClose } from 'react-icons/io'
-import { boardState } from './Writing'
-import { useRecoilState } from 'recoil'
 const ListBox = styled.div`
   padding: 1rem;
   position: relative;

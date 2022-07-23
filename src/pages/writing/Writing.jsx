@@ -82,23 +82,13 @@ function Writing() {
   // 등록 버튼 핸들러
   const handleButton = () => {
     // 입력창에 입력한 내용을 HTML 태그 형태로 취득
-    // console.log(editorRef.current?.getInstance().getHTML());
+    ceditorRef.current?.getInstance().getHTML();
     // 입력창에 입력한 내용을 MarkDown 형태로 취득
-    // console.log(editorRef.current?.getInstance().getMarkdown());
+    editorRef.current?.getInstance().getMarkdown();
   }
   //이미지 업로드
   const onUploadImage = async (blob, callback) => {
-    // let formData = new FormData();
-    // formData.append("file", blob);
-    //
-    // axios.defaults.withCredentials = true;
-    // const { data: url } = await axios.post(
-    //     `${backUrl}image.do`,
-    //     formData,
-    //     {
-    //         header: { "content-type": "multipart/formdata" },
-    //     }
-    // );
+
   }
   const data = [
     {
@@ -167,9 +157,9 @@ function Writing() {
           initialEditType="wysiwyg"
           plugins={[colorSyntax]}
           height="50rem"
-          // hooks={{
-          // 	addImageBlobHook: onUploadImage,
-          // }}
+          hooks={{
+          	addImageBlobHook: onUploadImage,
+          }}
         />
       </WritingContainer>
     </WritingSection>
