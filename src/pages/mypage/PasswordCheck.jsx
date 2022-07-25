@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
-
+import { useNavigate } from 'react-router-dom'
 const SignupSection = styled.section`
   width: 100vw;
   height: 100vw;
@@ -50,42 +50,38 @@ const SignupButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 22px;
+  cursor: pointer;
 `
-const InvalidInput = styled.p`
-  font-size: 0.7rem;
-  color: #ff8364;
-  position: relative;
-  top: 4.8rem;
-  left: 6.8rem;
-`
+
 //회원 정보 변경창에 들어가기전 패스워드 확인
 function PasswordCheck() {
   const [password, setPassword] = useState('')
-  const [passwordConfirm, setPasswordConfirm] = useState('')
+  const navigate = useNavigate()
   //입력된 정보가 올바른 형식인지 검사
-  const passwordValidation = password.length < 8
-  const passwordConfirmValidation = password !== passwordConfirm
+  const token = window.localStorage.getItem('token')
+  // const config = {
+  //   headers: { Authorization: `Bearer ${token}` },
+  //   data: { paassword: password },
+  // }
 
   const handleSubmit = async e => {
     e.preventDefault()
-    if (passwordValidation || passwordConfirmValidation) {
+    if (password === '') {
       alert('비밀번호를 확인해 주세요.')
     }
-
-    //회원가입 요청
-    if (!passwordConfirmValidation && !passwordValidation) {
-      try {
-        const data = { password }
-        await axios({
-          method: 'get',
-          url: 'http://localhost:8000/api/users',
-          data: data,
-        })
-        window.location.href = '/login'
-      } catch (err) {
-        console.error(err.stack)
-        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`)
-      }
+    try {
+      await axios({
+        method: 'post',
+        url: `http://localhost:8000/api/users/user/check`,
+        headers: { Authorization: `Bearer ${token}` },
+        data: {
+          password: 12341234,
+        },
+      })
+    } catch (err) {
+      //navigate('/editprofile')
+      console.error(err.stack)
+      //alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`)
     }
   }
 
@@ -103,19 +99,6 @@ function PasswordCheck() {
             }}
             placeholder="비밀번호를 입력해 주세요."
           />
-          {passwordValidation && <InvalidInput> * 8자 이상 입력해 주세요.</InvalidInput>}
-          <SignupInput
-            name="passwordConfirm"
-            value={passwordConfirm}
-            type="password"
-            onChange={e => {
-              setPasswordConfirm(e.target.value)
-            }}
-            placeholder="비밀번호를 다시 입력해 주세요."
-          />
-          {passwordConfirmValidation && (
-            <InvalidInput> * 비밀번호가 일치하지 않습니다.</InvalidInput>
-          )}
           <SignupButton onClick={handleSubmit}>변경</SignupButton>
         </form>
       </SignupContainer>

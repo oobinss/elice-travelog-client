@@ -43,6 +43,7 @@ function PlaceInfo() {
       const filterArray = placeRef.current.filter(e => e.id == id)
       setBookmark(filterArray[0])
       e.currentTarget.style.cssText = 'color: rgb(255, 184, 119)'
+      console.log(placeRef)
     } else {
       // 북마크에 장소 삭제
       const id = e.target.id

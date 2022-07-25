@@ -19,7 +19,7 @@ import S3 from './components/S3'
 import Community from './pages/community/Community'
 import CompanionWriting from './pages/community/CompanionWriting'
 import QnAWriting from './pages/community/QnAWriting'
-
+import ChangePassword from './pages/mypage/ChangePassword'
 function App() {
   return (
     <div>
@@ -42,6 +42,7 @@ function App() {
           <Route path="/community" element={<Community />} />
           <Route path="/companion" element={<CompanionWriting />} />
           <Route path="/qna" element={<QnAWriting />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
         </Routes>
       </RecoilRoot>
     </div>

@@ -9,6 +9,7 @@ const secretAccessKey = process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
 //S3에 이미지 업로드 되는지 테스트
 function S3(file) {
   const [selectedFile, setSelectedFile] = useState(null)
+  const [fileKey, setFileKey] = useState('')
   AWS.config.update({
     accessKeyId: accessKeyId,
     secretAccessKey: secretAccessKey,
@@ -37,15 +38,24 @@ function S3(file) {
         setTimeout(() => {
           setSelectedFile(null)
         }, 3000)
+        setFileKey(`${params.Key}`)
       })
       .send(err => {
-        if (err) console.log(err)
+        if (err) alert(err)
       })
+  }
+  const getFile = fileKey => {
+    const params = {
+      key: fileKey,
+      Bucket: bucketName,
+    }
+    return myBucket.getObject(params)
   }
 
   return (
     <>
       <input type="file" onChange={handleFileInput} />
+      {fileKey}
       {selectedFile ? (
         <button
           onClick={() => {
@@ -55,6 +65,9 @@ function S3(file) {
           업로드
         </button>
       ) : null}
+      <img src="img/avatar.jpg" />
+      <img src="https://elice-react-project-team1.s3.ap-northeast-2.amazonaws.com/upload/default.png" />
+      {console.log(fileKey)}
     </>
   )
 }
