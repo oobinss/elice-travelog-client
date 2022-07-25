@@ -37,7 +37,7 @@ function App() {
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/passwordcheck" element={<PasswordCheck />} />
           <Route path="/colorlog" element={<ColorLog />} />
-          <Route path="/oauth" element={<Kakao />} />
+          <Route path="/auth" element={<Kakao />} />
           <Route path="/aws" element={<S3 />} />
           <Route path="/community" element={<Community />} />
           <Route path="/companion" element={<CompanionWriting />} />

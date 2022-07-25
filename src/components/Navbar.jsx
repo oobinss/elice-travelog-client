@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import { useRecoilState } from 'recoil'
-import { loginState, iconMenuState } from '../recoil/Atom'
-import styled from 'styled-components'
-import { NavLink, useNavigate } from 'react-router-dom'
+import React, { useEffect } from 'react';
+import { useRecoilState } from 'recoil';
+import { loginState, iconMenuState } from '../recoil/Atom';
+import styled from 'styled-components';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Nav = styled.nav`
   width: 100vw;
@@ -12,27 +12,28 @@ const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
-`
-const LogoContainer = styled.h1`
-  width: 4rem;
+`;
+const LogoContainer = styled.div`
+  width: 7.5rem;
   height: 3rem;
-  background-color: #5f6caf;
   margin-left: 0.7rem;
   text-align: center;
   line-height: 3rem;
-  color: #fff;
   cursor: pointer;
-`
-
+`;
+const Img = styled.img`
+  width: 100%;
+  height: 100%;
+`;
 const NavUl = styled.ul`
   display: flex;
   align-items: center;
   margin-right: 3rem;
-`
+`;
 const NavLi = styled.li`
   margin: 0 2rem;
   color: #5f6caf;
-`
+`;
 const MenuUl = styled(NavUl)`
   display: flex;
   flex-direction: column;
@@ -43,7 +44,7 @@ const MenuUl = styled(NavUl)`
   right: -2.5rem;
   background-color: #5f6caf;
   color: #fff;
-`
+`;
 const MenuLi = styled(NavLi)`
   color: #5f6caf;
   margin: 0;
@@ -52,7 +53,7 @@ const MenuLi = styled(NavLi)`
   line-height: 3rem;
   color: #fff;
   cursor: pointer;
-`
+`;
 const LoginBtn = styled(NavLink)`
   display: block;
   text-align: center;
@@ -63,28 +64,28 @@ const LoginBtn = styled(NavLink)`
   border: none;
   border-radius: 22px;
   color: #fff;
-`
+`;
 const NavbarIcon = styled.img`
   border-radius: 50%;
   width: 3rem;
   cursor: pointer;
-`
+`;
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState)
-  const [style, setStyle] = useRecoilState(iconMenuState)
-  const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [style, setStyle] = useRecoilState(iconMenuState);
+  const navigate = useNavigate();
   useEffect(() => {
-    if (localStorage.getItem('token')) setIsLoggedIn(true)
-  }, [])
+    if (localStorage.getItem('token')) setIsLoggedIn(true);
+  }, []);
   return (
     <Nav>
       <LogoContainer
         onClick={() => {
-          window.location.href = '/'
+          window.location.href = '/';
         }}
       >
-        logo
+        <Img src="img/travelog.jpg" />
       </LogoContainer>
       <NavUl>
         <NavLi>
@@ -102,7 +103,7 @@ function Navbar() {
             <NavbarIcon
               src="img/default.png"
               onClick={() => {
-                setStyle(!style)
+                setStyle(!style);
               }}
             />
             {style ? (
@@ -118,10 +119,10 @@ function Navbar() {
                 <MenuLi
                   onClick={() => {
                     if (window.confirm('로그아웃 하시겠습니까?')) {
-                      localStorage.clear()
-                      navigate('/login')
+                      localStorage.clear();
+                      navigate('/login');
                     } else {
-                      return
+                      return;
                     }
                   }}
                 >
@@ -135,7 +136,7 @@ function Navbar() {
         )}
       </NavUl>
     </Nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

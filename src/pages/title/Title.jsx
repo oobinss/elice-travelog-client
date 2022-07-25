@@ -27,34 +27,34 @@ const mockData = [
     place: '목포',
     img: 'https://cdn.pixabay.com/photo/2019/06/11/07/36/shiroyama-hiji-peak-4266254_1280.jpg',
   },
-]
+];
 
 function Title() {
-  const [isloggedIn] = useRecoilState(loginState)
-  const [inputValue, setInputValue] = useState('')
+  const [isloggedIn] = useRecoilState(loginState);
+  const [inputValue, setInputValue] = useState('');
   useEffect(() => {
-    if (localStorage.getItem('token')) console.log('exist!')
-  }, [])
+    if (localStorage.getItem('token')) console.log('exist!');
+  }, []);
   const scrolling = () => {
-    const viewHight = window.innerHeight
+    const viewHight = window.innerHeight;
     window.scrollTo({
       top: viewHight,
       left: 0,
       behavior: 'smooth',
-    })
-  }
+    });
+  };
   const clickSearch = () => {
-    window.location.href = `/main?place=${inputValue}`
-  }
+    window.location.href = `/main?place=${inputValue}`;
+  };
   const inputSearch = e => {
-    setInputValue(e.target.value)
-  }
+    setInputValue(e.target.value);
+  };
 
   return (
     <div>
       <TitleContainer>
         <TitleSection>
-          <TitleText>logo</TitleText>
+          <Img src="img/travelog.jpg" />
           <TitleButton onClick={scrolling}>시작하기</TitleButton>
         </TitleSection>
         <VideoContainer>
@@ -81,12 +81,12 @@ function Title() {
         />
         <CardContainer>
           {mockData.map(i => {
-            return <TitleCard key={`Title-card-${i.id}`} place={i.place} img={i.img} />
+            return <TitleCard key={`Title-card-${i.id}`} place={i.place} img={i.img} />;
           })}
         </CardContainer>
       </SearchSection>
     </div>
-  )
+  );
 }
 
 export default Title
@@ -95,20 +95,13 @@ const TitleContainer = styled.div`
   width: 100vw;
   hegith: 100vh;
   display: flex;
-`
+`;
 
 const TitleSection = styled.section`
   width: 35vw;
   height: 100vh;
   background-color: #fff;
-`
-const TitleText = styled.h2`
-  font-size: 4rem;
-  font-weight: 300;
-  position: relative;
-  top: calc(50vh - 2rem);
-  left: calc(17.5vw - 3rem);
-`
+`;
 const TitleButton = styled.button`
   display: block;
   width: 10rem;
@@ -121,26 +114,26 @@ const TitleButton = styled.button`
   line-height: 4rem;
   border: none;
   position: relative;
-  top: 50vh;
+  top: 40vh;
   left: calc(17.5vw - 5rem);
-`
+`;
 
 const VideoContainer = styled.section`
   width: 65vw;
   height: 100vh;
   overflow: hidden;
-`
+`;
 const Video = styled.video`
   width: 120%;
   height: 105%;
   object-fit: cover;
   position: relative;
   top: -0.1rem;
-`
+`;
 const SearchSection = styled.section`
   width: 100vw;
   height: 100vh;
-`
+`;
 
 const CardContainer = styled.div`
   width: 50rem;
@@ -151,4 +144,12 @@ const CardContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1fr;
-`
+`;
+
+const Img = styled.img`
+  width: 15rem;
+  height: 7rem;
+  position: relative;
+  top: 35vh;
+  left: calc(17.5vw - 7.5rem);
+`;

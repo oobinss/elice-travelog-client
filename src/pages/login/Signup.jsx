@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
+import { loginState } from '../../recoil/Atom'
+import { useSetRecoilState } from 'recoil'
 
 const SignupSection = styled.section`
   width: 100vw;
@@ -65,6 +67,7 @@ function Signup() {
   const [age, setAge] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
+  const setIsLoggedIn = useSetRecoilState(loginState)
 
   //입력된 정보가 올바른 형식인지 검사
   const emailRegex =
@@ -102,11 +105,16 @@ function Signup() {
     if (emailValidation && !passwordConfirmValidation && !passwordValidation && !ageValidation) {
       try {
         const data = { nickname: name, email, password, age: ageData }
-        await axios({
+        const result = await axios({
           method: 'post',
           url: 'http://localhost:8000/api/users/register',
           data: data,
         })
+        //로그인 성공시 토큰을 로컬 스토리지에 저장
+        //세션이 만료되어도 로그인을 유지하기 위해 로컬 스토리지를 사용
+        localStorage.setItem('token', result.data.token)
+        setIsLoggedIn(true)
+
         window.location.href = '/login'
       } catch (err) {
         console.error(err.response.data.error)
