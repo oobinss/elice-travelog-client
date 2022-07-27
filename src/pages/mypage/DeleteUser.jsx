@@ -93,43 +93,38 @@ const MenuLi = styled(NavLi)`
   }
 `;
 //회원 정보 변경창에 들어가기전 패스워드 확인
-function ChangePassword() {
+function DeleteUser() {
   const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-  //입력된 정보가 올바른 형식인지 검사
-  const passwordValidation = password.length < 8;
-  const passwordConfirmValidation = password !== passwordConfirm;
   const token = window.localStorage.getItem('token');
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-    //data: { currentPassword: '12341234' },
-  };
+  //입력된 정보가 올바른 형식인지 검사
 
   const handleSubmit = async e => {
     e.preventDefault();
-    if (passwordValidation || passwordConfirmValidation) {
+    if (!password) {
       alert('비밀번호를 확인해 주세요.');
     }
 
     //회원가입 요청
-    if (!passwordConfirmValidation && !passwordValidation) {
-      try {
-        const userData = await axios
-          .get('http://localhost:8000/api/users/user', config)
-          .then(e => e.data);
-        await axios({
-          method: 'patch',
-          url: `http://localhost:8000/api/users/${userData.id}`,
+
+    try {
+      const userData = await axios
+        .get('http://localhost:8000/api/users/user', {
           headers: { Authorization: `Bearer ${token}` },
-          data: {
-            password,
-          },
-        });
-        window.location.href = '/login';
-      } catch (err) {
-        console.error(err.stack);
-        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-      }
+        })
+        .then(e => e.data);
+      console.log(typeof userData.password);
+      await axios({
+        method: 'delete',
+        url: `http://localhost:8000/api/users/${userData.id}`,
+        headers: { Authorization: `Bearer ${token}` },
+        data: {
+          password,
+        },
+      });
+      window.location.href = '/login';
+    } catch (err) {
+      console.error(err.stack);
+      alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
     }
   };
 
@@ -142,14 +137,13 @@ function ChangePassword() {
         <MenuLi>
           <NavLink to="/changepassword">비밀번호 변경</NavLink>
         </MenuLi>
-
         <MenuLi>
-          <NavLink to="/deleteuser">회원 탈퇴</NavLink>
+          <NavLink to="/deleteuser">회원탈퇴</NavLink>
         </MenuLi>
       </MenuUl>
       <SignupSection>
         <SignupContainer>
-          <SignupHeader>비밀 번호 변경</SignupHeader>
+          <SignupHeader>회원 탈퇴 확인</SignupHeader>
           <form>
             <SignupInput
               name="password"
@@ -160,20 +154,7 @@ function ChangePassword() {
               }}
               placeholder="비밀번호를 입력해 주세요."
             />
-            {passwordValidation && <InvalidInput> * 8자 이상 입력해 주세요.</InvalidInput>}
-            <SignupInput
-              name="passwordConfirm"
-              value={passwordConfirm}
-              type="password"
-              onChange={e => {
-                setPasswordConfirm(e.target.value);
-              }}
-              placeholder="비밀번호를 다시 입력해 주세요."
-            />
-            {passwordConfirmValidation && (
-              <InvalidInput> * 비밀번호가 일치하지 않습니다.</InvalidInput>
-            )}
-            <SignupButton onClick={handleSubmit}>변경</SignupButton>
+            <SignupButton onClick={handleSubmit}>회원 탈퇴</SignupButton>
           </form>
         </SignupContainer>
       </SignupSection>
@@ -181,4 +162,4 @@ function ChangePassword() {
   );
 }
 
-export default ChangePassword;
+export default DeleteUser;

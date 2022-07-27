@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { loginState, iconMenuState } from '../recoil/Atom';
 import styled from 'styled-components';
@@ -44,6 +44,7 @@ const MenuUl = styled(NavUl)`
   right: -2.5rem;
   background-color: #5f6caf;
   color: #fff;
+  z-index: 999;
 `;
 const MenuLi = styled(NavLi)`
   color: #5f6caf;
@@ -73,11 +74,23 @@ const NavbarIcon = styled.img`
 
 function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const [style, setStyle] = useRecoilState(iconMenuState);
+  const [isOpen, setisOpen] = useRecoilState(iconMenuState);
   const navigate = useNavigate();
+  const modalMenu = useRef();
+
+  const handleModalOutside = event => {
+    if (isOpen && !modalMenu.current.contains(event.target)) {
+      setisOpen(false);
+    }
+  };
   useEffect(() => {
     if (localStorage.getItem('token')) setIsLoggedIn(true);
+    window.addEventListener('click', handleModalOutside);
+    return () => {
+      window.removeEventListener('click', handleModalOutside);
+    };
   }, []);
+
   return (
     <Nav>
       <LogoContainer
@@ -103,36 +116,36 @@ function Navbar() {
             <NavbarIcon
               src="img/default.png"
               onClick={() => {
-                setStyle(!style);
+                setisOpen(!isOpen);
               }}
             />
-            {style ? (
-              <MenuUl>
-                <MenuLi>
-                  <NavLink to="/editprofile">회원 정보 수정</NavLink>
-                </MenuLi>
-                <MenuLi>여행 페이지 이동</MenuLi>
-                <MenuLi>
-                  <NavLink to="/mypage">마이페이지</NavLink>
-                </MenuLi>
-                <MenuLi>글쓰기</MenuLi>
-                <MenuLi
-                  onClick={() => {
-                    if (window.confirm('로그아웃 하시겠습니까?')) {
-                      localStorage.clear();
-                      navigate('/login');
-                    } else {
-                      return;
-                    }
-                  }}
-                >
-                  로그아웃
-                </MenuLi>
-              </MenuUl>
-            ) : (
-              ''
-            )}
           </NavLi>
+        )}
+        {isOpen && (
+          <div ref={modalMenu}>
+            <MenuUl>
+              <MenuLi>
+                <NavLink to="/passwordcheck">회원 정보 수정</NavLink>
+              </MenuLi>
+              <MenuLi>여행 페이지 이동</MenuLi>
+              <MenuLi>
+                <NavLink to="/mypage">마이페이지</NavLink>
+              </MenuLi>
+              <MenuLi>글쓰기</MenuLi>
+              <MenuLi
+                onClick={() => {
+                  if (window.confirm('로그아웃 하시겠습니까?')) {
+                    localStorage.clear();
+                    navigate('/login');
+                  } else {
+                    return;
+                  }
+                }}
+              >
+                로그아웃
+              </MenuLi>
+            </MenuUl>
+          </div>
         )}
       </NavUl>
     </Nav>
