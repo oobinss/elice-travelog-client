@@ -80,7 +80,6 @@ function LoginForEmail() {
           method: 'post',
           url: 'http://localhost:8000/api/users',
           data: loginData,
-          withCredentials: true,
         });
 
         //로그인 성공시 토큰을 로컬 스토리지에 저장

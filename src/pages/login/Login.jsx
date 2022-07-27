@@ -1,27 +1,27 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
-import styled from 'styled-components'
-import KakaoLogin from './KakaoLogin.jsx'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import KakaoLogin from './KakaoLogin.jsx';
 
 const LoginSection = styled.section`
   width: 100vw;
   height: 100vw;
   background-color: white;
-`
+`;
 const LoginContainer = styled.article`
   width: 30rem;
   height: 25rem;
   margin: 6rem auto;
   box-shadow: 1px 1px 22px 2px rgba(0, 0, 0, 0.25);
   border-radius: 2.5rem;
-`
+`;
 const LoginHeader = styled.h2`
   color: #5f6caf;
   font-size: 2rem;
   position: relative;
   top: 3rem;
   left: 12rem;
-`
+`;
 const EmailLoginButton = styled(NavLink)`
   display: block;
   width: 19rem;
@@ -38,7 +38,7 @@ const EmailLoginButton = styled(NavLink)`
   color: #fff;
   border: none;
   border-radius: 22px;
-`
+`;
 
 const SignupButton = styled(NavLink)`
   color: #5f6caf;
@@ -47,7 +47,7 @@ const SignupButton = styled(NavLink)`
   position: relative;
   bottom: -9rem;
   left: 13rem;
-`
+`;
 
 function Login() {
   return (
@@ -59,7 +59,7 @@ function Login() {
         <SignupButton to="/signup">회원가입</SignupButton>
       </LoginContainer>
     </LoginSection>
-  )
+  );
 }
 
-export default Login
+export default Login;

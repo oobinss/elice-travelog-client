@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TitleCard from '../../components/TitleCard';
 import videoBG from './video/background.mp4';
@@ -11,9 +11,6 @@ function Title() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem('token')) console.log('exist!');
-  }, []);
   const scrolling = () => {
     const viewHight = window.innerHeight;
     window.scrollTo({

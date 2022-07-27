@@ -7,6 +7,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './pages/login/Login.jsx';
 import LoginForEmail from './pages/login/LoginForEmail.jsx';
 import Writing from './pages/writing/Writing';
+
 import Signup from './pages/login/Signup.jsx';
 import EditProfile from './pages/mypage/EditProfile';
 import PasswordCheck from './pages/mypage/PasswordCheck';
