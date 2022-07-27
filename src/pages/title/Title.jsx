@@ -7,32 +7,10 @@ import { useRecoilState } from 'recoil';
 import { loginState } from '../../recoil/Atom';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const mockData = [
-  {
-    id: 1,
-    place: '제주도',
-    img: 'https://cdn.pixabay.com/photo/2019/06/11/07/36/shiroyama-hiji-peak-4266254_1280.jpg',
-  },
-  {
-    id: 2,
-    place: '부산',
-    img: 'https://cdn.pixabay.com/photo/2016/10/17/07/53/busan-night-scene-1747130_1280.jpg',
-  },
-  {
-    id: 3,
-    place: '양양',
-    img: 'https://cdn.pixabay.com/photo/2019/06/11/07/36/shiroyama-hiji-peak-4266254_1280.jpg',
-  },
-  {
-    id: 4,
-    place: '목포',
-    img: 'https://cdn.pixabay.com/photo/2019/06/11/07/36/shiroyama-hiji-peak-4266254_1280.jpg',
-  },
-];
-
 function Title() {
   const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [inputValue, setInputValue] = useState('');
+  const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem('token')) console.log('exist!');
   }, []);
@@ -44,8 +22,30 @@ function Title() {
       behavior: 'smooth',
     });
   };
+  const titleData = [
+    {
+      id: 1,
+      place: '제주',
+      img: 'https://cdn.pixabay.com/photo/2021/02/12/13/27/spring-6008564_1280.jpg',
+    },
+    {
+      id: 2,
+      place: '부산',
+      img: 'https://cdn.pixabay.com/photo/2020/05/05/11/57/sea-5132777_1280.jpg',
+    },
+    {
+      id: 3,
+      place: '보성',
+      img: 'https://cdn.pixabay.com/photo/2018/03/21/22/26/valley-3248525_1280.jpg',
+    },
+    {
+      id: 4,
+      place: '서울',
+      img: 'https://cdn.pixabay.com/photo/2016/11/02/14/32/lotte-world-tower-1791802_1280.jpg',
+    },
+  ];
   const clickSearch = () => {
-    window.location.href = `/main?place=${inputValue}`;
+    navigate(`/main?place=${inputValue}`);
   };
   const inputSearch = e => {
     setInputValue(e.target.value);
@@ -91,7 +91,7 @@ function Title() {
           changeMethod={inputSearch}
         />
         <CardContainer>
-          {mockData.map(i => {
+          {titleData.map(i => {
             return <TitleCard key={`Title-card-${i.id}`} place={i.place} img={i.img} />;
           })}
         </CardContainer>

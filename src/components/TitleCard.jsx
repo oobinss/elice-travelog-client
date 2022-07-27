@@ -1,16 +1,21 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 function TitleCard(props) {
+  const navigate = useNavigate();
+  const clickCard = data => {
+    navigate(`main?place=${data}`);
+  };
   return (
-    <Card>
+    <Card onClick={() => clickCard(props.place)}>
       <ImgContainer img={props.img} />
       <CardTitle>{props.place}</CardTitle>
     </Card>
-  )
+  );
 }
 
-export default TitleCard
+export default TitleCard;
 
 const Card = styled.div`
   width: 12rem;
@@ -19,18 +24,19 @@ const Card = styled.div`
   margin: 2.5rem auto;
   border-radius: 20px;
   overflow: hidden;
-`
+`;
 const ImgContainer = styled.div`
   width: 100%;
   height: 100%;
   background-image: url(${props => props.img});
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
   transition: 0.5s;
   &:hover {
     transform: scale(1.1);
   }
-`
+`;
 
 const CardTitle = styled.div`
   width: 12rem;
@@ -46,4 +52,4 @@ const CardTitle = styled.div`
   border-radius: 0 0 20px 20px;
   position: relative;
   bottom: 5rem;
-`
+`;

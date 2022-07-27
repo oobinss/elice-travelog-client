@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { ImSearch } from 'react-icons/im'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { ImSearch } from 'react-icons/im';
+import { NavLink } from 'react-router-dom';
 
 function SearchbarIntro({
   containerWidth,
@@ -38,7 +38,7 @@ function SearchbarIntro({
         글쓰기
       </Writing>
     </SearchBarContainer>
-  )
+  );
 }
 
 const SearchBarContainer = styled.div`
@@ -49,12 +49,12 @@ const SearchBarContainer = styled.div`
   position: relative;
   top: 20vh;
   left: calc(50vw - 25rem);
-`
+`;
 const SearchBarTitle = styled.p`
   text-align: center;
   font-size: 1.5rem;
   padding-top: 1.5rem;
-`
+`;
 
 const SearchBarInput = styled.input`
   height: 1.7rem;
@@ -63,14 +63,14 @@ const SearchBarInput = styled.input`
   left: 9rem;
   border: none;
   border-radius: 10px;
-`
+`;
 const Search = styled(ImSearch)`
   position: relative;
   padding-left: 1rem;
   top: 2rem;
   left: 10rem;
   cursor: pointer;
-`
+`;
 const Writing = styled(NavLink)`
   visibility: hidden;
   display: block;
@@ -85,6 +85,6 @@ const Writing = styled(NavLink)`
   position: absolute;
   top: 1rem;
   left: 38rem;
-`
+`;
 
-export default SearchbarIntro
+export default SearchbarIntro;
