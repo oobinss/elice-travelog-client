@@ -43,7 +43,7 @@ function Kakao() {
       }
     })();
   }, []);
-  return <div>Kakao</div>;
+  return <div></div>;
 }
 
 export default Kakao;
