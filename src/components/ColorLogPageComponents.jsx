@@ -25,7 +25,6 @@ const ModalBG = styled.article`
   height: 100%;
   background-color: rgba(213, 213, 213, 0.5);
   position: fixed;
-  top: 5rem;
   left: 0;
 `;
 const Modal = styled.div`

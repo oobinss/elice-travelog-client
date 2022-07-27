@@ -1,9 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { colorLogState } from '../../recoil/Atom';
+import ColorLogPageComponents from '../../components/ColorLogPageComponents';
 
 const MyPage = () => {
   const [Image, setImage] = useState('img/default.png');
+  const [buttonClick, setButtonClick] = useRecoilState(colorLogState);
+
+  const handleButtonClick = () => {
+    setButtonClick(true);
+  };
   return (
     <Page>
       <MyPageHeader>
@@ -24,7 +32,7 @@ const MyPage = () => {
               <p>여행글</p>
               <MyLog>3</MyLog>
             </MyInfoBox>
-            <MyInfoBox>
+            <MyInfoBox onClick={handleButtonClick}>
               <p>컬러로그</p>
             </MyInfoBox>
           </MyInfo>
@@ -37,6 +45,7 @@ const MyPage = () => {
         <ImgFeed src="img/people.jpg" />
         <ImgFeed src="img/avatar.jpg" />
       </Feed>
+      {buttonClick && <ColorLogPageComponents></ColorLogPageComponents>}
     </Page>
   );
 };

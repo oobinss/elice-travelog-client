@@ -42,7 +42,7 @@ function ColorLog() {
           viewBox="200 0 400 900"
           style={{
             position: 'relative',
-            top: '9rem',
+            top: '6rem',
             left: isClick.state ? '0rem' : 'calc(50% - 4rem)',
           }}
         >
@@ -239,7 +239,6 @@ const SvgContainer = styled.div`
   width: 30rem;
   height: 35rem;
   position: relative;
-  top: -3.5rem;
 `;
 
 const Path = styled.path`

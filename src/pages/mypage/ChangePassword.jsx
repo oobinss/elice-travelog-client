@@ -114,33 +114,6 @@ function ChangePassword() {
     //회원가입 요청
     if (!passwordConfirmValidation && !passwordValidation) {
       try {
-<<<<<<< HEAD
-        const data = { password };
-        await axios({
-          method: 'get',
-          url: 'http://localhost:8000/api/users',
-          data: data,
-        });
-        window.location.href = '/login';
-      } catch (err) {
-        console.error(err.stack);
-        alert(`문제가 발생하였습니다. 확인 후 다시 시도해 주세요: ${err.message}`);
-      }
-    }
-  };
-  const deleteUser = async () => {
-    if (window.confirm('회원 탈퇴하시겠습니까?')) {
-      try {
-        await axios.delete(`http://localhost:8000/api/users/9`, config);
-        console.log('삭제되었습니다');
-      } catch (err) {
-        console.log(err);
-      }
-    } else {
-      return;
-    }
-  };
-=======
         const userData = await axios
           .get('http://localhost:8000/api/users/user', config)
           .then(e => e.data);
@@ -160,7 +133,6 @@ function ChangePassword() {
     }
   };
 
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
   return (
     <>
       <MenuUl>

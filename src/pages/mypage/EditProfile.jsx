@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-=======
 import React, { useState, useEffect } from 'react';
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 import styled from 'styled-components';
 import axios from 'axios';
 import DaumPostcodeEmbed from 'react-daum-postcode';
 import { NavLink, useNavigate } from 'react-router-dom';
-<<<<<<< HEAD
-import S3 from '../../components/S3';
-=======
 import { S3Upload, S3getFileURL, S3deleteObject } from '../../components/S3';
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 
 const SignupSection = styled.section`
   width: 100vw;
@@ -46,10 +38,6 @@ const SignupInput = styled.input`
   border-radius: 10px;
   border: none;
 `;
-<<<<<<< HEAD
-=======
-
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 const SignupButton = styled.button`
   display: block;
   width: 18rem;
@@ -126,14 +114,11 @@ function EditProfile() {
   const [address2, setAddress2] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
   let userData = {};
   useEffect(() => {
     getUserData();
     console.log(userData.data);
   }, []);
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 
   //axios bearer token
   const token = window.localStorage.getItem('token');
@@ -151,15 +136,6 @@ function EditProfile() {
   }
   const handleSubmit = async e => {
     e.preventDefault();
-<<<<<<< HEAD
-    let userData = {};
-
-    //기존 데이터 불러오기
-    try {
-      userData = await axios.get('http://localhost:8000/api/users/user', config).then(e => e.data);
-    } catch (err) {}
-    console.log(userData);
-=======
 
     const fileKey = profileImage.name;
     S3Upload(profileImage);
@@ -167,7 +143,6 @@ function EditProfile() {
 
     S3deleteObject(fileKey);
 
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
     let resultData = { ...userData, phoneNumber, address };
     editname && (resultData.name = editname);
     editnickname && (resultData.nickname = editnickname);
@@ -186,16 +161,9 @@ function EditProfile() {
           age: resultData.age,
           //          profileImg:profileImg,
         },
-<<<<<<< HEAD
-        // {
-
-        // },
-      });
-=======
       });
       alert('정보가 변경되었습니다.');
       navigate('/mypage');
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
     } catch (err) {
       alert(err.stack);
     }
@@ -217,22 +185,6 @@ function EditProfile() {
     }
     setAddress(fullAddress);
   };
-<<<<<<< HEAD
-  //회원 탈퇴 처리
-  const deleteUser = async () => {
-    if (window.confirm('회원 탈퇴하시겠습니까?')) {
-      try {
-        await axios.delete(`http://localhost:8000/api/users/9`, config);
-        navigate('/login');
-      } catch (err) {
-        alert(err);
-      }
-    } else {
-      return;
-    }
-  };
-=======
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 
   const postCodeStyle = {
     display: 'block',
@@ -317,13 +269,8 @@ function EditProfile() {
               type="file"
               name="profileImage"
               onChange={e => {
-<<<<<<< HEAD
-                //formData.append('images', e.target.files[0])
-                setProfileImage(e.target.files[0]);
-=======
                 const file = e.target.files[0];
                 setProfileImage(file);
->>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
               }}
             />
 
