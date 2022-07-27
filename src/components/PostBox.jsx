@@ -1,9 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
+import { communityState } from '../recoil/Atom';
+import { useRecoilState } from 'recoil';
 
 function PostBox({ title, name, content }) {
+  const [postClick, setPostClick] = useRecoilState(communityState);
+
+  const handlePostClick = () => {
+    console.log('click');
+    setPostClick(true);
+  };
   return (
-    <PostContainer>
+    <PostContainer onClick={handlePostClick}>
       <PostTitle>{title}</PostTitle>
       <PostImg />
       <PostWriter>{name}</PostWriter>

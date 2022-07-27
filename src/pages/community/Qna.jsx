@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import SearchbarIntro from '../../components/SearchbarIntro';
 import PostBox from '../../components/PostBox';
+import { useRecoilState } from 'recoil';
+import { communityState } from '../../recoil/Atom';
+import CommunityModal from '../../components/CommunityModal';
 
 function Qna() {
   const [inputValue, setInputValue] = useState('');
+  const [postClick, setPostClick] = useRecoilState(communityState);
 
   const handleChange = e => {
     setInputValue(e.target.value);
@@ -27,6 +31,7 @@ function Qna() {
         clickMethod={handleClick}
       />
       <PostBox title="testtesttest" name="anonymous" content="this is question" />
+      {postClick && <CommunityModal></CommunityModal>}
     </div>
   );
 }

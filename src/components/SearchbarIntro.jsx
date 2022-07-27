@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { ImSearch } from 'react-icons/im';
 import { NavLink } from 'react-router-dom';
@@ -43,9 +43,9 @@ function SearchbarIntro({
 
 const SearchBarContainer = styled.div`
   height: 9rem;
-  background-color: #edf7fa;
+  background-color: #fff;
   border-radius: 20px;
-  box-shadow: 7px 7px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.25);
   position: relative;
   top: 20vh;
   left: calc(50vw - 25rem);
@@ -59,15 +59,15 @@ const SearchBarTitle = styled.p`
 const SearchBarInput = styled.input`
   height: 1.7rem;
   position: relative;
+  border: 1px solid #ddd;
   top: 2rem;
   left: 9rem;
-  border: none;
   border-radius: 10px;
 `;
 const Search = styled(ImSearch)`
   position: relative;
   padding-left: 1rem;
-  top: 2rem;
+  top: 2.2rem;
   left: 10rem;
   cursor: pointer;
 `;

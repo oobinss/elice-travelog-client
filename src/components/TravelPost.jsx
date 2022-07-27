@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const mockData = ['서울숲', '슈퍼맛챠', '낙산공원', '대학로', '닭한마리'];
+
 function TravelPost() {
   return (
     <PostContainer>
@@ -9,6 +11,11 @@ function TravelPost() {
       <Title>2박 3일 부산여행</Title>
       <ProfilePic />
       <PostWriter>akskdkfk</PostWriter>
+      <RouteContainer>
+        {mockData.map((i, idx) => {
+          return <RouteBox key={idx}>{i}</RouteBox>;
+        })}
+      </RouteContainer>
     </PostContainer>
   );
 }
@@ -69,4 +76,32 @@ const PostWriter = styled.p`
   position: relative;
   top: -17.3rem;
   left: 15rem;
+`;
+const RouteContainer = styled.div`
+  display: flex;
+  width: 29rem;
+  height: 10rem;
+  overflow-x: auto;
+  position: relative;
+  top: -16rem;
+  left: 12rem;
+  &::-webkit-scrollbar {
+    width: 5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #eee;
+    border-radius: 5rem;
+  }
+  &::-webkit-scrollbar-track {
+    border: none;
+    background-color: #fff;
+  }
+`;
+const RouteBox = styled.div`
+  width: 7rem;
+  height: 7rem;
+  margin: 1rem 1rem;
+  box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.1);
+  flex: 0 0 auto;
+  border-radius: 22px;
 `;
