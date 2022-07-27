@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
-import TitleCard from '../../components/TitleCard'
-import videoBG from './video/background.mp4'
-import SearchbarIntro from '../../components/SearchbarIntro'
-import { useRecoilState } from 'recoil'
-import { loginState } from '../../recoil/Atom'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import TitleCard from '../../components/TitleCard';
+import videoBG from './video/background.mp4';
+import SearchbarIntro from '../../components/SearchbarIntro';
+import { useRecoilState } from 'recoil';
+import { loginState } from '../../recoil/Atom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const mockData = [
   {
@@ -30,7 +31,7 @@ const mockData = [
 ];
 
 function Title() {
-  const [isloggedIn] = useRecoilState(loginState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
   const [inputValue, setInputValue] = useState('');
   useEffect(() => {
     if (localStorage.getItem('token')) console.log('exist!');
@@ -69,6 +70,16 @@ function Title() {
 						light={false}
 					/> */}
         </VideoContainer>
+        <MenuUl>
+          <MenuLi>
+            <NavLink to="/community">community</NavLink>
+          </MenuLi>
+          <MenuLi>
+            <NavLink to={isLoggedIn ? '/mypage' : '/login'}>
+              {isLoggedIn ? 'my page' : 'login'}
+            </NavLink>
+          </MenuLi>
+        </MenuUl>
       </TitleContainer>
       <SearchSection>
         <SearchbarIntro
@@ -89,7 +100,7 @@ function Title() {
   );
 }
 
-export default Title
+export default Title;
 
 const TitleContainer = styled.div`
   width: 100vw;
@@ -128,7 +139,21 @@ const Video = styled.video`
   height: 105%;
   object-fit: cover;
   position: relative;
-  top: -0.1rem;
+  top: -0.2rem;
+`;
+const MenuUl = styled.ul`
+  display: flex;
+  position: absolute;
+  width: 15rem;
+  text-align: center;
+  top: 1rem;
+  right: 1rem;
+`;
+const MenuLi = styled.li`
+  height: 3rem;
+  width: 10rem;
+  line-height: 3rem;
+  color: #fff;
 `;
 const SearchSection = styled.section`
   width: 100vw;

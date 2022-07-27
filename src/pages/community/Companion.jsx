@@ -25,7 +25,7 @@ function Companion() {
         changeMethod={handleChange}
         clickMethod={handleClick}
       />
-      <PostBox name="sojeong" content=" 같이 갈사람 괌" />
+      <PostBox title="testtesttest" name="sojeong" content=" 같이 갈사람 괌" />
     </div>
   );
 }

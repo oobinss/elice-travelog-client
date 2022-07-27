@@ -1,26 +1,26 @@
-import React, { useRef, useState } from 'react'
-import styled from 'styled-components'
-import WritingSidebar from './WritingSidebar'
-import WritingListS from './WritingListS'
+import React, { useRef, useState } from 'react';
+import styled from 'styled-components';
+import WritingSidebar from './WritingSidebar';
+import WritingListS from './WritingListS';
 // Toast 에디터
-import '@toast-ui/editor/dist/toastui-editor.css'
-import { Editor } from '@toast-ui/react-editor'
+import '@toast-ui/editor/dist/toastui-editor.css';
+import { Editor } from '@toast-ui/react-editor';
 //Toast ColorSyntax 플러그인
-import 'tui-color-picker/dist/tui-color-picker.css'
-import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
+import 'tui-color-picker/dist/tui-color-picker.css';
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 // recoil
-import { atom, useRecoilState } from 'recoil'
+import { atom, useRecoilState } from 'recoil';
 //react dnd
-import { useDrop } from 'react-dnd'
+import { useDrop } from 'react-dnd';
 
-export const boardState = atom({ key: 'boardState', default: [] })
+export const boardState = atom({ key: 'boardState', default: [] });
 
 const WritingSection = styled.section`
   width: 100vw;
   height: 95vh;
   gap: 2rem;
-`
+`;
 const WritingContainer = styled.div`
   width: 70vw;
   margin-left: 35rem;
@@ -37,19 +37,19 @@ const WritingContainer = styled.div`
   .toastui-editor-defaultUI-toolbar {
     background-color: #edf7fa;
   }
-`
+`;
 
 const WritingHeader = styled.h1`
   font-size: 2rem;
-`
+`;
 const BtnBox = styled.div`
   display: flex;
   gap: 1rem;
-`
+`;
 const WritingHeaderBox = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 const Button = styled.button`
   display: block;
   width: 6rem;
@@ -62,7 +62,7 @@ const Button = styled.button`
   border: none;
   border-radius: 22px;
   cursor: pointer;
-`
+`;
 const Board = styled.div`
   width: 30rem;
   height: 10rem;
@@ -73,11 +73,11 @@ const Board = styled.div`
   gap: 1rem;
   overflow: scroll;
   width: 70vw;
-`
+`;
 
 function Writing() {
   // Editor DOM 선택용
-  const editorRef = useRef()
+  const editorRef = useRef();
 
   // 등록 버튼 핸들러
   const handleButton = () => {
@@ -85,11 +85,9 @@ function Writing() {
     ceditorRef.current?.getInstance().getHTML();
     // 입력창에 입력한 내용을 MarkDown 형태로 취득
     editorRef.current?.getInstance().getMarkdown();
-  }
+  };
   //이미지 업로드
-  const onUploadImage = async (blob, callback) => {
-
-  }
+  const onUploadImage = async (blob, callback) => {};
   const data = [
     {
       id: 132,
@@ -112,27 +110,27 @@ function Writing() {
       memo: '존맛탱',
       url: 'http://www.foodbank.co.kr/news/photo/202106/61595_18750_5558.jpg',
     },
-  ]
+  ];
 
-  const [board, setBoard] = useRecoilState(boardState)
-  const [arr, setArr] = useState([])
+  const [board, setBoard] = useRecoilState(boardState);
+  const [arr, setArr] = useState([]);
   const [{ isOver }, dropToAdd] = useDrop(() => ({
     accept: 'card',
     drop: item => addToBoard(item.id),
-  }))
+  }));
   const addToBoard = id => {
-    const items = data.filter(e => id === e.id)
-    setBoard(board => [...board, items[0]])
+    const items = data.filter(e => id === e.id);
+    setBoard(board => [...board, items[0]]);
     //하나로 바꾸기
     // setBoard([items[0]]);
-  }
+  };
   function arrFilter() {
     board.forEach(element => {
       if (!arr.includes(element)) {
-        setArr(arr => [...arr, element])
+        setArr(arr => [...arr, element]);
       }
-    })
-    return arr
+    });
+    return arr;
   }
   return (
     <WritingSection>
@@ -147,7 +145,7 @@ function Writing() {
         </WritingHeaderBox>
         <Board ref={dropToAdd}>
           {arrFilter().map(e => {
-            return <WritingListS id={e.id} name={e.name} url={e.url} />
+            return <WritingListS id={e.id} name={e.name} url={e.url} />;
           })}
         </Board>
         <Editor
@@ -158,12 +156,12 @@ function Writing() {
           plugins={[colorSyntax]}
           height="50rem"
           hooks={{
-          	addImageBlobHook: onUploadImage,
+            addImageBlobHook: onUploadImage,
           }}
         />
       </WritingContainer>
     </WritingSection>
-  )
+  );
 }
 
-export default Writing
+export default Writing;

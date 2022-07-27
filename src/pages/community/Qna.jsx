@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
-import SearchbarIntro from '../../components/SearchbarIntro'
-import PostBox from '../../components/PostBox'
+import React, { useState } from 'react';
+import SearchbarIntro from '../../components/SearchbarIntro';
+import PostBox from '../../components/PostBox';
 
 function Qna() {
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState('');
 
   const handleChange = e => {
-    setInputValue(e.target.value)
-  }
-  const handleClick = () => {}
+    setInputValue(e.target.value);
+  };
+  const handleClick = () => {};
   return (
     <div>
       <SearchbarIntro
@@ -26,9 +26,9 @@ function Qna() {
         changeMethod={handleChange}
         clickMethod={handleClick}
       />
-      <PostBox name="anonymous" content="this is question" />
+      <PostBox title="testtesttest" name="anonymous" content="this is question" />
     </div>
-  )
+  );
 }
 
-export default Qna
+export default Qna;

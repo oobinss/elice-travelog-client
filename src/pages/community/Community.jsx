@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import Companion from './Companion'
-import Qna from './Qna'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import Companion from './Companion';
+import Qna from './Qna';
+import Traveling from './Traveling';
 function Community() {
-  const [travel, setTravel] = useState(false)
-  const [companion, setCompanion] = useState(true)
-  const [qna, setQna] = useState(false)
+  const [travel, setTravel] = useState(false);
+  const [companion, setCompanion] = useState(true);
+  const [qna, setQna] = useState(false);
 
   return (
     <div>
@@ -13,9 +14,9 @@ function Community() {
         <TabMenuLi
           className={travel}
           onClick={() => {
-            setTravel(true)
-            setCompanion(false)
-            setQna(false)
+            setTravel(true);
+            setCompanion(false);
+            setQna(false);
           }}
         >
           여행하기
@@ -23,9 +24,9 @@ function Community() {
         <TabMenuLi
           className={companion}
           onClick={() => {
-            setTravel(false)
-            setCompanion(true)
-            setQna(false)
+            setTravel(false);
+            setCompanion(true);
+            setQna(false);
           }}
         >
           동행 구해요
@@ -33,9 +34,9 @@ function Community() {
         <TabMenuLi
           className={qna}
           onClick={() => {
-            setTravel(false)
-            setCompanion(false)
-            setQna(true)
+            setTravel(false);
+            setCompanion(false);
+            setQna(true);
           }}
         >
           Q & A
@@ -43,18 +44,19 @@ function Community() {
       </TabMenuUl>
       {companion && <Companion />}
       {qna && <Qna />}
+      {travel && <Traveling />}
     </div>
-  )
+  );
 }
 
-export default Community
+export default Community;
 
 const TabMenuUl = styled.ul`
   width: 45rem;
   margin: 60px auto 0;
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const TabMenuLi = styled.li`
   width: 11rem;
@@ -67,4 +69,4 @@ const TabMenuLi = styled.li`
     background-color: #5f6caf;
     color: #fff;
   }
-`
+`;

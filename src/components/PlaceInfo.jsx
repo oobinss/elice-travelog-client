@@ -1,36 +1,36 @@
-import React, { useRef } from 'react'
-import SetBookmarkList from '../pages/main/bookmark/SetBookmarkList'
-import styled from 'styled-components'
-import { useRecoilState } from 'recoil'
+import React, { useRef } from 'react';
+import SetBookmarkList from '../pages/main/bookmark/SetBookmarkList';
+import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
 import {
   placeInfoState,
   addBookmarkState,
   bookmarkState,
   activeState,
   detailInfoState,
-} from '../recoil/Atom'
+} from '../recoil/Atom';
 
 function PlaceInfo() {
-  const [placeInfo] = useRecoilState(placeInfoState)
-  const [bookmark, setBookmark] = useRecoilState(bookmarkState)
-  const [, setActive] = useRecoilState(activeState)
-  const [, setDetailInfo] = useRecoilState(detailInfoState)
-  const [addBookmark, setAddBookmark] = useRecoilState(addBookmarkState)
+  const [placeInfo] = useRecoilState(placeInfoState);
+  const [bookmark, setBookmark] = useRecoilState(bookmarkState);
+  const [, setActive] = useRecoilState(activeState);
+  const [, setDetailInfo] = useRecoilState(detailInfoState);
+  const [addBookmark, setAddBookmark] = useRecoilState(addBookmarkState);
 
-  const placeRef = useRef([])
-  placeRef.current = []
+  const placeRef = useRef([]);
+  placeRef.current = [];
 
   function addRef(data) {
-    placeRef.current.push(data)
+    placeRef.current.push(data);
   }
 
   function handleStyle(data) {
     if (data.category_group_code == 'AT4') {
-      return { border: '2px solid rgb(3, 155, 0)' }
+      return { border: '2px solid rgb(3, 155, 0)' };
     } else if (data.category_group_code == 'FD6') {
-      return { border: '2px solid rgb(0, 41, 254)' }
+      return { border: '2px solid rgb(0, 41, 254)' };
     } else if (data.category_group_code == 'CE7') {
-      return { border: '2px solid rgb(224, 88, 54)' }
+      return { border: '2px solid rgb(224, 88, 54)' };
     }
   }
 
@@ -38,23 +38,23 @@ function PlaceInfo() {
     // 북마크 추가 모달 오픈
     if (bookmark == '') {
       // 북마크에 장소 추가
-      setAddBookmark(true)
-      const id = e.target.id
-      const filterArray = placeRef.current.filter(e => e.id == id)
-      setBookmark(filterArray[0])
-      e.currentTarget.style.cssText = 'color: rgb(255, 184, 119)'
-      console.log(placeRef)
+      setAddBookmark(true);
+      const id = e.target.id;
+      const filterArray = placeRef.current.filter(e => e.id == id);
+      setBookmark(filterArray[0]);
+      e.currentTarget.style.cssText = 'color: rgb(255, 184, 119)';
+      console.log(placeRef);
     } else {
       // 북마크에 장소 삭제
-      const id = e.target.id
-      setBookmark('')
-      e.currentTarget.style.cssText = ''
+      const id = e.target.id;
+      setBookmark('');
+      e.currentTarget.style.cssText = '';
     }
   }
 
   function ActivateExtend(e) {
-    setActive(true)
-    setDetailInfo(placeRef.current[e.target.id])
+    setActive(true);
+    setDetailInfo(placeRef.current[e.target.id]);
   }
 
   function makePlaceInfo(placeInfo) {
@@ -70,16 +70,16 @@ function PlaceInfo() {
           <li>{data.address_name}</li>
         </ul>
       </div>
-    ))
+    ));
   }
   return (
     <PlaceInfoStyle>
       {placeInfo !== '' ? makePlaceInfo(placeInfo) : ''}
       {addBookmark == true ? <SetBookmarkList /> : ''}
     </PlaceInfoStyle>
-  )
+  );
 }
-export default PlaceInfo
+export default PlaceInfo;
 
 const PlaceInfoStyle = styled.div`
   display: flex;
@@ -129,4 +129,4 @@ const PlaceInfoStyle = styled.div`
     height: 1rem;
     line-height: 1rem;
   }
-`
+`;

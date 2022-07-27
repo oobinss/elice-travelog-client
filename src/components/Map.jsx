@@ -1,25 +1,25 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useRecoilState } from 'recoil'
-import { placeState, placeInfoState } from '../recoil/Atom'
-import makeMap from '../function/makeMap'
-import searchMap from '../function/searchMap'
-import customMarker from '../function/customMarker'
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { useRecoilState } from 'recoil';
+import { placeState, placeInfoState } from '../recoil/Atom';
+import makeMap from '../function/makeMap';
+import searchMap from '../function/searchMap';
+import customMarker from '../function/customMarker';
 
 function Map() {
-  const [place] = useRecoilState(placeState)
-  const [, setPlaceInfo] = useRecoilState(placeInfoState)
+  const [place] = useRecoilState(placeState);
+  const [, setPlaceInfo] = useRecoilState(placeInfoState);
 
   useEffect(() => {
-    const kakaoMap = makeMap()
-    searchMap(kakaoMap, place, setPlaceInfo)
-    customMarker(kakaoMap)
-  }, [place])
+    const kakaoMap = makeMap();
+    searchMap(kakaoMap, place, setPlaceInfo);
+    customMarker(kakaoMap);
+  }, [place]);
   return (
     <MapContainer>
       <div id="map"></div>
     </MapContainer>
-  )
+  );
 }
 
 const MapContainer = styled.div`
@@ -48,6 +48,6 @@ const MapContainer = styled.div`
   #toggle:checked ~ .toggleSwitch {
     color: rgb(255, 184, 119);
   }
-`
+`;
 
-export default Map
+export default Map;

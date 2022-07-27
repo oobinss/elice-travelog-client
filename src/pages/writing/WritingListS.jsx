@@ -1,6 +1,6 @@
-import React from 'react'
-import styled from 'styled-components'
-import { IoIosClose } from 'react-icons/io'
+import React from 'react';
+import styled from 'styled-components';
+import { IoIosClose } from 'react-icons/io';
 const ListBox = styled.div`
   padding: 1rem;
   position: relative;
@@ -9,16 +9,16 @@ const ListBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-`
+`;
 const ListImg = styled.img`
   width: 8rem;
   height: 8rem;
   border-radius: 2px;
-`
+`;
 const ListHeader = styled.h2`
   font-size: 1.6rem;
   text-align: center;
-`
+`;
 const Closebtn = styled.button`
   position: absolute;
   top: 10px;
@@ -40,11 +40,11 @@ const Closebtn = styled.button`
     width: 1.5rem;
     height: 1.5rem;
   }
-`
+`;
 function WritingListS({ id, name, url }) {
   const handleButton = () => {
     // 구현 중
-  }
+  };
 
   return (
     <ListBox>
@@ -54,7 +54,7 @@ function WritingListS({ id, name, url }) {
         <IoIosClose className="close" />
       </Closebtn>
     </ListBox>
-  )
+  );
 }
 
-export default WritingListS
+export default WritingListS;

@@ -71,6 +71,10 @@ export const loginState = atom({
   default: Boolean(localStorage.getItem('token')),
 });
 
+export const colorLogState = atom({
+  key: 'colorLogState',
+  default: false,
+});
 export const iconMenuState = atom({
   key: 'iconMenuState',
   default: false,

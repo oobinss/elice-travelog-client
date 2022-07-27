@@ -1,37 +1,37 @@
-import React, { useState } from 'react'
-import styled from 'styled-components'
-import { ImSearch } from 'react-icons/im'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { ImSearch } from 'react-icons/im';
 
 const SearchbarBox = styled.div`
   background-color: #fff;
   margin: 2rem 1rem 1rem 1rem;
   padding: 0.5rem;
   border-radius: 12px;
-`
+`;
 
 const SearchButton = styled.button`
   border: 0;
   outline: 0;
   padding: 0.5rem;
   background-color: #fff;
-`
+`;
 const SearchInput = styled.input`
   border: 0;
   outline: 0;
-`
+`;
 const SearchForm = styled.form`
   display: grid;
   grid-template-columns: 3fr 1fr;
-`
+`;
 function WritingSearchbar() {
-  const [inputValue, setInputValue] = useState(null)
+  const [inputValue, setInputValue] = useState(null);
   const onChange = e => {
-    setInputValue(e.target.value)
-  }
+    setInputValue(e.target.value);
+  };
   const handleSubmit = e => {
-    e.preventDefault()
-    setInputValue(inputValue)
-  }
+    e.preventDefault();
+    setInputValue(inputValue);
+  };
 
   return (
     <SearchbarBox>
@@ -47,7 +47,7 @@ function WritingSearchbar() {
         </SearchButton>
       </SearchForm>
     </SearchbarBox>
-  )
+  );
 }
 
-export default WritingSearchbar
+export default WritingSearchbar;

@@ -14,7 +14,7 @@ const SidebarTitleBox = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-`
+`;
 const FavoriteBox = styled.div`
   .icon {
     width: 3rem;
@@ -24,11 +24,11 @@ const FavoriteBox = styled.div`
     color: white;
     border-radius: 5px;
   }
-`
+`;
 const SidebarHeader = styled.h1`
   font-size: 1.8rem;
   text-align: center;
-`
+`;
 
 const WritingsidebarContainer = styled.div`
   width: 30rem;
@@ -37,7 +37,7 @@ const WritingsidebarContainer = styled.div`
   box-shadow: 0 40px 22px 2px rgba(0, 0, 0, 0.25);
   overflow: scroll;
   position: fixed;
-`
+`;
 const SidebarListBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@ const SidebarListBox = styled.div`
   padding: 1rem;
   background-color: #fff;
   border-radius: 5px;
-`
+`;
 
 const ListFilterBox = styled.div`
   margin: 1rem;
@@ -54,17 +54,17 @@ const ListFilterBox = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #fff;
-`
+`;
 const Filterbtn = styled.button`
   border: none;
   background-color: #fff;
   cursor: pointer;
-`
+`;
 const Select = styled.select`
   border: none;
   background-color: #fff;
   cursor: pointer;
-`
+`;
 const data = [
   {
     id: 132,
@@ -87,47 +87,47 @@ const data = [
     memo: '존맛탱',
     url: 'http://www.foodbank.co.kr/news/photo/202106/61595_18750_5558.jpg',
   },
-]
+];
 
-export const dataState = atom({ key: 'dataState', default: data })
+export const dataState = atom({ key: 'dataState', default: data });
 function WritingSidebar() {
-  const [list, setList] = useState(data)
-  const [selected, setSelected] = useState('최신')
+  const [list, setList] = useState(data);
+  const [selected, setSelected] = useState('최신');
 
   const handleChange = e => {
-    setSelected(e.target.value)
-    let newlist = []
+    setSelected(e.target.value);
+    let newlist = [];
     switch (selected) {
       case '최신':
-        newlist = [...list].sort((a, b) => a.index - b.index)
-        setList(newlist)
-        break
+        newlist = [...list].sort((a, b) => a.index - b.index);
+        setList(newlist);
+        break;
       case '장소':
         newlist = [...list].sort(function (a, b) {
           if (a.name < b.name) {
-            return -1
+            return -1;
           } else if (a.name > b.name) {
-            return 1
+            return 1;
           } else {
-            return 0
+            return 0;
           }
-        })
-        setList(newlist)
-        break
+        });
+        setList(newlist);
+        break;
       case '메모':
         newlist = [...list].sort(function (a, b) {
           if (a.memo < b.memo) {
-            return -1
+            return -1;
           } else if (a.memo > b.memo) {
-            return 1
+            return 1;
           } else {
-            return 0
+            return 0;
           }
-        })
-        setList(newlist)
-        break
+        });
+        setList(newlist);
+        break;
     }
-  }
+  };
   return (
     <WritingsidebarContainer>
       <WritingSearchbar />
@@ -147,11 +147,11 @@ function WritingSidebar() {
       </ListFilterBox>
       <SidebarListBox>
         {list.map(e => {
-          return <WritingList id={e.id} name={e.name} url={e.url} />
+          return <WritingList id={e.id} name={e.name} url={e.url} />;
         })}
       </SidebarListBox>
     </WritingsidebarContainer>
-  )
+  );
 }
 
-export default WritingSidebar
+export default WritingSidebar;

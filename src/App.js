@@ -15,12 +15,19 @@ import EditProfile from './pages/mypage/EditProfile';
 import PasswordCheck from './pages/mypage/PasswordCheck';
 import ColorLog from './components/ColorLog';
 import Kakao from './pages/login/Kakao.jsx';
+<<<<<<< HEAD
+import S3 from './components/S3';
+=======
 
+>>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 import Community from './pages/community/Community';
 import CompanionWriting from './pages/community/CompanionWriting';
 import QnAWriting from './pages/community/QnAWriting';
 import ChangePassword from './pages/mypage/ChangePassword';
+<<<<<<< HEAD
+=======
 import DeleteUser from './pages/mypage/DeleteUser';
+>>>>>>> 5d2ae1f9ce382623f3e532551e93d38f94a276e0
 function App() {
   return (
     <div>
