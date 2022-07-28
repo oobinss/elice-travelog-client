@@ -35,7 +35,7 @@ function WritingSearchbar() {
 
   return (
     <SearchbarBox>
-      <SearchForm className="searchbar" onSubmit={handleSubmit}>
+      <SearchForm onSubmit={handleSubmit}>
         <SearchInput
           className="search"
           placeholder="Search"

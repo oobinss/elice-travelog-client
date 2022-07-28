@@ -100,6 +100,31 @@ export const communityState = atom({
 	default: false,
 });
 export const iconMenuState = atom({
-	key: 'iconMenuState',
-	default: false,
+  key: 'iconMenuState',
+  default: false,
+})
+
+export const toggleState = atom({
+  key: 'toggleState',
+  default: false,
+})
+
+export const boardState = atom({
+  key: 'boardState',
+  default: [],
+})
+
+export const checkedState = atom({
+  key: 'checkedState',
+  default: [],
+})
+
+export const tagState = atom({
+  key: 'tagState',
+  default: [],
+});
+
+export const cityTagToggleState = atom({
+  key: 'cityTagToggleState',
+  default: false,
 });
