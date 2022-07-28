@@ -15,7 +15,7 @@ function BookmarkInfoDetail({ width, height }) {
 	function handleBookmark(e) {
 		// 북마크에 장소 삭제
 		const id = e.target.id;
-		setBookmark(bookmark.filter(data => data.id !== id));	
+		setBookmark(bookmark.filter(data => data.id !== id));
 	}
 
 	function ActivateExtend(e) {
@@ -28,7 +28,7 @@ function BookmarkInfoDetail({ width, height }) {
 			<div key={i} id={data.id} className="bookmarkBox">
 				{handleStyle(data)}
 				<button id={data.id} className="deleteBtn" onClick={handleBookmark}>
-				<AiFillCloseCircle className='circleX' color='#5f6caf'/>
+					<AiFillCloseCircle className="circleX" color="#5f6caf" />
 				</button>
 				<div onClick={ActivateExtend} style={{ color: '#5f6caf', cursor: 'pointer' }}>
 					<span id={i}>{data.place_name}</span>

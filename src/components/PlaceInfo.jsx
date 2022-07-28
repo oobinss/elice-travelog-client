@@ -21,7 +21,7 @@ function PlaceInfo() {
 
 	function handleBookmark(e) {
 		setAddBookmark(true);
-		const id = e.currentTarget.id
+		const id = e.currentTarget.id;
 		const targetObj = placeInfo[e.currentTarget.name];
 		if (!bookmark.some(data => data.id == id)) {
 			setBookmark([...bookmark, targetObj]);
@@ -30,7 +30,6 @@ function PlaceInfo() {
 			console.log(bookmark);
 		}
 	}
-
 
 	function ActivateExtend(e) {
 		setActive(true);
@@ -41,13 +40,15 @@ function PlaceInfo() {
 		return placeInfo.map((data, i) => (
 			<div key={Math.random()} id={data.id} name={i} className="infoBox">
 				<div key={Math.random()}>{handleStyle(data)}</div>
-				<button id={data.id} 
-				name={i} 
-				className={bookmark.includes(data) ? 'bookmarkBtn on' : 'bookmarkBtn'}
-				onClick={handleBookmark}>
-					<BsStarFill/>
+				<button
+					id={data.id}
+					name={i}
+					className={bookmark.includes(data) ? 'bookmarkBtn on' : 'bookmarkBtn'}
+					onClick={handleBookmark}
+				>
+					<BsStarFill />
 				</button>
-				<ul id='placeInfoBox'>
+				<ul id="placeInfoBox">
 					<li onClick={ActivateExtend} id={i} className="placeInfoName">
 						{data.place_name}
 					</li>
@@ -144,6 +145,4 @@ const PlaceInfoStyle = styled.div`
 		color: #ffb877;
 		transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 	}
-
-
 `;

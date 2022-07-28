@@ -30,8 +30,18 @@ function Qna() {
         changeMethod={handleChange}
         clickMethod={handleClick}
       />
-      <PostBox title="testtesttest" name="anonymous" content="this is question" />
-      {postClick && <CommunityModal></CommunityModal>}
+      <PostBox
+        title="광안리 초밥 맛집 추천해주세욥"
+        name="anonymous"
+        content="광안리에서 초밥먹으려고 하는데 맛집 추천 부탁드려욥"
+      />
+      {postClick && (
+        <CommunityModal
+          title="광안리 초밥 맛집 추천해주세욥"
+          name="anonymous"
+          content="광안리에서 초밥먹으려고 하는데 맛집 추천 부탁드려욥"
+        />
+      )}
     </div>
   );
 }

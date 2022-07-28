@@ -1,20 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const mockData = ['서울숲', '슈퍼맛챠', '낙산공원', '대학로', '닭한마리'];
-
-function TravelPost() {
+function TravelPost({ title, userId }) {
   return (
     <PostContainer>
       <Thumbnail />
-      <PositionData>📍Busan</PositionData>
-      <Title>2박 3일 부산여행</Title>
+      <PositionData>📍BUSAN</PositionData>
+      <Title>{title}</Title>
       <ProfilePic />
-      <PostWriter>akskdkfk</PostWriter>
+      <PostWriter>{userId}</PostWriter>
       <RouteContainer>
-        {mockData.map((i, idx) => {
+        {/* {markedData.map((i, idx) => {
           return <RouteBox key={idx}>{i}</RouteBox>;
-        })}
+        })} */}
       </RouteContainer>
     </PostContainer>
   );
@@ -29,6 +27,7 @@ const PostContainer = styled.div`
   background-color: #fff;
   box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
   padding: 2rem;
+  margin-bottom: 3rem;
   box-sizing: border-box;
   position: relative;
   top: 7rem;

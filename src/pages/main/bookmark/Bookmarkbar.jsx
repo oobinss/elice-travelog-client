@@ -19,7 +19,11 @@ function Bookmarkbar() {
 	}, [viewDetail]);
 
 	function renderDetailPage() {
-		return viewDetail ? <BookmarkList getNumber={getNumber} setGetNumber={setGetNumber} /> : <BookmarkDetail getNumber={getNumber} setGetNumber={setGetNumber} />;
+		return viewDetail ? (
+			<BookmarkList getNumber={getNumber} setGetNumber={setGetNumber} />
+		) : (
+			<BookmarkDetail getNumber={getNumber} setGetNumber={setGetNumber} />
+		);
 	}
 
 	function handleBookmarkbar() {
@@ -43,7 +47,7 @@ function Bookmarkbar() {
 const BookmarkbarStyle = styled.div`
 	position: absolute;
 	z-index: 6;
-	border-right: 1px solid rgb(219,219,219);
+	border-right: 1px solid rgb(219, 219, 219);
 	.bookmarkbar {
 		display: flex;
 		flex-flow: column;

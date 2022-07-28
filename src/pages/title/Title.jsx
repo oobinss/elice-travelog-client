@@ -117,13 +117,15 @@ const TitleButton = styled.button`
   background-color: #5f6caf;
   color: #fff;
   font-size: 1.5rem;
-  font-weight: 200;
+  font-weight: 400;
   text-align: center;
   line-height: 4rem;
   border: none;
+  border-radius: 22px;
   position: relative;
   top: 40vh;
   left: calc(17.5vw - 5rem);
+  cursor: pointer;
 `;
 
 const VideoContainer = styled.section`
@@ -149,6 +151,7 @@ const MenuUl = styled.ul`
 const MenuLi = styled.li`
   height: 3rem;
   width: 10rem;
+  font-size: 1.25rem;
   line-height: 3rem;
   color: #fff;
 `;

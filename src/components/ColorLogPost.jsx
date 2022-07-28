@@ -1,46 +1,65 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function ColorLogPost({ address }) {
-  return (
-    <PostContainer>
-      <PostThumbnail />
-      <PostTitle>{address}</PostTitle>
-      <TravelPeriod>2022.02.20 - 22.03.30</TravelPeriod>
-    </PostContainer>
-  );
+function ColorLogPost({ title, mainImg, tag }) {
+	return (
+		<PostContainer>
+			<PostThumbnail src={mainImg} />
+			<PostTitle>{title}</PostTitle>
+			<TravelTagBox>
+				{tag.map((i, idx) => {
+					return <Tag key={idx}>{i}</Tag>;
+				})}
+			</TravelTagBox>
+		</PostContainer>
+	);
 }
 
 export default ColorLogPost;
 
 const PostContainer = styled.article`
-  width: 18rem;
-  height: 6.7rem;
-  background-color: #edf7fa;
-  margin: 1rem auto;
-  border-radius: 10px;
+	width: 18rem;
+	height: 6.7rem;
+	background-color: #edf7fa;
+	margin: 1rem auto;
+	border-radius: 10px;
 `;
 const PostThumbnail = styled.img`
-  width: 4rem;
-  height: 4rem;
-  margin: 1.5rem;
-  border-radius: 10px;
-  background-color: blue;
+	width: 4rem;
+	height: 4rem;
+	margin: 1.5rem;
+	border-radius: 10px;
 `;
 const PostTitle = styled.h2`
-  display: block;
-  width: 10rem;
-  position: relative;
-  top: -5.2rem;
-  left: 6.5rem;
-  font-size: 1.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+	display: block;
+	width: 10rem;
+	position: relative;
+	top: -5.2rem;
+	left: 6.5rem;
+	font-size: 1.5rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 `;
-const TravelPeriod = styled.p`
-  font-size: 1rem;
-  position: relative;
-  top: -4.5rem;
-  left: 6.5rem;
+const TravelTagBox = styled.div`
+	display: flex;
+	width: 11rem;
+	height: 4rem;
+	overflow: scroll;
+	position: relative;
+	top: -5rem;
+	left: 6rem;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+`;
+const Tag = styled.div`
+	font-size: 0.7rem;
+	min-width: 2rem;
+	height: 2rem;
+	margin: 0.5rem;
+	border-radius: 10px;
+	background-color: #fff;
+	text-align: center;
+	line-height: 2rem;
 `;

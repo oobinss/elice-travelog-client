@@ -54,6 +54,7 @@ const SearchBarTitle = styled.p`
   text-align: center;
   font-size: 1.5rem;
   padding-top: 1.5rem;
+  cursor: default;
 `;
 
 const SearchBarInput = styled.input`

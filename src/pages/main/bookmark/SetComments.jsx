@@ -42,8 +42,7 @@ function SetComments(props) {
 				<button onClick={handleBtn} ref={buttonRef}>
 					등록
 				</button>
-				<p className="viewMemo" ref={pRef}>
-				</p>
+				<p className="viewMemo" ref={pRef}></p>
 			</div>
 		</SetCommentsStyle>
 	);

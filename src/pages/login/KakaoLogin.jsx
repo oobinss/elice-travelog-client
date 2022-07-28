@@ -33,4 +33,5 @@ const SocialImage = styled.div`
   height: 3rem;
   background: url('img/kakao_login_large_narrow.png') no-repeat center;
   background-size: contain;
+  cursor: pointer;
 `;

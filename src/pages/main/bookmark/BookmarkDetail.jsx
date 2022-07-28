@@ -23,7 +23,7 @@ function BookmarkDetail(props) {
 	const listNumber = useRecoilValue(listNumberState);
 	const [bookmarkSet, setBookmarkSet] = useRecoilState(bookmarkSetState);
 	const setViewDetail = useSetRecoilState(viewDetailState);
-	
+
 	let navigate = useNavigate();
 
 	async function sendToWriting() {
@@ -32,19 +32,19 @@ function BookmarkDetail(props) {
 		console.log(bookmarkSet);
 
 		const token = localStorage.getItem('token');
-		await axios({ 
-			method: 'post', 
-			url: 'http://localhost:8000/api/bookmarks/registers', 
-			headers: { 
+		await axios({
+			method: 'post',
+			url: 'http://localhost:8000/api/bookmarks/registers',
+			headers: {
 				Authorization: `Bearer ${token}`,
 			},
-			data: bookmarkSet, 
+			data: bookmarkSet,
 		})
-		.then((res) => {
-			console.log(res.status);
-			console.log(res.data)
-		})
-		.catch((err) => console.log(err.toJSON()))
+			.then(res => {
+				console.log(res.status);
+				console.log(res.data);
+			})
+			.catch(err => console.log(err.toJSON()));
 
 		navigate(`../writing?list=${bmList[listNumber]}`);
 	}
@@ -65,7 +65,6 @@ function BookmarkDetail(props) {
 		</DetailPageStyle>
 	);
 }
-
 
 const DetailPageStyle = styled.div`
 	display: flex;

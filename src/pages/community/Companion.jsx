@@ -31,8 +31,14 @@ function Companion() {
         changeMethod={handleChange}
         clickMethod={handleClick}
       />
-      <PostBox title="testtesttest" name="sojeong" content=" 같이 갈사람 괌" />
-      {postClick && <CommunityModal></CommunityModal>}
+      <PostBox title="내일 수변공원 동행 구해요!" name="sojeong" content="같이 갈사람 괌" />
+      {postClick && (
+        <CommunityModal
+          title="내일 수변공원 동행 구해요!"
+          name="sojeong"
+          content="같이 갈사람 괌"
+        />
+      )}
     </>
   );
 }

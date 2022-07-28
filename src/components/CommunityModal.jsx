@@ -5,7 +5,7 @@ import { communityState } from '../recoil/Atom';
 import { IoClose } from 'react-icons/io5';
 import CommentForCommunity from './CommentForCommunity';
 
-function CommunityModal() {
+function CommunityModal({ title, name, content }) {
   const [click, setClick] = useRecoilState(communityState);
   let [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
@@ -24,10 +24,10 @@ function CommunityModal() {
   return (
     <ModalBG onClick={clickHandler}>
       <Modal onClick={e => e.stopPropagation()}>
-        <Title>this is title yea</Title>
+        <Title>{title}</Title>
         <PostImg />
-        <PostWriter>sojeong</PostWriter>
-        <PostContent>dkdkdkdkdkkdsldkjfskdlfksjdfksldkj</PostContent>
+        <PostWriter>{name}</PostWriter>
+        <PostContent>{content}</PostContent>
         <CommentBox>
           <CommentContainer>
             {comments.map((i, idx) => {

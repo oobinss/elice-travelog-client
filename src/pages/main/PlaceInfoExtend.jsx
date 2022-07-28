@@ -10,14 +10,16 @@ function PlaceInfoExtend() {
 	const [detailInfo] = useRecoilState(detailInfoState);
 
 	function handleExtendInfo() {
-		setActive(false)
+		setActive(false);
 	}
 
 	return (
 		<PlaceInfoExtendbar>
 			<div className={active ? 'placeInfoExtend' : 'placeInfoExtend close'}>
 				<div className="detailInfo">
-					<div className='detailIcon' key={Math.random()}>{handleStyle(detailInfo)}</div>
+					<div className="detailIcon" key={Math.random()}>
+						{handleStyle(detailInfo)}
+					</div>
 					<div id="x" onClick={handleExtendInfo}>
 						<TiArrowLeft color="rgb(219,219,219)" />
 					</div>
@@ -57,7 +59,7 @@ const PlaceInfoExtendbar = styled.div`
 		background-color: #fafafa;
 		overflow: scroll;
 		overflow-y: auto;
-	
+
 		&::-webkit-scrollbar {
 			width: 8px;
 		}
@@ -68,7 +70,7 @@ const PlaceInfoExtendbar = styled.div`
 	}
 
 	.detailIcon {
-		display:inline-block;
+		display: inline-block;
 		padding-left: 27.2%;
 		text-align: center;
 		margin-top: 1rem;
@@ -82,7 +84,7 @@ const PlaceInfoExtendbar = styled.div`
 		height: 20rem;
 		margin: 1rem;
 		border-radius: 0.5rem;
-		border: 1px solid rgb(219,219,219);
+		border: 1px solid rgb(219, 219, 219);
 	}
 
 	.close {
@@ -132,7 +134,7 @@ const PlaceInfoExtendbar = styled.div`
 		height: 100%;
 		background-color: white;
 		margin: 1rem;
-		border: 1px solid rgb(219,219,219);
+		border: 1px solid rgb(219, 219, 219);
 	}
 `;
 

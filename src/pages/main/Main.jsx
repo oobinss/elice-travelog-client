@@ -10,7 +10,7 @@ import PlaceInfoExtend from './PlaceInfoExtend.jsx';
 
 function Main() {
 	const showBmList = useRecoilValue(showBmListState);
-	const detailInfo = useRecoilValue(detailInfoState)
+	const detailInfo = useRecoilValue(detailInfoState);
 	return (
 		<>
 			<Sidebar />

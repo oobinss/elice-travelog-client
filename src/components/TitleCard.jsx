@@ -20,10 +20,10 @@ export default TitleCard;
 const Card = styled.div`
   width: 12rem;
   height: 15rem;
-
   margin: 2.5rem auto;
   border-radius: 20px;
   overflow: hidden;
+  cursor: pointer;
 `;
 const ImgContainer = styled.div`
   width: 100%;

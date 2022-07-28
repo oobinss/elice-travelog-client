@@ -23,7 +23,7 @@ function Map() {
 			setMainInputValue(params);
 			setPlace(params);
 		}
-	},[])
+	}, []);
 
 	useEffect(() => {
 		const kakaoMap = makeMap();
@@ -62,9 +62,9 @@ const MapContainer = styled.div`
 		color: #ddd;
 	}
 
-  #toggle:checked ~ .toggleSwitch {
-    color: rgb(255, 184, 119);
-  }
+	#toggle:checked ~ .toggleSwitch {
+		color: rgb(255, 184, 119);
+	}
 `;
 
 export default Map;

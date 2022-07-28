@@ -19,10 +19,7 @@ function SelectBmList() {
 		<SelectBmListStyle>
 			<span>추가할 리스트 선택</span>
 			<div className="allbtnContainer">
-				<ModalBmList
-					currentList={currentList}
-					setCurrentList={setCurrentList}
-				/>
+				<ModalBmList currentList={currentList} setCurrentList={setCurrentList} />
 			</div>
 			<div className="addBmListContainer">
 				<button className="addBmListBtn" onClick={handleList}>
@@ -78,7 +75,7 @@ const SelectBmListStyle = styled.div`
 	}
 
 	.on {
-		background-color: #EDF7FA;
+		background-color: #edf7fa;
 	}
 
 	.addBmListBtn {

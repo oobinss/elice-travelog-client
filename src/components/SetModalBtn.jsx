@@ -20,8 +20,8 @@ function SetModalBtn(props) {
 }
 
 const SetModalBtnStyle = styled.div`
-    position: absolute;
-    z-index: 4;
+	position: absolute;
+	z-index: 4;
 	#closeBtn {
 		width: 1rem;
 		height: 2rem;

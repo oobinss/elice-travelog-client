@@ -21,7 +21,7 @@ function BookmarkInfo() {
 	const bmList = useRecoilValue(bookmarkListState);
 	const listNumber = useRecoilValue(listNumberState);
 	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
-	const [text, setText] = useRecoilState(textState);	
+	const [text, setText] = useRecoilState(textState);
 	const setActive = useSetRecoilState(activeState);
 	const setDetailInfo = useSetRecoilState(detailInfoState);
 	const [bookmarkSet, setBookmarkSet] = useRecoilState(bookmarkSetState);
@@ -67,8 +67,8 @@ function BookmarkInfo() {
 	}
 
 	function ActivateExtend(e) {
-		setActive(true);
-		setDetailInfo(placeInfo[e.target.id]);
+		// 	setActive(true);
+		// 	setDetailInfo(placeInfo[e.target.id]);
 	}
 
 	function makeBookmarkInfo(bookmark) {

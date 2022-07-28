@@ -4,7 +4,11 @@ import { IoMdCafe } from 'react-icons/io';
 import { AiOutlineQuestion } from 'react-icons/ai';
 
 export default function handleStyle(data) {
-	if (data.category_group_code !== 'FD6' && data.category_group_code !== 'AT4' && data.category_group_code !== 'CE7') {
+	if (
+		data.category_group_code !== 'FD6' &&
+		data.category_group_code !== 'AT4' &&
+		data.category_group_code !== 'CE7'
+	) {
 		return (
 			<AiOutlineQuestion
 				key={Math.random()}
