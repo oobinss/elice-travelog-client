@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import handleStyle from '../../../function/handleStyle';
 import { MdOutlineClose } from 'react-icons/md';
@@ -18,8 +18,11 @@ function BookmarkInfo() {
 	const placeInfo = useRecoilValue(placeInfoState);
 	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
 	const bmList = useRecoilValue(bookmarkListState);
-	const text = useRecoilValue(textState);
+	const [text, setText] = useRecoilState(textState);
 	const listNumber = useRecoilValue(listNumberState);
+	const setActive = useSetRecoilState(activeState);
+	const setDetailInfo = useSetRecoilState(detailInfoState);
+	const [comment, setComment] = useState();
 
 	useEffect(() => {
 		console.log(bookmark);
@@ -47,8 +50,8 @@ function BookmarkInfo() {
 			data: newObj,
 		};
 
-		// console.log(newArray);
-	}, [listNumber]);
+		console.log(newArray);
+	}, [bookmark, listNumber]);
 
 	function handleBookmark(e) {
 		// 북마크에 장소 삭제
@@ -72,7 +75,7 @@ function BookmarkInfo() {
 					<p onClick={ActivateExtend} className="bookmarkInfoName">
 						{data.place_name}
 					</p>
-					<SetComments className="modalInput" />
+					<SetComments i={i} className="modalInput" comment={comment} setComment={setComment} />
 				</div>
 			</div>
 		));
@@ -101,7 +104,7 @@ const BookmarkInfoStyle = styled.div`
 	}
 
 	.bookmarkBox {
-		display:flex;
+		display: flex;
 		width: 18rem;
 		height: 6rem;
 		background-color: white;

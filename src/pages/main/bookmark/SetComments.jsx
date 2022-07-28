@@ -11,8 +11,6 @@ import {
 } from '../../../recoil/Atom';
 function SetComments(props) {
 	const [value, setValue] = useState('');
-	const [number, setNumber] = useState(null);
-	const [comment, setComment] = useState([]);
 	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
 	const [bookmarkSet, setBookmarkSet] = useRecoilState(bookmarkSetState);
 	const [bmList, setBmList] = useRecoilState(bookmarkListState);
@@ -21,10 +19,6 @@ function SetComments(props) {
 	const inputRef = useRef();
 	const buttonRef = useRef();
 	const pRef = useRef();
-
-	useEffect(() => {
-		console.log(comment);
-	}, [comment]);
 
 	const newObject = bookmark.map(element => {
 		let newObj = {
@@ -58,6 +52,8 @@ function SetComments(props) {
 	function handleBtn(e) {
 		// input의 value를 특정 배열 내 객체의 프로퍼티에 넣는 작업
 		e.preventDefault();
+		props.setComment([...props.comment, { id: props.i, bookmarkMemo: value }]);
+		console.log(props.comment);
 		inputRef.current.type = 'hidden';
 		buttonRef.current.style.display = 'none';
 		pRef.current.style.display = 'inline-block';
@@ -84,7 +80,6 @@ function SetComments(props) {
 					등록
 				</button>
 			</div>
-	
 		</SetCommentsStyle>
 	);
 }
@@ -102,12 +97,12 @@ const SetCommentsStyle = styled.div`
 
 	input {
 		background-color: #edf7fa;
-		margin-left:0.1rem;
+		margin-left: 0.1rem;
 		height: 1.5rem;
 	}
 
-	input:focus { 
-		outline: none; 
+	input:focus {
+		outline: none;
 	}
 
 	.makeFlex {
