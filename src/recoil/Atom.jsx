@@ -64,9 +64,14 @@ export const listNumberState = atom({
 	default: false,
 });
 
+export const currentListState = atom({
+	key: 'currentListState',
+	default: [],
+});
+
 export const textState = atom({
 	key: 'textState',
-	default: '메모를 입력해 주세요.',
+	default: [],
 });
 
 // bookmark info창 controller

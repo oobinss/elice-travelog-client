@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import makeBookmark from '../../../function/makeBookmark';
 import { MdArrowBackIos, MdStars } from 'react-icons/md';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
 	bookmarkState,
 	bookmarkSetState,
@@ -10,18 +12,25 @@ import {
 	listNumberState,
 	viewDetailState,
 	textState,
+	currentListState,
 } from '../../../recoil/Atom';
 import BookmarkInfoDetail from './BookmarkInfoDetail';
-function BookmarkDetail() {
-	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
+function BookmarkDetail(props) {
+	const bookmark = useRecoilValue(bookmarkState);
+	const text = useRecoilValue(textState);
+	const currentList = useRecoilValue(currentListState);
+	const bmList = useRecoilValue(bookmarkListState);
+	const listNumber = useRecoilValue(listNumberState);
 	const [bookmarkSet, setBookmarkSet] = useRecoilState(bookmarkSetState);
-	const [bmList, setBmList] = useRecoilState(bookmarkListState);
-	const [listNumber, setListNumber] = useRecoilState(listNumberState);
-	const [viewDetail, setViewDetail] = useRecoilState(viewDetailState);
-	const [text, setText] = useRecoilState(textState);
+	const setViewDetail = useSetRecoilState(viewDetailState);
+	
+	let navigate = useNavigate();
 
 	async function sendToWriting() {
+		let newArray = makeBookmark(bookmark, text, bmList, listNumber);
+		setBookmarkSet(newArray);
 		console.log(bookmarkSet);
+
 		const token = localStorage.getItem('token');
 		await axios({ 
 			method: 'post', 
@@ -36,17 +45,19 @@ function BookmarkDetail() {
 			console.log(res.data)
 		})
 		.catch((err) => console.log(err.toJSON()))
+
+		navigate(`../writing?list=${bmList[listNumber]}`);
 	}
 
 	return (
 		<DetailPageStyle>
 			<div className="folder">
 				<MdStars color="#ffb877" id="btnStar" size="32" />
-				{bmList[listNumber]}
+				{bmList[props.getNumber]}
 				<MdArrowBackIos className="backBtn" onClick={() => setViewDetail(true)} />
 			</div>
 			<div className="content">
-				{<BookmarkInfoDetail />}
+				{currentList.includes(props.getNumber) && <BookmarkInfoDetail />}
 			</div>
 			<button className="redirectTowrite" onClick={sendToWriting}>
 				글쓰기

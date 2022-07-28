@@ -19,7 +19,6 @@ export default function BookmarkModal() {
 	const setShowBmList = useSetRecoilState(showBmListState);
 	
 	function handleMakeBookmark() {
-		console.log(bookmark);
 		bookmark !== [] ? setShowBmList(true) : <MessageBox message='북마크를 추가해주세요.' top='50vh' left='50vw'/>
 	}
 

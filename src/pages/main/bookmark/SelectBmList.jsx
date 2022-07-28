@@ -1,17 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useSetRecoilState } from 'recoil';
-import { bookmarkbarState, showBmListState } from '../../../recoil/Atom';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { bookmarkbarState, showBmListState, currentListState } from '../../../recoil/Atom';
 import ModalBmList from './ModalBmList';
 
 function SelectBmList() {
 	const setBmClose = useSetRecoilState(bookmarkbarState);
 	const setShowBmList = useSetRecoilState(showBmListState);
-	const [currentList, setCurrentList] = useState([]);
+	const [currentList, setCurrentList] = useRecoilState(currentListState);
 
 	function handleList() {
 		setBmClose(false);
 		setShowBmList(false);
+		console.log(currentList);
 	}
 
 	return (

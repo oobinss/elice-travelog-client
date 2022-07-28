@@ -25,7 +25,8 @@ function BookmarkInfoDetail({ width, height }) {
 
 	function makeBookmarkInfoDetail(bookmark) {
 		return bookmark.map((data, i) => (
-			<div key={i} id={data.id} style={handleStyle(data)} className="bookmarkBox">
+			<div key={i} id={data.id} className="bookmarkBox">
+				{handleStyle(data)}
 				<button id={data.id} className="deleteBtn" onClick={handleBookmark}>
 				<AiFillCloseCircle className='circleX' color='#5f6caf'/>
 				</button>

@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Searchbar from '../Searchbar';
 import { BsCaretLeftSquare } from 'react-icons/bs';
 import { IoMdAirplane } from 'react-icons/io';
 import styled from 'styled-components';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { bookmarkbarState, viewDetailState } from '../../../recoil/Atom';
 import BookmarkList from './BookmarkList';
 import BookmarkDetail from './BookmarkDetail';
@@ -11,14 +11,15 @@ import SetModalBtn from '../../../components/SetModalBtn';
 
 function Bookmarkbar() {
 	const [bmClose, setBmClose] = useRecoilState(bookmarkbarState);
-	const viewDetail = useSetRecoilState(viewDetailState);
+	const viewDetail = useRecoilValue(viewDetailState);
+	const [getNumber, setGetNumber] = useState('');
 
 	useEffect(() => {
 		renderDetailPage();
 	}, [viewDetail]);
 
 	function renderDetailPage() {
-		return viewDetail ? <BookmarkList /> : <BookmarkDetail />;
+		return viewDetail ? <BookmarkList getNumber={getNumber} setGetNumber={setGetNumber} /> : <BookmarkDetail getNumber={getNumber} setGetNumber={setGetNumber} />;
 	}
 
 	function handleBookmarkbar() {
