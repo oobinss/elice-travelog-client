@@ -37,10 +37,12 @@ export function S3getFileURL(fileKey) {
   const url = myBucket.getSignedUrl('getObject', params);
   return url;
 }
-
 export function S3deleteObject(fileKey) {
-  myBucket.deleteObject('deleteObject', {
+  const params = {
     Bucket: bucketName,
     Key: fileKey,
+  };
+  myBucket.deleteObject(params, function (err, data) {
+    if (err) alert(err, err.stack);
   });
 }

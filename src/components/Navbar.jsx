@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
-import { loginState, iconMenuState } from '../recoil/Atom';
+import { loginState } from '../recoil/Atom';
 import styled from 'styled-components';
 import { NavLink, useNavigate } from 'react-router-dom';
 
@@ -41,10 +41,11 @@ const MenuUl = styled(NavUl)`
   width: 200px;
   border: 1px solid blue;
   text-align: center;
-  right: -2.5rem;
+  right: -3.5rem;
   background-color: #5f6caf;
   color: #fff;
   z-index: 999;
+  top: 5%;
 `;
 const MenuLi = styled(NavLi)`
   color: #5f6caf;
@@ -73,23 +74,23 @@ const NavbarIcon = styled.img`
 `;
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
-  const [isOpen, setisOpen] = useRecoilState(iconMenuState);
-  const navigate = useNavigate();
   const modalMenu = useRef();
-
-  const handleModalOutside = event => {
-    if (isOpen && !modalMenu.current.contains(event.target)) {
-      setisOpen(false);
-    }
-  };
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
+  const [isMenu, setisMenu] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     if (localStorage.getItem('token')) setIsLoggedIn(true);
-    window.addEventListener('click', handleModalOutside);
+    window.addEventListener('mousedown', handleModalOutside);
     return () => {
-      window.removeEventListener('click', handleModalOutside);
+      window.removeEventListener('mousedown', handleModalOutside);
     };
-  }, []);
+  });
+
+  const handleModalOutside = event => {
+    if (isMenu && !modalMenu.current.contains(event.target)) {
+      setisMenu(!isMenu);
+    }
+  };
 
   return (
     <Nav>
@@ -116,36 +117,34 @@ function Navbar() {
             <NavbarIcon
               src="img/default.png"
               onClick={() => {
-                setisOpen(!isOpen);
+                setisMenu(!isMenu);
               }}
             />
           </NavLi>
         )}
-        {isOpen && (
-          <div ref={modalMenu}>
-            <MenuUl>
-              <MenuLi>
-                <NavLink to="/passwordcheck">회원 정보 수정</NavLink>
-              </MenuLi>
-              <MenuLi>여행 페이지 이동</MenuLi>
-              <MenuLi>
-                <NavLink to="/mypage">마이페이지</NavLink>
-              </MenuLi>
-              <MenuLi>글쓰기</MenuLi>
-              <MenuLi
-                onClick={() => {
-                  if (window.confirm('로그아웃 하시겠습니까?')) {
-                    localStorage.clear();
-                    navigate('/login');
-                  } else {
-                    return;
-                  }
-                }}
-              >
-                로그아웃
-              </MenuLi>
-            </MenuUl>
-          </div>
+        {isMenu && (
+          <MenuUl ref={modalMenu}>
+            <MenuLi>
+              <NavLink to="/passwordcheck">회원 정보 수정</NavLink>
+            </MenuLi>
+            <MenuLi>여행 페이지 이동</MenuLi>
+            <MenuLi>
+              <NavLink to="/mypage">마이페이지</NavLink>
+            </MenuLi>
+            <MenuLi>글쓰기</MenuLi>
+            <MenuLi
+              onClick={() => {
+                if (window.confirm('로그아웃 하시겠습니까?')) {
+                  localStorage.clear();
+                  navigate('/login');
+                } else {
+                  return;
+                }
+              }}
+            >
+              로그아웃
+            </MenuLi>
+          </MenuUl>
         )}
       </NavUl>
     </Nav>
