@@ -1,149 +1,143 @@
-import React, { useState, useEffect, useRef } from 'react'
-import styled from 'styled-components'
-import Extendbar from './Extendbar'
-import Bookmarkbar from './bookmark/Bookmarkbar'
-import { BiRestaurant } from 'react-icons/bi'
-import { ImSearch, ImLibrary } from 'react-icons/im'
-import { IoMdCafe } from 'react-icons/io'
-import { TbStar } from 'react-icons/tb'
-import { useRecoilState } from 'recoil'
+import React, { useState, useEffect, useRef } from 'react';
+import styled from 'styled-components';
+import PlaceInfoExtend from './PlaceInfoExtend.jsx';
+import { BiRestaurant } from 'react-icons/bi';
+import { ImSearch, ImLibrary } from 'react-icons/im';
+import { IoMdCafe } from 'react-icons/io';
+import { BsFillStarFill } from 'react-icons/bs';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
-  extendbarState,
-  bookmarkbarState,
-  placeState,
-  mainInputValueState,
-} from '../../recoil/Atom'
+	extendbarState,
+	bookmarkbarState,
+	placeState,
+	mainInputValueState,
+	detailInfoState,
+	activeState,
+} from '../../recoil/Atom';
 
 function Sidebar() {
-  const [close, setClose] = useRecoilState(extendbarState)
-  const [, setPlace] = useRecoilState(placeState)
-  const [mainInputValue] = useRecoilState(mainInputValueState)
-  const [bmClose, setBmClose] = useRecoilState(bookmarkbarState)
-  const [btnActive, setBtnActive] = useState('')
-  // 리팩토링 요망
-  const search = useRef()
-  const restaurant = useRef()
-  const landmark = useRef()
-  const cafe = useRef()
-  const bookmark = useRef()
+	const detailInfo = useRecoilValue(detailInfoState);
+	const setPlace = useSetRecoilState(placeState);
+	const mainInputValue = useRecoilValue(mainInputValueState);
+	const [bmClose, setBmClose] = useRecoilState(bookmarkbarState);
+	const [close, setClose] = useRecoilState(extendbarState);
+	const setActive = useSetRecoilState(activeState);
 
-  useEffect(() => {
-    search.current.className === btnActive
-      ? (search.current.style = 'background: #edf7fa;')
-      : (search.current.style = 'background: white;')
-    restaurant.current.className === btnActive
-      ? (restaurant.current.style = 'background: #edf7fa;')
-      : (restaurant.current.style = 'background: white;')
-    landmark.current.className === btnActive
-      ? (landmark.current.style = 'background: #edf7fa;')
-      : (landmark.current.style = 'background: white;')
-    cafe.current.className === btnActive
-      ? (cafe.current.style = 'background: #edf7fa;')
-      : (cafe.current.style = 'background: white;')
-    bookmark.current.className === btnActive
-      ? (bookmark.current.style = 'background: #edf7fa;')
-      : (bookmark.current.style = 'background: white;')
-  }, [btnActive])
+	const [btnActive, setBtnActive] = useState('');
+	const search = useRef(),
+		restaurant = useRef(),
+		landmark = useRef(),
+		cafe = useRef(),
+		bookmark = useRef();
 
-  return (
-    <SidebarStyle>
-      <div className="sidebar">
-        <div className="filterBox">
-          <div className="search" ref={search}>
-            <ImSearch
-              className="icon"
-              style={{ marginTop: '30px', backgroundColor: '#d9d9d9' }}
-              onClick={() => {
-                setBmClose(true)
-                setClose(!close)
-                setBtnActive('search')
-              }}
-            />
-          </div>
-          <div className="restaurant" ref={restaurant}>
-            <BiRestaurant
-              className="icon"
-              style={{ backgroundColor: '#0029fe' }}
-              onClick={() => {
-                setPlace(mainInputValue + ' 식당')
-                setBtnActive('restaurant')
-              }}
-            />
-          </div>
-          <div className="landmark" ref={landmark}>
-            <ImLibrary
-              className="icon"
-              style={{ backgroundColor: '#039b00' }}
-              onClick={() => {
-                setPlace(mainInputValue + ' 관광지')
-                setBtnActive('landmark')
-              }}
-            />
-          </div>
-          <div className="cafe" ref={cafe}>
-            <IoMdCafe
-              className="icon"
-              style={{ backgroundColor: '#e05836' }}
-              onClick={() => {
-                setPlace(mainInputValue + ' 카페')
-                setBtnActive('cafe')
-              }}
-            />
-          </div>
-          <div className="bookmark" ref={bookmark}>
-            <TbStar
-              className="icon"
-              style={{ backgroundColor: '#ffb877' }}
-              onClick={() => {
-                setClose(true)
-                setBmClose(!bmClose)
-                setBtnActive('bookmark')
-              }}
-            />
-          </div>
-        </div>
-        <Extendbar />
-        <Bookmarkbar />
-      </div>
-    </SidebarStyle>
-  )
+	useEffect(() => {
+		const activeArray = [search, restaurant, landmark, cafe, bookmark];
+		activeArray.map(element => {
+			element.current.className === btnActive
+				? (element.current.style = 'background: #fafafa;')
+				: (element.current.style = 'background: white;');
+		});
+	}, [btnActive]);
+
+	return (
+		<SidebarStyle>
+			<div className="filterBox">
+				<div className="search" ref={search}>
+					<ImSearch
+						className="icon"
+						style={{ marginTop: '30px', backgroundColor: '#d9d9d9' }}
+						onClick={() => {
+							setBmClose(true);
+							setClose(!close);
+							setBtnActive('search');
+							setActive(false);
+						}}
+					/>
+				</div>
+				<div className="restaurant" ref={restaurant}>
+					<BiRestaurant
+						className="icon"
+						style={{ backgroundColor: '#0029fe' }}
+						onClick={() => {
+							setBmClose(true);
+							setClose(false);
+							setPlace(mainInputValue + ' 식당');
+							setBtnActive('restaurant');
+						}}
+					/>
+				</div>
+				<div className="landmark" ref={landmark}>
+					<ImLibrary
+						className="icon"
+						style={{ backgroundColor: '#039b00' }}
+						onClick={() => {
+							setBmClose(true);
+							setClose(false);
+							setPlace(mainInputValue + ' 관광지');
+							setBtnActive('landmark');
+						}}
+					/>
+				</div>
+				<div className="cafe" ref={cafe}>
+					<IoMdCafe
+						className="icon"
+						style={{ backgroundColor: '#e05836' }}
+						onClick={() => {
+							setBmClose(true);
+							setClose(false);
+							setPlace(mainInputValue + ' 카페');
+							setBtnActive('cafe');
+						}}
+					/>
+				</div>
+				<div className="bookmark" ref={bookmark}>
+					<BsFillStarFill
+						className="icon"
+						style={{ backgroundColor: '#ffb877' }}
+						onClick={() => {
+							setClose(true);
+							setBmClose(!bmClose);
+							setBtnActive('bookmark');
+							setActive(false);
+						}}
+					/>
+				</div>
+			</div>
+		</SidebarStyle>
+	);
 }
 
 const SidebarStyle = styled.div`
-  left: 0;
-  width: 70px;
+	left: 0;
+	width: 70px;
+	float: left;
+	position: relative;
+	background-color: #ffffff;
+	font-size: 1.5rem;
+	line-height: 48px;
+	transition: 0.3s ease-in-out;
+	height: calc(100vh - 80px);
+	z-index: 10;
+	.filterBox {
+		display: flex;
+		flex-flow: column;
+	}
 
-  .sidebar {
-    float: left;
-    position: relative;
-    background-color: #ffffff;
-    font-size: 1.5rem;
-    line-height: 48px;
-    transition: 0.3s ease-in-out;
-    height: calc(100vh - 80px);
-    z-index: 5;
-  }
+	.icon {
+		margin: 10px;
+		padding: 10px;
+		border-radius: 5px;
+		color: white;
+	}
 
-  .filterBox {
-    display: flex;
-    flex-flow: column;
-  }
+	.icon:hover {
+		transform: scale(1.1);
+		opacity: 0.8;
+	}
 
-  .icon {
-    margin: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    color: white;
-  }
+	.icon:active {
+		filter: brightness(50%);
+	}
+`;
 
-  .icon:hover {
-    transform: scale(1.1);
-    opacity: 0.8;
-  }
-
-  .icon:active {
-    filter: invert(80%);
-  }
-`
-
-export default Sidebar
+export default Sidebar;

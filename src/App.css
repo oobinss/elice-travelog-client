@@ -5,3 +5,7 @@ a {
 body {
 	overflow-x: hidden;
 }
+
+input:focus { 
+	outline: none; 
+}

@@ -11,27 +11,24 @@ export default function searchMap(kakaoMap, place, setPlaceInfo, searchOptions) 
     if (status === kakao.maps.services.Status.OK) {
       let bounds = new kakao.maps.LatLngBounds()
       for (let i = 0; i < data.length; i++) {
-        displayMarker(data[i])
+        let marker = new kakao.maps.Marker({
+          map: kakaoMap,
+          position: new kakao.maps.LatLng(data[i].y, data[i].x),
+        })
+        let infowindow = new kakao.maps.InfoWindow({
+          zIndex: 1,
+          removable: true,
+        })
+        kakao.maps.event.addListener(marker, 'click', function () {
+          infowindow.setContent(overlayContents(data[i]))
+          infowindow.open(kakaoMap, marker)
+        })
         setPlaceInfo(data)
         bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
       }
+      
       kakaoMap.setBounds(bounds)
     }
   }
-  function displayMarker(place) {
-    let marker = new kakao.maps.Marker({
-      map: kakaoMap,
-      position: new kakao.maps.LatLng(place.y, place.x),
-    })
 
-    let infowindow = new kakao.maps.InfoWindow({
-      zIndex: 1,
-      removable: true,
-    })
-
-    kakao.maps.event.addListener(marker, 'click', function () {
-      infowindow.setContent(overlayContents(place))
-      infowindow.open(kakaoMap, marker)
-    })
-  }
 }

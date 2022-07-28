@@ -1,53 +1,126 @@
-import React from 'react'
-import styled from 'styled-components'
-
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import axios from 'axios';
+import { MdArrowBackIos, MdStars } from 'react-icons/md';
+import { useRecoilState } from 'recoil';
+import {
+	bookmarkState,
+	bookmarkSetState,
+	bookmarkListState,
+	listNumberState,
+	viewDetailState,
+	textState,
+} from '../../../recoil/Atom';
+import BookmarkInfoDetail from './BookmarkInfoDetail';
 function BookmarkDetail() {
-  function handleStyle(data) {
-    if (data.category_group_code === 'AT4') {
-      return { border: '2px solid rgb(3, 155, 0)' }
-    } else if (data.category_group_code === 'FD6') {
-      return { border: '2px solid rgb(0, 41, 254)' }
-    } else if (data.category_group_code === 'CE7') {
-      return { border: '2px solid rgb(224, 88, 54)' }
-    }
-  }
+	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
+	const [bookmarkSet, setBookmarkSet] = useRecoilState(bookmarkSetState);
+	const [bmList, setBmList] = useRecoilState(bookmarkListState);
+	const [listNumber, setListNumber] = useRecoilState(listNumberState);
+	const [viewDetail, setViewDetail] = useRecoilState(viewDetailState);
+	const [text, setText] = useRecoilState(textState);
 
-  return (
-    <DetailPageStyle>
-      <div className="folder"></div>
-      <div className="content"></div>
-      <button>글쓰기</button>
-    </DetailPageStyle>
-  )
+	async function sendToWriting() {
+		console.log(bookmarkSet);
+		const token = localStorage.getItem('token');
+		await axios({ 
+			method: 'post', 
+			url: 'http://localhost:8000/api/bookmarks/registers', 
+			headers: { 
+				Authorization: `Bearer ${token}`,
+			},
+			data: bookmarkSet, 
+		})
+		.then((res) => {
+			console.log(res.status);
+			console.log(res.data)
+		})
+		.catch((err) => console.log(err.toJSON()))
+	}
+
+	return (
+		<DetailPageStyle>
+			<div className="folder">
+				<MdStars color="#ffb877" id="btnStar" size="32" />
+				{bmList[listNumber]}
+				<MdArrowBackIos className="backBtn" onClick={() => setViewDetail(true)} />
+			</div>
+			<div className="content">
+				{<BookmarkInfoDetail />}
+			</div>
+			<button className="redirectTowrite" onClick={sendToWriting}>
+				글쓰기
+			</button>
+		</DetailPageStyle>
+	);
 }
 
+
 const DetailPageStyle = styled.div`
-  display: flex;
-  flex-flow: column;
-  justify-content: flex-start;
-  margin: auto;
+	display: flex;
+	flex-flow: column;
+	justify-content: flex-start;
+	margin: auto;
 
-  .folder {
-    height: 3rem;
-    margin: 1rem auto;
-  }
-  .content {
-    height: 75vh;
-    margin: 1rem auto;
-    overflow: scroll;
-  }
+	.folder {
+		display: flex;
+		justify-content: center;
+		height: 3rem;
+		font-size: 1.2rem;
+		text-align: center;
+		background-color: white;
+		border-radius: 0.5rem;
+	}
+	.content {
+		width: 18rem;
+		height: 70vh;
+		margin: 1rem 0;
+		text-align: center;
+		overflow: scroll;
+		overflow-y: auto;
+		overflow-x: hidden;
+		background-color: white;
+		&::-webkit-scrollbar {
+			width: 4px;
+		}
+		&::-webkit-scrollbar-thumb {
+			border-radius: 2px;
+			background: #ccc;
+		}
+	}
 
-  .infoBox {
-    width: 15rem;
-    height: 8rem;
-    font-size: 1rem;
-    background-color: white;
-    border: none;
-    border-radius: 1rem;
-    margin: 1rem auto;
-    padding: 1rem;
-    line-height: 2rem;
-  }
-`
+	#btnStar {
+		padding: 0.5rem 1rem 0 1rem;
+	}
+	.backBtn {
+		padding: 0.8rem 0 0 4rem;
+		cursor: pointer;
+	}
 
-export default BookmarkDetail
+	.bookmarkBox {
+		margin-left: 1.3rem;
+		font-size: 1rem;
+	}
+
+	.infoBox {
+		width: 15rem;
+		height: 8rem;
+		font-size: 2rem;
+		background-color: white;
+		border: none;
+		border-radius: 1rem;
+		margin: 1rem auto;
+		padding: 1rem;
+		line-height: 2rem;
+	}
+
+	.redirectTowrite {
+		height: 2rem;
+		border: none;
+		border-radius: 0.5rem;
+		background-color: #5f6caf;
+		color: white;
+	}
+`;
+
+export default BookmarkDetail;
