@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import TravelPost from '../../components/TravelPost';
 import axios from 'axios';
 
-const postData = [];
 function Traveling() {
+	const [travelData, setTravelData] = useState([]);
 	useEffect(() => {
 		(async () => {
 			try {
 				const type = 'post';
 				const data = await axios.get(`http://localhost:8000/api/posts/${type}`);
-				data.data.forEach(i => postData.push(i));
+				setTravelData(data.data);
 			} catch (e) {
 				console.error(e);
 			}
@@ -17,14 +17,17 @@ function Traveling() {
 	});
 	return (
 		<div>
-			{postData.map((i, idx) => {
+			{travelData.map((i, idx) => {
 				return (
 					<TravelPost
 						key={idx}
-						// cateCity={i.cateCity}
-						// id={i.id}
-						// img={i.mainImg}
-						// markedData={i.markedData}
+						cateCity={i.cateCity}
+						id={i.id}
+						img={i.mainImg}
+						markedData={i.markedData}
+						tag={i.tag}
+						username={i.User.nickname}
+						profileImg={i.User.profileImg}
 						title={i.title}
 						userId={i.userId}
 					/>

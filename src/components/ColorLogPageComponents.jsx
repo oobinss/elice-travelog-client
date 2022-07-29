@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import ColorLog from './ColorLog';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 import { colorLogState } from '../recoil/Atom';
 import { IoClose } from 'react-icons/io5';
 
 function ColorLogPageComponents() {
-	const [click, setClick] = useRecoilState(colorLogState);
+	const setClick = useSetRecoilState(colorLogState);
 	const clickHandler = () => {
 		setClick(false);
 	};
@@ -36,7 +36,7 @@ const Modal = styled.div`
 	background-color: #fff;
 	box-shadow: 1px 1px 15px 1px rgba(0, 0, 0, 0.25);
 	position: fixed;
-	top: 5rem;
+	top: calc(50vh - 20rem);
 	left: calc(50vw - 25rem);
 `;
 const CloseButton = styled(IoClose)`

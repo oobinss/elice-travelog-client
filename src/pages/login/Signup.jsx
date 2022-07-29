@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { loginState } from '../../recoil/Atom';
 import { useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 const SignupSection = styled.section`
 	width: 100vw;
@@ -68,8 +69,8 @@ function Signup() {
 	const [password, setPassword] = useState('');
 	const [passwordConfirm, setPasswordConfirm] = useState('');
 	const setIsLoggedIn = useSetRecoilState(loginState);
+	const navigate = useNavigate();
 
-	//입력된 정보가 올바른 형식인지 검사
 	const emailRegex =
 		/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 	const emailValidation = emailRegex.test(email);
@@ -115,7 +116,7 @@ function Signup() {
 				localStorage.setItem('token', result.data.token);
 				setIsLoggedIn(true);
 
-				window.location.href = '/login';
+				navigate('/login');
 			} catch (err) {
 				console.error(err.response.data.error);
 				alert(err.response.data.error);

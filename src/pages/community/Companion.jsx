@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchbarIntro from '../../components/SearchbarIntro';
 import PostBox from '../../components/PostBox';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { communityState } from '../../recoil/Atom';
 import CommunityModal from '../../components/CommunityModal';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import axios from 'axios';
 function Companion() {
 	const [inputValue, setInputValue] = useState('');
 	const [together, setTogether] = useState([]);
-	const [postClick, setPostClick] = useRecoilState(communityState);
+	const postClick = useRecoilValue(communityState);
 	useEffect(() => {
 		(async () => {
 			try {
@@ -25,9 +25,7 @@ function Companion() {
 	const handleChange = e => {
 		setInputValue(e.target.value);
 	};
-	const handleClick = () => {
-		console.log(inputValue);
-	};
+	const handleClick = () => {};
 	return (
 		<>
 			<SearchbarIntro
@@ -44,18 +42,26 @@ function Companion() {
 				changeMethod={handleChange}
 				clickMethod={handleClick}
 			/>
-			{together.map((i, idx) => {
-				return (
-					<PostBox
-						key={idx}
-						title={i.title}
-						img={i.User.profileImg}
-						name={i.User.nickname}
-						content={i.content}
-						id={i.id}
-					/>
-				);
-			})}
+			{together
+				.filter(item => {
+					if (inputValue === '') {
+						return item;
+					} else if (item.title.toLowerCase().includes(inputValue.toLowerCase())) {
+						return item;
+					}
+				})
+				.map((i, idx) => {
+					return (
+						<PostBox
+							key={idx}
+							title={i.title}
+							img={i.User.profileImg}
+							name={i.User.nickname}
+							content={i.content}
+							id={i.id}
+						/>
+					);
+				})}
 			{postClick.state && (
 				<CommunityModal
 					id={together.find(i => i.id === postClick.id).id}

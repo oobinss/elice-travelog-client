@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchbarIntro from '../../components/SearchbarIntro';
 import PostBox from '../../components/PostBox';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { communityState } from '../../recoil/Atom';
 import CommunityModal from '../../components/CommunityModal';
 import axios from 'axios';
@@ -9,14 +9,13 @@ import axios from 'axios';
 function Qna() {
 	const [inputValue, setInputValue] = useState('');
 	const [qna, setQna] = useState([]);
-	const [postClick, setPostClick] = useRecoilState(communityState);
+	const postClick = useRecoilValue(communityState);
 	useEffect(() => {
 		(async () => {
 			try {
 				const type = 'qna';
 				const data = await axios.get(`http://localhost:8000/api/posts/${type}`);
 				setQna(data.data);
-				console.log(data.data);
 			} catch (e) {
 				console.error(e);
 			}
@@ -44,18 +43,26 @@ function Qna() {
 				changeMethod={handleChange}
 				clickMethod={handleClick}
 			/>
-			{qna.map((i, idx) => {
-				return (
-					<PostBox
-						key={idx}
-						title={i.title}
-						img={i.User.profileImg}
-						name={i.User.nickname}
-						content={i.content}
-						id={i.id}
-					/>
-				);
-			})}
+			{qna
+				.filter(item => {
+					if (inputValue === '') {
+						return item;
+					} else if (item.title.toLowerCase().includes(inputValue.toLowerCase())) {
+						return item;
+					}
+				})
+				.map((i, idx) => {
+					return (
+						<PostBox
+							key={idx}
+							title={i.title}
+							img={i.User.profileImg}
+							name={i.User.nickname}
+							content={i.content}
+							id={i.id}
+						/>
+					);
+				})}
 			{postClick.state && (
 				<CommunityModal
 					id={qna.find(i => i.id === postClick.id).id}

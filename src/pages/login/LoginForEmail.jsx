@@ -3,6 +3,7 @@ import { loginState } from '../../recoil/Atom';
 import { useSetRecoilState } from 'recoil';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginSection = styled.section`
 	width: 100vw;
@@ -58,6 +59,7 @@ function LoginForEmail() {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const setIsLoggedIn = useSetRecoilState(loginState);
+	const navigate = useNavigate();
 
 	//이메일과 비밀번호 올바른 형식인지 검사
 	const emailRegex =
@@ -73,7 +75,6 @@ function LoginForEmail() {
 			alert('이메일 또는 비밀번호를 확인해 주세요.');
 		}
 
-		//모든 유효성 검사를 통과한다면 백에 회원가입 요청
 		if (emailValidation && !passwordValidation) {
 			try {
 				const result = await axios({
@@ -82,14 +83,11 @@ function LoginForEmail() {
 					data: loginData,
 				});
 
-				//로그인 성공시 토큰을 로컬 스토리지에 저장
-				//세션이 만료되어도 로그인을 유지하기 위해 로컬 스토리지를 사용
 				localStorage.setItem('userId', result.data.userId);
 				localStorage.setItem('token', result.data.token);
 				setIsLoggedIn(true);
 
-				//로그인 성공하면 redirect
-				window.location.href = '/';
+				navigate('/');
 			} catch (err) {
 				alert(err.response.data.error);
 			}
