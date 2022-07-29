@@ -131,13 +131,16 @@ function CommentList({ id, content, createAt, like, userName, userprofile }) {
 	if (ago > 60) {
 		let hour = Math.ceil(ago / 60);
 		time = `${hour}시간 전`;
+	} else if (ago > 1440) {
+		let day = Math.ceil(ago / 1440);
+		time = `${day}일 전`;
 	} else {
 		time = `${ago}분 전`;
 	}
 	return (
 		<CommentSection>
 			<MenuBtn>
-				<ProfileImg src="https://cdn.pixabay.com/photo/2016/11/18/15/03/man-1835195_1280.jpg"></ProfileImg>
+				<ProfileImg src={userprofile}></ProfileImg>
 			</MenuBtn>
 			<CommentBox>
 				<UserName>{userName}</UserName>

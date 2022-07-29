@@ -49,7 +49,6 @@ function BookmarkDetail(props) {
 				console.log(res.data);
 			})
 			.catch(err => console.log(err.toJSON()));
-
 		navigate(`../writing?list=${bmList[listNumber]}`);
 	}
 

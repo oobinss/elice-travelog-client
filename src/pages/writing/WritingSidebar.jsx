@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { TbStar } from 'react-icons/tb';
-import WritingSearchbar from './WritingSearchbar';
 import WritingList from './WritingList';
 import { useRecoilState } from 'recoil';
 import { ImSearch } from 'react-icons/im';
@@ -134,7 +133,7 @@ function WritingSidebar() {
 		let newlist = [];
 		switch (selected) {
 			case '최신':
-				newlist = [...list].sort((a, b) => a.index - b.index);
+				newlist = [...list].sort((a, b) => a.id - b.id);
 				setList(newlist);
 				break;
 			case '장소':

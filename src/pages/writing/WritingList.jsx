@@ -1,12 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useDrag } from 'react-dnd';
-import { toggleState, checkedState, TagState } from '../../recoil/Atom.jsx';
+import { toggleState, checkedState, boardState, dataState } from '../../recoil/Atom.jsx';
 import { useRecoilState } from 'recoil';
-import { BiRestaurant } from 'react-icons/bi';
+import { BiRestaurant, BiPlus } from 'react-icons/bi';
 import { ImLibrary } from 'react-icons/im';
 import { IoMdCafe } from 'react-icons/io';
-
+const AddBtn = styled.button`
+	width: 2rem;
+	height: 2rem;
+	border: 0;
+	background-color: #fafafa;
+	cursor: pointer;
+	display: none;
+	position: absolute;
+	top: -5%;
+	right: 0;
+`;
 const SidebarList = styled.div`
 	padding: 1rem;
 	border-radius: 5px;
@@ -21,6 +31,9 @@ const SidebarList = styled.div`
 	}
 	&:hover {
 		color: #5f6caf;
+	}
+	&:hover ${AddBtn} {
+		display: block;
 	}
 `;
 const ListHeader = styled.h2`
@@ -37,9 +50,9 @@ const ListTextBox = styled.div`
 const Label = styled.label`
 	display: flex;
 	align-items: center;
-	gap: 1rem;
 	user-select: none;
 	justify-content: center;
+	position: relative;
 	cursor: pointer;
 	.icon {
 		width: 2rem;
@@ -50,6 +63,7 @@ const Input = styled.input`
 	appearance: none;
 	width: 1.5rem;
 	height: 1.5rem;
+	margin-right: 2rem;
 	color: gray;
 	border: 1px solid gray;
 	border-radius: 50%;
@@ -63,8 +77,10 @@ const Input = styled.input`
 		background-color: limegreen;
 	}
 `;
+
 const LinkToURL = styled.a`
 	cursor: pointer;
+	display: flex;
 `;
 function WritingList({ id, placeName, placeUrl, bookmarkMemo, categoryGroupName }) {
 	const [toggle, setToggle] = useRecoilState(toggleState);
@@ -94,11 +110,16 @@ function WritingList({ id, placeName, placeUrl, bookmarkMemo, categoryGroupName 
 		default:
 			category = <ImLibrary className="icon" />;
 	}
-
+	const [data, setData] = useRecoilState(dataState);
+	const [board, setBoard] = useRecoilState(boardState);
+	const handleAddBtn = e => {
+		const items = data.filter(e => id === e.id);
+		setBoard(board => [...board, items[0]]);
+	};
 	return (
-		<SidebarList ref={previewRef}>
-			<LinkToURL ref={drag} href={placeUrl} target="_blank">
-				<Label htmlFor={id}>
+		<SidebarList>
+			<Label htmlFor={id}>
+				<LinkToURL href={placeUrl} target="_blank">
 					{toggle ? (
 						<Input
 							id={id}
@@ -114,8 +135,11 @@ function WritingList({ id, placeName, placeUrl, bookmarkMemo, categoryGroupName 
 						<ListHeader>{placeName}</ListHeader>
 						<p>{bookmarkMemo}</p>
 					</ListTextBox>
-				</Label>
-			</LinkToURL>
+				</LinkToURL>
+				<AddBtn className="addBtn" onClick={handleAddBtn}>
+					<BiPlus className="icon" />
+				</AddBtn>
+			</Label>
 		</SidebarList>
 	);
 }

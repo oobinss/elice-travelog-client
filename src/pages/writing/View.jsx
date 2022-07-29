@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import ViewBoardList from './ViewBoardList';
 import Comment from './Comment';
 import { IoMapOutline, IoFlagSharp } from 'react-icons/io5';
+import { useLocation } from 'react-router';
 // Toast-UI Viewer 임포트
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
 import axios from 'axios';
-import { useHistory, useParams } from 'react-router-dom';
+//colorLog
+import { colorLogState } from '../../recoil/Atom';
+import ColorLogPageComponents from '../../components/ColorLogPageComponents';
+import { useRecoilState } from 'recoil';
 const WritingSection = styled.section`
 	width: 100vw;
 	height: calc(100vh - 5rem);
@@ -88,7 +92,6 @@ const Board = styled.div`
 	height: 18rem;
 	display: flex;
 	gap: 1rem;
-	overflow: scroll;
 `;
 const ViewerBox = styled.div`
 	padding-left: 1 rem;
@@ -158,10 +161,13 @@ const MenuBox = styled.div`
 `;
 
 function View() {
+	const location = useLocation(); // location.search 함수로 / 뒤의 주소 받아옴
+	const queryArray = location.pathname.split('/'); // 한글 url decode 해주고 = 기준으로 앞뒤로 자르기 // 뒤에 있는 걸 가져오면 내가 원하는 검색어
+	const params = queryArray[2]; // 한글 url decode 해주고 = 기준으로 앞뒤로 자르기 // 뒤에 있는 걸 가져오면 내가 원하는 검색어
+
 	const [writing, setWriting] = useState({});
 	const [board, setBoard] = useState([]);
 	const [tag, setTag] = useState([]);
-	let { id } = useParams();
 	//axios bearer token
 	const token = window.localStorage.getItem('token');
 	let config = {
@@ -169,8 +175,7 @@ function View() {
 	};
 	const getWritingData = async () => {
 		try {
-			console.log(id);
-			await axios.get(`http://localhost:8000/api/posts/user/${id}`, config).then(res => {
+			await axios.get(`http://localhost:8000/api/posts/user/${params}`, config).then(res => {
 				setWriting(res.data);
 				setBoard(JSON.parse(res.data.markedData));
 				setTag(JSON.parse(res.data.tag));
@@ -182,6 +187,10 @@ function View() {
 	useEffect(() => {
 		getWritingData();
 	}, []);
+	const [buttonClick, setButtonClick] = useRecoilState(colorLogState);
+	const handleButtonClick = () => {
+		setButtonClick(true);
+	};
 	return (
 		<WritingSection>
 			<WritingContainer>
@@ -193,7 +202,7 @@ function View() {
 						</MenuBtn>
 					</MenuBtnBox>
 					<MenuBtnBox>
-						<MenuBtn href="/community">
+						<MenuBtn onClick={handleButtonClick}>
 							<IoFlagSharp className="munuImg" />
 							<BtnInfo className="log">COLORLOG</BtnInfo>
 						</MenuBtn>
@@ -208,20 +217,31 @@ function View() {
 						</TagBox>
 					</WritingHeaderBox>
 					<Board>
-						{board.map(e => {
-							return (
-								<ViewBoardList
-									bookmarkId={e.bookmarkId}
-									placeName={e.placeName}
-									placeUrl={e.placeUrl}
-									bookmarkMemo={e.bookmarkMemo}
-								/>
-							);
-						})}
+						{board.length
+							? board.map(e => {
+									return (
+										<ViewBoardList
+											id={e.id}
+											placeName={e.placeName}
+											placeUrl={e.placeUrl}
+											bookmarkMemo={e.bookmarkMemo}
+										/>
+									);
+							  })
+							: ''}
 					</Board>
 					<ViewerBox>{writing.id ? <Viewer initialValue={writing.content} /> : ''}</ViewerBox>
 				</EditContainer>
-				<Comment />
+				{writing.id ? (
+					<Comment
+						nickname={writing.User.nickname}
+						profileImg={writing.User.profileImg}
+						createAt={writing.createAt}
+					/>
+				) : (
+					' '
+				)}
+				{buttonClick && <ColorLogPageComponents />}
 			</WritingContainer>
 		</WritingSection>
 	);

@@ -8,6 +8,8 @@ import { ImLibrary } from 'react-icons/im';
 import { IoMdCafe } from 'react-icons/io';
 
 const ListBox = styled.div`
+	width: 2rem;
+	min-height: 14rem;
 	flex: 0 0 auto;
 	padding: 1rem;
 	position: relative;
@@ -22,8 +24,7 @@ const ListBox = styled.div`
 	height: 12rem;
 	border-radius: 8px;
 	background-color: #fff;
-	justify-content: center;
-
+	justify-content: flex-start;
 	.icon {
 		width: 2rem;
 		height: 2rem;
@@ -35,8 +36,8 @@ const ListHeader = styled.h2`
 `;
 const Closebtn = styled.button`
 	position: absolute;
-	top: 10px;
-	left: 10px;
+	top: 0;
+	left: 0;
 	background-color: rgba(0, 0, 0, 0);
 	&:hover {
 		background-color: red;
@@ -86,7 +87,6 @@ function WritingBoardList({ id, placeName, placeUrl, bookmarkMemo, categoryGroup
 			{category}
 			<LinkToURL href={placeUrl} target="_blank">
 				<ListHeader>{placeName.split(' ')[0]}</ListHeader>
-				<p>{bookmarkMemo}</p>
 			</LinkToURL>
 			<Closebtn onClick={handleButton}>
 				<IoIosClose className="close" />

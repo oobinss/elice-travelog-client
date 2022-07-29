@@ -5,6 +5,7 @@ import { useRecoilState } from 'recoil';
 import { colorLogState } from '../../recoil/Atom';
 import ColorLogPageComponents from '../../components/ColorLogPageComponents';
 import { BiPencil } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 
 const MyPage = () => {
 	const [usertext, setUserText] = useState('');
@@ -46,6 +47,7 @@ const MyPage = () => {
 	const handleButtonClick = () => {
 		setButtonClick(true);
 	};
+	let navigate = useNavigate();
 	return (
 		<Page>
 			<Profile>
@@ -89,17 +91,19 @@ const MyPage = () => {
 				<Post>게시물</Post>
 			</PostMenu>
 			<Feed>
-				<ImgFeed src="img/airport.jpg" />
-				<ImgFeed src="img/beach.jpg" />
-				<ImgFeed src="img/hamburg.jpg" />
-				<ImgFeed src="img/people.jpg" />
-				<ImgFeed src="img/avatar.jpg" />
 				{userpost.map(post => (
-					<div key={post.id}>
-						<a href="www.naver.com">
-							<ImgFeed src={post.mainImg} />
-						</a>
-					</div>
+					<FeedBox key={post.id}>
+						<FeedBtn onClick={() => navigate(`../View/${post.id}`)}>
+							<FeedImg
+								src={
+									post.mainImg
+										? post.mainImg
+										: 'https://cdn.crowdpic.net/detail-thumb/thumb_d_3865635F24FB50FC7E5E781B7974F81E.jpg'
+								}
+							></FeedImg>
+							<Title>{post.title}</Title>
+						</FeedBtn>
+					</FeedBox>
 				))}
 			</Feed>
 			{buttonClick && <ColorLogPageComponents />}
@@ -107,6 +111,53 @@ const MyPage = () => {
 	);
 };
 export default MyPage;
+
+const FeedImg = styled.img`
+	width: 17rem;
+	height: 20rem;
+	z-index: -9999;
+	box-sizing: border-box;
+	top: 0;
+	left: 0;
+	position: absolute;
+`;
+const FeedBtn = styled.button`
+	width: 17rem;
+	height: 20rem;
+	border: 0;
+	background-color:
+	box-sizing: border-box;
+	margin: auto;
+	object-fit: fill;
+	cursor: pointer;
+	position: relative;
+	background-color: transparent;
+`;
+const Title = styled.h2`
+	font-size: 1.4rem;
+	text-align: center;
+	display: none;
+`;
+const FeedBox = styled.div`
+	width: 17rem;
+	height: 20rem;
+	box-sizing: border-box;
+	margin: auto;
+	object-fit: fill;
+	cursor: pointer;
+
+	box-shadow: rgb(31 38 135 / 20%) 0px 8px 32px 0px;
+	&:hover ${FeedImg} {
+		filter: brightness(70%);
+	}
+	&:hover {
+		transform: scale(1.1);
+	}
+	&:hover ${Title} {
+		display: block;
+		color: #fff;
+	}
+`;
 
 const Page = styled.div`
 	width: 60rem;
@@ -213,17 +264,6 @@ const Feed = styled.div`
 	width: 60rem;
 `;
 
-const ImgFeed = styled.img`
-	width: 17rem;
-	height: 20rem;
-	box-sizing: border-box;
-	margin: auto;
-	object-fit: fill;
-	cursor: pointer;
-	&:hover {
-		filter: brightness(20%);
-	}
-`;
 const InputBox = styled.input`
 	width: 18rem;
 	height: 2.5rem;
