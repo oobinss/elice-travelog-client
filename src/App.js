@@ -31,7 +31,7 @@ function App() {
 					<Route path="/loginForEmail" element={<LoginForEmail />} />
 					<Route path="/signup" element={<Signup />} />
 					<Route path="/writing" element={<Writing />} />
-					<Route path="/View" element={<View />} />
+					<Route path="/view/:id" element={<View />} />
 					<Route path="/mypage" element={<MyPage />} />
 					<Route path="/editprofile" element={<EditProfile />} />
 					<Route path="/passwordcheck" element={<PasswordCheck />} />

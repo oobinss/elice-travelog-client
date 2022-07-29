@@ -3,7 +3,7 @@ import { useRecoilState } from 'recoil';
 import { loginState } from '../recoil/Atom';
 import styled from 'styled-components';
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 const Nav = styled.nav`
 	width: 100vw;
 	height: 5rem;
@@ -78,20 +78,30 @@ function Navbar() {
 	const modalMenu = useRef();
 	const [isLoggedIn, setIsLoggedIn] = useRecoilState(loginState);
 	const [isMenu, setisMenu] = useState(false);
+	const [profileIcon, setProfileIcon] = useState('');
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (localStorage.getItem('token')) setIsLoggedIn(true);
+		axios
+			.get('http://localhost:8000/api/users/user', config)
+			.then(({ data }) => setProfileIcon(data.profileImg));
 		window.addEventListener('mousedown', handleModalOutside);
 		return () => {
 			window.removeEventListener('mousedown', handleModalOutside);
 		};
-	});
+	}, [profileIcon]);
 
 	const handleModalOutside = event => {
 		if (isMenu && !modalMenu.current.contains(event.target)) {
 			setisMenu(!isMenu);
 		}
 	};
+
+	const token = window.localStorage.getItem('token');
+	let config = {
+		headers: { Authorization: `Bearer ${token}` },
+	};
+
 	const handleClickList = () => {
 		setisMenu(false);
 	};
@@ -103,7 +113,7 @@ function Navbar() {
 					navigate('/');
 				}}
 			>
-				<Img src="img/travelog.jpg" />
+				<Img src="/img/travelog.jpg" />
 			</LogoContainer>
 			<NavUl style={{ marginRight: isMenu ? '-2rem' : '' }}>
 				<NavLi>
@@ -119,12 +129,13 @@ function Navbar() {
 				) : (
 					<NavLi>
 						<NavbarIcon
-							src="img/default.png"
+							src={profileIcon}
 							onClick={() => {
 								setisMenu(!isMenu);
 							}}
 							style={{ marginTop: isMenu ? '15.4rem' : '' }}
 						/>
+
 						{isMenu && (
 							<MenuUl ref={modalMenu}>
 								<MenuLi>

@@ -99,39 +99,41 @@ function EditProfile() {
 	const [phoneNumber, setPhoneNumber] = useState('');
 	const [popup, setPopup] = useState('false');
 	const [address, setAddress] = useState('');
-	const [userId, setUserId] = useState('');
 	const [address2, setAddress2] = useState('');
 	const [profileImage, setProfileImage] = useState('');
+	const [userId, setUserId] = useState('');
 	const navigate = useNavigate();
-	let userData = {};
-	useEffect(() => {
-		getUserData();
-	});
 
-	const getUserData = async () => {
-		try {
-			userData = await axios.get('http://localhost:8000/api/users/user', config).then(e => e.data);
-			setUserName(userData.name || '');
-			setUserNickname(userData.nickname || '');
-			setPhoneNumber(userData.phoneNumber || '');
-			setUserId(userData.id || '');
-		} catch (err) {
-			alert(err);
-		}
-	};
+	useEffect(() => {
+		axios
+			.get('http://localhost:8000/api/users/user', config)
+			//.then(({ data }) => setUserData(data));
+			.then(({ data }) => {
+				setUserName(data.name);
+				setUserNickname(data.nickname);
+				setPhoneNumber(data.phoneNumber);
+				setUserId(data.id);
+			});
+	}, []);
+
 	//axios bearer token
 	const token = window.localStorage.getItem('token');
 	let config = {
 		headers: { Authorization: `Bearer ${token}` },
 	};
 
-	//기존 데이터 불러오기
-
+	//데이터 전송
 	const handleSubmit = async e => {
 		e.preventDefault();
+
 		const fileKey = profileImage.name;
-		S3Upload(profileImage);
-		const profileImg = S3getFileURL(`upload/${fileKey}`);
+		let profileImg;
+		if (profileImage) {
+			S3Upload(profileImage);
+			profileImg = S3getFileURL(`upload/${fileKey}`);
+		} else {
+			profileImg = S3getFileURL(`upload/default.png`);
+		}
 
 		let resultData = { userName, userNickname, phoneNumber, address, profileImg };
 
@@ -204,7 +206,7 @@ function EditProfile() {
 					<form>
 						<SignupInput
 							name="name"
-							value={userName}
+							value={userName || ''}
 							onChange={e => {
 								setUserName(e.target.value);
 							}}
@@ -212,7 +214,7 @@ function EditProfile() {
 						/>
 						<SignupInput
 							name="nickname"
-							value={userNickname}
+							value={userNickname || ''}
 							onChange={e => {
 								setUserNickname(e.target.value);
 							}}
@@ -220,7 +222,7 @@ function EditProfile() {
 						/>
 						<SignupInput
 							name="phonenumber"
-							value={phoneNumber}
+							value={phoneNumber || ''}
 							placeholder="휴대폰 번호를 입력해 주세요."
 							onChange={e => {
 								setPhoneNumber(e.target.value);

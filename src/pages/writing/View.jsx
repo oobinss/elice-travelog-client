@@ -7,6 +7,7 @@ import { IoMapOutline, IoFlagSharp } from 'react-icons/io5';
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
 import { Viewer } from '@toast-ui/react-editor';
 import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
 const WritingSection = styled.section`
 	width: 100vw;
 	height: calc(100vh - 5rem);
@@ -160,6 +161,7 @@ function View() {
 	const [writing, setWriting] = useState({});
 	const [board, setBoard] = useState([]);
 	const [tag, setTag] = useState([]);
+	let { id } = useParams();
 	//axios bearer token
 	const token = window.localStorage.getItem('token');
 	let config = {
@@ -167,7 +169,8 @@ function View() {
 	};
 	const getWritingData = async () => {
 		try {
-			await axios.get('http://localhost:8000/api/posts/user/32', config).then(res => {
+			console.log(id);
+			await axios.get(`http://localhost:8000/api/posts/user/${id}`, config).then(res => {
 				setWriting(res.data);
 				setBoard(JSON.parse(res.data.markedData));
 				setTag(JSON.parse(res.data.tag));

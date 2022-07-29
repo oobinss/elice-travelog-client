@@ -9,29 +9,25 @@ import { BiPencil } from 'react-icons/bi';
 const MyPage = () => {
 	const [usertext, setUserText] = useState('');
 	const [userpost, setUserPost] = useState([]);
-	const [userdata, setUserData] = useState([]);
+	const [userId, setUserId] = useState('');
+	const [userprofile, setUserProfile] = useState('');
 	const [editable, setEditable] = useState(false);
 	const [buttonClick, setButtonClick] = useRecoilState(colorLogState);
+	const [userName, setUserName] = useState('');
 	useEffect(() => {
-		getUserData();
+		axios.get('http://localhost:8000/api/users/user', config).then(({ data }) => {
+			setUserText(data.profileText);
+			setUserProfile(data.profileImg);
+			setUserId(data.id);
+			setUserName(data.name);
+		});
+		axios.get('http://localhost:8000/api/posts/user', config).then(({ data }) => setUserPost(data));
 	}, []);
-	const getUserData = async () => {
-		try {
-			await axios
-				.get('http://localhost:8000/api/users/user', config)
-				.then(e => setUserData(e.data));
-			setUserText(userdata.profileText);
-			await axios
-				.get('http://localhost:8000/api/posts/user', config)
-				.then(e => setUserPost(e.data));
-		} catch (err) {
-			alert(err);
-		}
-	};
+
 	const handleKeyDown = () => {
 		axios({
 			method: 'patch',
-			url: `http://localhost:8000/api/users/${userdata.id}`,
+			url: `http://localhost:8000/api/users/${userId}`,
 			headers: { Authorization: `Bearer ${token}` },
 			data: {
 				profileText: usertext,
@@ -53,8 +49,8 @@ const MyPage = () => {
 	return (
 		<Page>
 			<Profile>
-				<Img src="img/airport.jpg" />
-				<UserName>{userdata.name}</UserName>
+				<Img src={userprofile} />
+				<UserName>{userName}</UserName>
 
 				{!editable ? (
 					<>
@@ -89,8 +85,8 @@ const MyPage = () => {
 				</MyInfo>
 			</Profile>
 			<PostMenu>
-				{/* <PostIcon src="img/posticon.png" />
-				<Post>게시물</Post> */}
+				<PostIcon src="img/posticon.png" />
+				<Post>게시물</Post>
 			</PostMenu>
 			<Feed>
 				<ImgFeed src="img/airport.jpg" />
