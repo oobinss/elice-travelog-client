@@ -92,6 +92,9 @@ function Navbar() {
 			setisMenu(!isMenu);
 		}
 	};
+	const handleClickList = () => {
+		setisMenu(false);
+	};
 
 	return (
 		<Nav>
@@ -125,13 +128,17 @@ function Navbar() {
 						{isMenu && (
 							<MenuUl ref={modalMenu}>
 								<MenuLi>
-									<NavLink to="/passwordcheck">회원 정보 수정</NavLink>
+									<NavLink to="/passwordcheck" onClick={handleClickList}>
+										회원 정보 수정
+									</NavLink>
 								</MenuLi>
 								<MenuLi>여행 페이지 이동</MenuLi>
 								<MenuLi>
-									<NavLink to="/mypage">마이페이지</NavLink>
+									<NavLink onClick={handleClickList} to="/mypage">
+										마이페이지
+									</NavLink>
 								</MenuLi>
-								<MenuLi>글쓰기</MenuLi>
+								<MenuLi onClick={handleClickList}>글쓰기</MenuLi>
 								<MenuLi
 									onClick={() => {
 										if (window.confirm('로그아웃 하시겠습니까?')) {

@@ -11,8 +11,8 @@ const SignupSection = styled.section`
 	background-color: white;
 `;
 const SignupContainer = styled.article`
-	width: 30rem;
-	height: 48rem;
+	width: 40rem;
+	height: 44rem;
 	margin: 6rem auto;
 	box-shadow: 1px 1px 22px 2px rgba(0, 0, 0, 0.25);
 	border-radius: 38px;
@@ -22,16 +22,17 @@ const SignupHeader = styled.h2`
 	font-size: 2rem;
 	position: relative;
 	top: 3rem;
-	left: 8rem;
+	left: 14rem;
 `;
 const SignupInput = styled.input`
-	width: 18rem;
+	display: block;
+	width: 22rem;
 	height: 2.5rem;
 	padding: 0.8rem;
 	box-sizing: border-box;
 	position: relative;
 	top: 6rem;
-	left: 6rem;
+	left: 9rem;
 	margin-bottom: 1.8rem;
 	color: #5f6caf;
 	background-color: #edf7fa;
@@ -40,15 +41,15 @@ const SignupInput = styled.input`
 `;
 const SignupButton = styled.button`
 	display: block;
-	width: 18rem;
+	width: 22rem;
 	height: 3.2rem;
 	font-size: 1rem;
 	text-align: center;
 	line-height: 3.2rem;
 	margin-bottom: 1.5rem;
 	position: relative;
-	top: 8rem;
-	left: 6rem;
+	top: 6rem;
+	left: 9rem;
 	background-color: #5f6caf;
 	color: #fff;
 	border: none;
@@ -57,44 +58,31 @@ const SignupButton = styled.button`
 
 const AddressButton = styled.button`
 	width: 6rem;
-	height: 3.2rem;
+	height: 2.5rem;
 	font-size: 1rem;
 	text-align: center;
-	line-height: 3.2rem;
-	margin-bottom: 1.5rem;
+	line-height: 2.5rem;
 	position: relative;
-	top: 6rem;
-	left: 6rem;
+	top: 1.7rem;
+	left: 25rem;
 	background-color: #5f6caf;
 	color: #fff;
 	border: none;
-	border-radius: 22px;
+	border-radius: 0 22px 22px 0;
 `;
-const NavUl = styled.ul`
-	display: flex;
-	align-items: center;
-	margin-right: 3rem;
-`;
-const NavLi = styled.li`
-	margin: 0 2rem;
-	color: #5f6caf;
-`;
-const MenuUl = styled(NavUl)`
-	display: flex;
-	flex-direction: column;
+const MenuUl = styled.ul`
 	position: absolute;
-	width: 15vw;
+	width: 10rem;
 	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
 	text-align: center;
-	left: -0.5rem;
 	top: 11rem;
-	background-color: #edf7fa;
+	background-color: #fff;
+	z-index: 999;
 `;
-const MenuLi = styled(NavLi)`
+const MenuLi = styled.li`
 	color: #5f6caf;
-	margin: 0;
 	height: 3rem;
-	width: 15vw;
+	width: 10rem;
 	line-height: 3rem;
 	color: black;
 	cursor: pointer;
@@ -242,6 +230,7 @@ function EditProfile() {
 							name="address"
 							defaultValue={address}
 							placeholder="주소를 입력해 주세요."
+							style={{ width: '17rem' }}
 						/>
 						<AddressButton
 							onClick={e => {
@@ -262,6 +251,7 @@ function EditProfile() {
 								setAddress2(e.target.value);
 							}}
 							placeholder="상세 주소를 입력해 주세요."
+							style={{ top: '3.5rem' }}
 						/>
 
 						<SignupInput
@@ -271,6 +261,7 @@ function EditProfile() {
 								const file = e.target.files[0];
 								setProfileImage(file);
 							}}
+							style={{ top: '3.5rem' }}
 						/>
 
 						<SignupButton onClick={handleSubmit}>변경</SignupButton>

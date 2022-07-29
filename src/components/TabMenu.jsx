@@ -27,4 +27,5 @@ const TabMenuLi = styled.li`
 	background-color: #edf7fa;
 	text-align: center;
 	line-height: 4rem;
+	cursor: pointer;
 `;

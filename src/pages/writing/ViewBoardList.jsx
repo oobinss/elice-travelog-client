@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { BiRestaurant } from 'react-icons/bi';
 import { ImLibrary } from 'react-icons/im';
@@ -21,9 +21,7 @@ const Moving = keyframes`
     transform: rotate( 0deg );
   }
 `;
-const IconBox = styled.div`
-
-`
+const IconBox = styled.div``;
 const ListBox = styled.div`
 	padding: 1rem;
 	margin: 1.5rem;
@@ -55,12 +53,12 @@ const LinkToURL = styled.a`
 	cursor: pointer;
 `;
 const ListHeader = styled.h2`
-  font-size: 1.2rem;
-  text-align: center;
-`
+	font-size: 1.2rem;
+	text-align: center;
+`;
 
 function ViewBoardList({ bookmarkId, placeName, placeUrl, bookmarkMemo }) {
-  return (
+	return (
 		<LinkToURL href={placeUrl} target="_blank">
 			<ListBox>
 				<IconBox>
@@ -73,4 +71,4 @@ function ViewBoardList({ bookmarkId, placeName, placeUrl, bookmarkMemo }) {
 	);
 }
 
-export default ViewBoardList
+export default ViewBoardList;
