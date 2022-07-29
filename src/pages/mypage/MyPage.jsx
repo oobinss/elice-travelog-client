@@ -15,6 +15,7 @@ const MyPage = () => {
 	const [editable, setEditable] = useState(false);
 	const [buttonClick, setButtonClick] = useRecoilState(colorLogState);
 	const [userName, setUserName] = useState('');
+	const [userbookmark, setUserBookmark] = useState([]);
 	useEffect(() => {
 		axios.get('http://localhost:8000/api/users/user', config).then(({ data }) => {
 			setUserText(data.profileText);
@@ -23,6 +24,9 @@ const MyPage = () => {
 			setUserName(data.name);
 		});
 		axios.get('http://localhost:8000/api/posts/user', config).then(({ data }) => setUserPost(data));
+		axios
+			.get('http://localhost:8000/api/bookmarks/folders', config)
+			.then(({ data }) => setUserBookmark(data.length));
 	}, []);
 
 	const handleKeyDown = () => {
@@ -51,7 +55,7 @@ const MyPage = () => {
 	return (
 		<Page>
 			<Profile>
-				<Img src={userprofile} />
+				<Img src={userprofile || '/img/default.png'} />
 				<UserName>{userName}</UserName>
 
 				{!editable ? (
@@ -75,7 +79,7 @@ const MyPage = () => {
 				<MyInfo>
 					<MyInfoBox>
 						<p>내 여행</p>
-						<MyLog>3</MyLog>
+						<MyLog>{userbookmark}</MyLog>
 					</MyInfoBox>
 					<MyInfoBox>
 						<p>여행글</p>
@@ -93,7 +97,7 @@ const MyPage = () => {
 			<Feed>
 				{userpost.map(post => (
 					<FeedBox key={post.id}>
-						<FeedBtn onClick={() => navigate(`../View/${post.id}`)}>
+						<FeedBtn onClick={() => navigate(`../view/${post.id}`)}>
 							<FeedImg
 								src={
 									post.mainImg

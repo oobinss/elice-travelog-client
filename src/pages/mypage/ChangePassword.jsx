@@ -125,6 +125,7 @@ function ChangePassword() {
 						password,
 					},
 				});
+				localStorage.clear();
 				window.location.href = '/login';
 			} catch (err) {
 				console.error(err.stack);

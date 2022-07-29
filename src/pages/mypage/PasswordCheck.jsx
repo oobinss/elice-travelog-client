@@ -102,7 +102,7 @@ function PasswordCheck() {
 						}}
 						placeholder="비밀번호를 입력해 주세요."
 					/>
-					<SignupButton onClick={handleSubmit}>변경</SignupButton>
+					<SignupButton onClick={handleSubmit}>확인</SignupButton>
 				</form>
 			</SignupContainer>
 		</SignupSection>

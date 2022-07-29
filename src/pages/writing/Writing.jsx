@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 import WritingSidebar from './WritingSidebar';
 import TagBtn from './TagBtn';
@@ -135,6 +136,7 @@ const NoList = styled.p`
 `;
 function Writing() {
 	const location = useLocation(); // location.search 함수로 / 뒤의 주소 받아옴
+	const navigate = useNavigate(); // redirect
 	const queryArray = decodeURI(location.search).split('='); // 한글 url decode 해주고 = 기준으로 앞뒤로 자르기
 	const params = queryArray[1]; // 뒤에 있는 걸 가져오면 내가 원하는 검색어
 
@@ -276,6 +278,7 @@ function Writing() {
 		};
 		postData();
 		alert('저장되었습니다.');
+		navigate('../mypage');
 	};
 	return (
 		<WritingSection>
