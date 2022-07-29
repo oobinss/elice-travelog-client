@@ -16,6 +16,7 @@ function Qna() {
 				const type = 'qna';
 				const data = await axios.get(`http://localhost:8000/api/posts/${type}`);
 				setQna(data.data);
+				console.log(data.data);
 			} catch (e) {
 				console.error(e);
 			}

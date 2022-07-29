@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import WritingSidebar from './WritingSidebar';
 import TagBtn from './TagBtn';
 import CityTag from './CityTag';
-import WritingBoardList from './WritingBoardList'
+import WritingBoardList from './WritingBoardList';
 // Toast 에디터
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/react-editor';
@@ -29,77 +29,77 @@ const WritingSection = styled.section`
 	overflow: scroll;
 `;
 const WritingContainer = styled.div`
-  width: 70vw;
-  margin-left: 35rem;
-  padding-top: 3rem;
-  display: flex;
-  flex-direction: column;
-  .toastui-editor-defaultUI {
-    border: 0 !important;
-    padding: 0 !important;
-  }
-  .toastui-editor-defaultUI-toolbar {
-    background-color: #fff;
-    padding: 0 !important;
-  }
-  .toastui-editor-defaultUI .ProseMirror {
-    padding: 0 !important;
-  }
-  .toastui-editor-ww-container .toastui-editor-contents {
-    padding: 0 !important;
-    margin-top: 2rem;
-  }
+	width: 70vw;
+	margin-left: 35rem;
+	padding-top: 3rem;
+	display: flex;
+	flex-direction: column;
+	.toastui-editor-defaultUI {
+		border: 0 !important;
+		padding: 0 !important;
+	}
+	.toastui-editor-defaultUI-toolbar {
+		background-color: #fff;
+		padding: 0 !important;
+	}
+	.toastui-editor-defaultUI .ProseMirror {
+		padding: 0 !important;
+	}
+	.toastui-editor-ww-container .toastui-editor-contents {
+		padding: 0 !important;
+		margin-top: 2rem;
+	}
 `;
 
 const WritingHeader = styled.textarea`
-  background: transparent;
-  display: block;
-  padding: 0px;
-  font-size: 2.75rem;
-  width: 100%;
-  height: 4.2rem;
-  resize: none;
-  line-height: 1.5;
-  outline: none;
-  border: none;
-  font-weight: bold;
-  cursor: text;
+	background: transparent;
+	display: block;
+	padding: 0px;
+	font-size: 2.75rem;
+	width: 100%;
+	height: 4.2rem;
+	resize: none;
+	line-height: 1.5;
+	outline: none;
+	border: none;
+	font-weight: bold;
+	cursor: text;
 `;
 const HeaderBar = styled.div`
-  background: rgb(73, 80, 87);
-  height: 6px;
-  width: 4rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 1px;
-`
+	background: rgb(73, 80, 87);
+	height: 6px;
+	width: 4rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border-radius: 1px;
+`;
 const TagInput = styled.input`
-  background: transparent;
-  display: inline-flex;
-  outline: none;
-  cursor: text;
-  font-size: 1.125rem;
-  line-height: 2rem;
-  min-width: 8rem;
-  border: none;
+	background: transparent;
+	display: inline-flex;
+	outline: none;
+	cursor: text;
+	font-size: 1.125rem;
+	line-height: 2rem;
+	min-width: 8rem;
+	border: none;
 `;
 const WritingHeaderBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 2rem;
 `;
 const Button = styled.button`
-  display: block;
-  width: 6rem;
-  height: 3.2rem;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 3.2rem;
-  background-color: #5f6caf;
-  color: #fff;
-  border: none;
-  border-radius: 22px;
-  cursor: pointer;
+	display: block;
+	width: 6rem;
+	height: 3.2rem;
+	font-size: 1rem;
+	text-align: center;
+	line-height: 3.2rem;
+	background-color: #5f6caf;
+	color: #fff;
+	border: none;
+	border-radius: 22px;
+	cursor: pointer;
 `;
 const Board = styled.div`
 	height: 18rem;
@@ -113,32 +113,32 @@ const Board = styled.div`
 	align-items: center;
 `;
 const TagBox = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.5rem;
-  margin-top: 0.75rem;
-  gap: 2rem;
-  .display {
-    display: block;
-  }
-  .displayNone {
-    display: none;
-  }
+	display: flex;
+	align-items: center;
+	margin-bottom: 1.5rem;
+	margin-top: 0.75rem;
+	gap: 2rem;
+	.display {
+		display: block;
+	}
+	.displayNone {
+		display: none;
+	}
 `;
 const Select = styled.select`
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
-  height: 2rem;
+	border: none;
+	background-color: #fff;
+	cursor: pointer;
+	height: 2rem;
 `;
 function Writing() {
 	const location = useLocation(); // location.search 함수로 / 뒤의 주소 받아옴
 	const queryArray = decodeURI(location.search).split('='); // 한글 url decode 해주고 = 기준으로 앞뒤로 자르기
-  const params = queryArray[1]; // 뒤에 있는 걸 가져오면 내가 원하는 검색어
-  
+	const params = queryArray[1]; // 뒤에 있는 걸 가져오면 내가 원하는 검색어
+
 	useBeforeunload(e => e.preventDefault());
 
-  const [data, setData] = useState([]);
+	const [data, setData] = useState([]);
 	//axios bearer token
 	const token = window.localStorage.getItem('token');
 	let config = {
@@ -169,8 +169,8 @@ function Writing() {
 		setTimeout(() => callback(url, '이미지'), 1000);
 	};
 	// 보드 상태 변경
-  const [board, setBoard] = useRecoilState(boardState);
-    console.log(data);
+	const [board, setBoard] = useRecoilState(boardState);
+	console.log(data);
 	// DnD
 	const [{ isOver }, dropToAdd] = useDrop(() => ({
 		accept: 'card',
@@ -180,9 +180,9 @@ function Writing() {
 		}),
 	}));
 
-  // 보드에 리스트 추가
-  const addToBoard = id => {
-    const items = data.filter(e => id === e.id);
+	// 보드에 리스트 추가
+	const addToBoard = id => {
+		const items = data.filter(e => id === e.id);
 		setBoard(board => [...board, items[0]]);
 		//하나로 바꾸기
 		// setBoard([items[0]]);
@@ -285,68 +285,68 @@ function Writing() {
 		alert('저장되었습니다.');
 	};
 	return (
-			<WritingSection>
-				<WritingSidebar />
-				<WritingContainer>
-					<Board ref={dropToAdd}>
-						{[...new Set(board)].map(e => {
-							return (
-								<WritingBoardList
-									id={e.id}
-									placeName={e.placeName}
-									placeUrl={e.placeUrl}
-									bookmarkMemo={e.bookmarkMemo}
-									categoryGroupName={e.categoryGroupName}
-								/>
-							);
+		<WritingSection>
+			<WritingSidebar />
+			<WritingContainer>
+				<Board ref={dropToAdd}>
+					{[...new Set(board)].map(e => {
+						return (
+							<WritingBoardList
+								id={e.id}
+								placeName={e.placeName}
+								placeUrl={e.placeUrl}
+								bookmarkMemo={e.bookmarkMemo}
+								categoryGroupName={e.categoryGroupName}
+							/>
+						);
+					})}
+				</Board>
+				<WritingHeaderBox>
+					<WritingHeader onChange={handleHeader} placeholder="제목을 입력하세요"></WritingHeader>
+					<Button onClick={handleButton}>발행</Button>
+				</WritingHeaderBox>
+				<HeaderBar />
+				<TagBox>
+					{cateTag.length
+						? cateTag.map(e => {
+								return (
+									<CityTag changeToggle={changeToggle} changeCateTag={changeCateTag} city={e} />
+								);
+						  })
+						: ''}
+					<Select
+						className={CityTagToggle ? 'display' : 'displayNone'}
+						onChange={e => handleTagChange(e)}
+					>
+						{cityArr.map(e => {
+							return <option value={e}>{e}</option>;
 						})}
-					</Board>
-					<WritingHeaderBox>
-						<WritingHeader onChange={handleHeader} placeholder="제목을 입력하세요"></WritingHeader>
-						<Button onClick={handleButton}>발행</Button>
-					</WritingHeaderBox>
-					<HeaderBar />
-					<TagBox>
-						{cateTag.length
-							? cateTag.map(e => {
-									return (
-										<CityTag changeToggle={changeToggle} changeCateTag={changeCateTag} city={e} />
-									);
-							  })
-							: ''}
-						<Select
-							className={CityTagToggle ? 'display' : 'displayNone'}
-							onChange={e => handleTagChange(e)}
-						>
-							{cityArr.map(e => {
-								return <option value={e}>{e}</option>;
-							})}
-						</Select>
-						{TagList.map(e => {
-							return <TagBtn id={e.id} tag={e.tag} />;
-						})}
-						<form onSubmit={handleTag}>
-							<TagInput
-								ref={tagInputRef}
-								onChange={getValue}
-								placeholder="태그를 입력하세요"
-								type="text"
-							></TagInput>
-						</form>
-					</TagBox>
-					<Editor
-						ref={editorRef}
-						initialValue="여기에 이야기를 적어보세요!"
-						previewStyle="vertical"
-						initialEditType="wysiwyg"
-						plugins={[colorSyntax]}
-						height="50rem"
-						hooks={{
-							addImageBlobHook: onUploadImage,
-						}}
-					/>
-				</WritingContainer>
-			</WritingSection>
+					</Select>
+					{TagList.map(e => {
+						return <TagBtn id={e.id} tag={e.tag} />;
+					})}
+					<form onSubmit={handleTag}>
+						<TagInput
+							ref={tagInputRef}
+							onChange={getValue}
+							placeholder="태그를 입력하세요"
+							type="text"
+						></TagInput>
+					</form>
+				</TagBox>
+				<Editor
+					ref={editorRef}
+					initialValue="여기에 이야기를 적어보세요!"
+					previewStyle="vertical"
+					initialEditType="wysiwyg"
+					plugins={[colorSyntax]}
+					height="50rem"
+					hooks={{
+						addImageBlobHook: onUploadImage,
+					}}
+				/>
+			</WritingContainer>
+		</WritingSection>
 	);
 }
 

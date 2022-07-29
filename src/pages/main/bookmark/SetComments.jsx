@@ -26,10 +26,10 @@ function SetComments(props) {
 		buttonRef.current.style.display = 'none';
 	}
 
-	const handleChange = debounce((e) => {
+	const handleChange = debounce(e => {
 		setValue(e.target.value);
 	}, 500);
-	
+
 	return (
 		<SetCommentsStyle>
 			<BsPencilFill className="addComments" onClick={handleForm} color="#5f6caf" />

@@ -16,7 +16,7 @@ function Searchbar() {
 	const setClose = useSetRecoilState(extendbarState);
 	const setPlace = useSetRecoilState(placeState);
 
-	const onChange = debounce((e) => {
+	const onChange = debounce(e => {
 		setMainInputValue(e.target.value);
 	}, 500);
 

@@ -27,10 +27,8 @@ function BookmarkDetail(props) {
 
 	let navigate = useNavigate();
 	const token = localStorage.getItem('token');
-	
-	useEffect(()=>{
-			
-	},[listNumber])
+
+	useEffect(() => {}, [listNumber]);
 
 	async function sendToWriting() {
 		let newArray = makeBookmark(bookmark, text, bmList, listNumber);

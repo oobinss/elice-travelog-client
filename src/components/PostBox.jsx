@@ -30,6 +30,7 @@ const PostContainer = styled.div`
 	position: relative;
 	top: 10rem;
 	left: calc(50vw - 22.5rem);
+	cursor: pointer;
 `;
 const PostTitle = styled.p`
 	display: block;

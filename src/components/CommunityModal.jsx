@@ -5,16 +5,20 @@ import { communityState } from '../recoil/Atom';
 import { IoClose } from 'react-icons/io5';
 import CommentForCommunity from './CommentForCommunity';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+const loginUserId = localStorage.getItem('userId');
+const token = localStorage.getItem('token');
 
 function CommunityModal({ title, img, name, content, id, userId }) {
 	const [click, setClick] = useRecoilState(communityState);
 	const [comments, setComments] = useState([]);
 	const [commentInput, setCommentInput] = useState('');
 	const [randomId, setRandomId] = useState(0);
+	const navigate = useNavigate();
 
 	const postId = id;
-	const loginUserId = localStorage.getItem('userId');
-	const token = localStorage.getItem('token');
+
 	useEffect(() => {
 		(async () => {
 			try {
@@ -48,6 +52,20 @@ function CommunityModal({ title, img, name, content, id, userId }) {
 		setComments(data.data);
 		setCommentInput('');
 	};
+
+	const handleDelete = async () => {
+		try {
+			await axios.delete(`http://localhost:8000/api/posts/${postId}`, {
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			});
+		} catch (e) {
+			console.error(e);
+		}
+		setClick({ state: false, id: '' });
+		window.location.reload();
+	};
 	return (
 		<ModalBG onClick={clickHandler}>
 			<Modal onClick={e => e.stopPropagation()}>
@@ -55,7 +73,9 @@ function CommunityModal({ title, img, name, content, id, userId }) {
 				<PostImg src={img} />
 				<PostWriter>{name}</PostWriter>
 				<PostContent>{content}</PostContent>
-				<DeleteButton>삭제</DeleteButton>
+				{Number(loginUserId) === Number(userId) && (
+					<DeleteButton onClick={handleDelete}>삭제</DeleteButton>
+				)}
 				<CommentBox>
 					<CommentContainer>
 						{comments.map((i, idx) => {
@@ -142,7 +162,7 @@ const CommentBox = styled.div`
 	height: 28rem;
 	border-left: 1px solid #ccc;
 	position: relative;
-	top: -8rem;
+	top: -5rem;
 	left: 30rem;
 `;
 const CommentContainer = styled.div`
@@ -191,13 +211,14 @@ const DeleteButton = styled.div`
 	width: 4rem;
 	height: 2rem;
 	font-weight: 300;
-	position: relative;
-	top: -3.8rem;
+	position: absolute;
+	top: 2.2rem;
 	left: 25rem;
 	border-radius: 10px;
 	text-align: center;
 	line-height: 2rem;
 	border: 1px solid #ff8364;
+	cursor: pointer;
 	&:hover {
 		background-color: #ff8364;
 		color: #fff;

@@ -63,6 +63,7 @@ function Companion() {
 					name={together.find(i => i.id === postClick.id).User.nickname}
 					img={together.find(i => i.id === postClick.id).User.profileImg}
 					content={together.find(i => i.id === postClick.id).content}
+					userId={together.find(i => i.id === postClick.id).userId}
 				/>
 			)}
 		</>

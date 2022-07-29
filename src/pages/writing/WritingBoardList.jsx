@@ -30,8 +30,8 @@ const ListBox = styled.div`
 	}
 `;
 const ListHeader = styled.h2`
-  font-size: 1.2rem;
-  text-align: center;
+	font-size: 1.2rem;
+	text-align: center;
 `;
 const Closebtn = styled.button`
 	position: absolute;
@@ -57,42 +57,42 @@ const Closebtn = styled.button`
 	}
 `;
 const LinkToURL = styled.a`
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: center;
-  cursor: pointer;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+	cursor: pointer;
 `;
 function WritingBoardList({ id, placeName, placeUrl, bookmarkMemo, categoryGroupName }) {
-  const [board, setBoard] = useRecoilState(boardState);
-  const handleButton = () => {
-    const newArr = board.filter(e => id !== e.id);
-    setBoard(newArr);
-  };
-  let category;
-  switch (categoryGroupName) {
-    case '카페':
-      category = <IoMdCafe className="icon" />;
-      break;
-    case '음식점':
-      category = <BiRestaurant className="icon" />;
-      break;
-    default:
-      category = <ImLibrary className="icon" />;
-  }
-  return (
-    <ListBox>
-      {category}
-      <LinkToURL href={placeUrl} target="_blank">
-        <ListHeader>{placeName.split(' ')[0]}</ListHeader>
-        <p>{bookmarkMemo}</p>
-      </LinkToURL>
-      <Closebtn onClick={handleButton}>
-        <IoIosClose className="close" />
-      </Closebtn>
-    </ListBox>
-  );
+	const [board, setBoard] = useRecoilState(boardState);
+	const handleButton = () => {
+		const newArr = board.filter(e => id !== e.id);
+		setBoard(newArr);
+	};
+	let category;
+	switch (categoryGroupName) {
+		case '카페':
+			category = <IoMdCafe className="icon" />;
+			break;
+		case '음식점':
+			category = <BiRestaurant className="icon" />;
+			break;
+		default:
+			category = <ImLibrary className="icon" />;
+	}
+	return (
+		<ListBox>
+			{category}
+			<LinkToURL href={placeUrl} target="_blank">
+				<ListHeader>{placeName.split(' ')[0]}</ListHeader>
+				<p>{bookmarkMemo}</p>
+			</LinkToURL>
+			<Closebtn onClick={handleButton}>
+				<IoIosClose className="close" />
+			</Closebtn>
+		</ListBox>
+	);
 }
 
 export default WritingBoardList;

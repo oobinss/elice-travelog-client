@@ -1,34 +1,34 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import styled, { keyframes } from 'styled-components'
+import styled, { keyframes } from 'styled-components';
 import CommentList from './CommentList';
 import {
-  IoChatbubbleEllipsesOutline,
-  IoHeartOutline,
-  IoMapOutline,
-  IoPeople,
-  IoEllipsisHorizontalSharp,
-  IoArrowRedoOutline,
-  IoHeartSharp,
+	IoChatbubbleEllipsesOutline,
+	IoHeartOutline,
+	IoMapOutline,
+	IoPeople,
+	IoEllipsisHorizontalSharp,
+	IoArrowRedoOutline,
+	IoHeartSharp,
 } from 'react-icons/io5';
 const CommentContainer = styled.div`
-  display: flex;
-  width: 26vw;
-  height: calc(100vh - 5rem);
-  flex-direction: column;
-  padding-top: 1.5rem;
-  gap: 2rem;
-  border-left: 1px solid #e9e9e9;
-  position: fixed;
-  right: 0;
-  margin-bottm: 5rem;
-  overflow: scroll;
+	display: flex;
+	width: 26vw;
+	height: calc(100vh - 5rem);
+	flex-direction: column;
+	padding-top: 1.5rem;
+	gap: 2rem;
+	border-left: 1px solid #e9e9e9;
+	position: fixed;
+	right: 0;
+	margin-bottm: 5rem;
+	overflow: scroll;
 `;
 const CommentStatus = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-items: center;
-`
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-items: center;
+`;
 const MovingHeart = keyframes`
   0%{
     transform: scale(0.8);
@@ -77,98 +77,98 @@ const CommentBtn = styled.button`
     animation: ${MovingHeart} 0.3s linear ;
 `;
 const ProfileBox = styled.div`
-  display: flex;
-  padding-left: 1rem;
-  padding-right: 2rem;
-  justify-content: space-between;
+	display: flex;
+	padding-left: 1rem;
+	padding-right: 2rem;
+	justify-content: space-between;
 `;
 const InfoBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  justify-content: center;
-  padding-left: 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	justify-content: center;
+	padding-left: 1rem;
 `;
 const ProfilInfo = styled.div`
-  display: flex;
-  margin-bottom: 2rem;
-`
+	display: flex;
+	margin-bottom: 2rem;
+`;
 const MoreBtn = styled.button`
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
-  height: 1rem;
+	border: none;
+	background-color: #fff;
+	cursor: pointer;
+	height: 1rem;
 `;
 const UserName = styled.h2`
-  font-weight: bold;
+	font-weight: bold;
 `;
 const DateNTime = styled.span`
-  font-size: 0.8rem;
-  color: #808080;
+	font-size: 0.8rem;
+	color: #808080;
 `;
 const ProfileImgBox = styled.button`
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 2rem;
-  border: none;
-  position: relative;
-  color: #fff;
-  text-align: center;
-  align-items: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: 2rem;
+	border: none;
+	position: relative;
+	color: #fff;
+	text-align: center;
+	align-items: center;
 `;
 const ProfileImg = styled.img`
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: 2rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  &:hover {
-    filter: brightness(110%);
-  }
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: 2rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	&:hover {
+		filter: brightness(110%);
+	}
 `;
 const Like = styled.p`
-  padding-left: 2.3rem;
-`
+	padding-left: 2.3rem;
+`;
 const CommentFormBox = styled.div`
-  padding: 1rem 1rem 3rem 1rem;
-  border-radius: 12px;
+	padding: 1rem 1rem 3rem 1rem;
+	border-radius: 12px;
 `;
 const CommentForm = styled.form`
-  display: grid;
-  grid-template-columns: 1fr;
-  position: relative;
+	display: grid;
+	grid-template-columns: 1fr;
+	position: relative;
 `;
 const CommentInput = styled.input`
-  border-radius: 12px;
-  height: 2rem;
+	border-radius: 12px;
+	height: 2rem;
 `;
 const CommentSubmitBtn = styled.button`
-  border: red;
-  border-radius: 0 12px 12px 0;
-  padding: 0.5rem;
-  background-color: #fff;
-  color: #5f6caf;
-  position: absolute;
-  font-weight: bold;
-  width: 3rem;
-  top: 50%;
-  left: 90%;
-  transform: translate(-50%, -50%);
+	border: red;
+	border-radius: 0 12px 12px 0;
+	padding: 0.5rem;
+	background-color: #fff;
+	color: #5f6caf;
+	position: absolute;
+	font-weight: bold;
+	width: 3rem;
+	top: 50%;
+	left: 90%;
+	transform: translate(-50%, -50%);
 `;
 
 function Comment() {
-  const [commentData, setCommentData] = useState([]);
+	const [commentData, setCommentData] = useState([]);
 	//axios bearer token
 	const token = window.localStorage.getItem('token');
 	let config = {
 		headers: { Authorization: `Bearer ${token}` },
 	};
 	const getCommnetData = async () => {
-    try {
-      let postId = 32;
+		try {
+			let postId = 32;
 			await axios.get(`http://localhost:8000/api/comments/${postId}`, config).then(res => {
-        setCommentData(res.data);
+				setCommentData(res.data);
 			});
 		} catch (err) {
 			console.log(err);
@@ -177,14 +177,14 @@ function Comment() {
 	useEffect(() => {
 		getCommnetData();
 	}, []);
-  console.log(commentData);
+	console.log(commentData);
 	const inputRef = useRef();
 	const [value, setValue] = useState('');
 	const [heart, setHeart] = useState(false);
 	const [isValid, setIsValid] = useState(false);
 	const handleHeart = () => {
 		setHeart(!heart);
-  };
+	};
 	// 댓글 버튼
 	const handleComent = () => {
 		inputRef.current.focus();
@@ -192,17 +192,17 @@ function Comment() {
 	// 사용자로 부터 받아오는 값을 value에 업데이트
 	const getValue = e => {
 		setValue(e.target.value);
-		e.target.value ? setIsValid(true) : null;
+		// e.target.value ? setIsValid(true) : null;
 	};
 	//랜덤 아이디 생성
 	const [randomId, setRandomId] = useState(0);
 	useEffect(() => {
 		setRandomId(new Date().getTime());
 	}, [value]);
-	  const [commentList, setCommentList] = useState([]);
-  // 사용자로부터 받아오는 값을 commentList에 배열 데이터 추가 & 댓글 초기화
-  const addComment = e => {
-    const addCommnetData = async () => {
+	const [commentList, setCommentList] = useState([]);
+	// 사용자로부터 받아오는 값을 commentList에 배열 데이터 추가 & 댓글 초기화
+	const addComment = e => {
+		const addCommnetData = async () => {
 			await axios
 				.post(
 					'http://localhost:8000/api/comments/register/32',
@@ -225,9 +225,9 @@ function Comment() {
 		};
 		e.preventDefault();
 		inputRef.current.value = '';
-    addCommnetData();
+		addCommnetData();
 		setValue('');
-    setIsValid(false);
+		setIsValid(false);
 	};
 	let heartStatus = heart ? (
 		<IoHeartSharp heart={heart} className="redHeart" />
@@ -287,4 +287,4 @@ function Comment() {
 	);
 }
 
-export default Comment
+export default Comment;

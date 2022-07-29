@@ -5,19 +5,19 @@ import WritingSearchbar from './WritingSearchbar';
 import WritingList from './WritingList';
 import { useRecoilState } from 'recoil';
 import { ImSearch } from 'react-icons/im';
-import { toggleState, boardState, checkedState } from '../../recoil/Atom.jsx'
+import { toggleState, boardState, checkedState } from '../../recoil/Atom.jsx';
 import axios from 'axios';
 import { useLocation } from 'react-router';
 
 const SidebarTitleBox = styled.div`
-  margin: 1rem;
-  background-color: #fff;
-  padding: 0.5rem;
-  border-radius: 12px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
+	margin: 1rem;
+	background-color: #fff;
+	padding: 0.5rem;
+	border-radius: 12px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1.5rem;
 `;
 const SearchbarBox = styled.div`
 	background-color: #fff;
@@ -41,70 +41,70 @@ const SearchForm = styled.form`
 	grid-template-columns: 3fr 1fr;
 `;
 const FavoriteBox = styled.div`
-  .icon {
-    width: 3rem;
-    height: 3rem;
-    padding: 0.5rem;
-    background-color: #ffb877;
-    color: white;
-    border-radius: 5px;
-  }
+	.icon {
+		width: 3rem;
+		height: 3rem;
+		padding: 0.5rem;
+		background-color: #ffb877;
+		color: white;
+		border-radius: 5px;
+	}
 `;
 const SidebarHeader = styled.h1`
-  font-size: 1.8rem;
-  text-align: center;
+	font-size: 1.8rem;
+	text-align: center;
 `;
 
 const WritingsidebarContainer = styled.div`
-  width: 30rem;
-  height: calc(100vh - 5rem);
-  background-color: #fafafa;
-  box-shadow: 0 40px 22px 2px rgba(0, 0, 0, 0.25);
-  overflow: scroll;
-  position: fixed;
+	width: 30rem;
+	height: calc(100vh - 5rem);
+	background-color: #fafafa;
+	box-shadow: 0 40px 22px 2px rgba(0, 0, 0, 0.25);
+	overflow: scroll;
+	position: fixed;
 `;
 const SidebarListBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin: 1rem;
-  padding: 1rem;
-  background-color: #fff;
-  border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin: 1rem;
+	padding: 1rem;
+	background-color: #fff;
+	border-radius: 5px;
 `;
 
 const ListFilterBox = styled.div`
-  margin: 1rem;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  display: flex;
-  justify-content: ${props => props.children[0].props.className};
-  background-color: #fff;
-  .display {
-    display: block;
-  }
-  .displayNone {
-    display: None;
-  }
-  .space-between {
-    display: block;
-  }
-  .flex-end {
-    display: None;
-  }
-`
+	margin: 1rem;
+	padding: 0.5rem 1rem 0.5rem 1rem;
+	display: flex;
+	justify-content: ${props => props.children[0].props.className};
+	background-color: #fff;
+	.display {
+		display: block;
+	}
+	.displayNone {
+		display: None;
+	}
+	.space-between {
+		display: block;
+	}
+	.flex-end {
+		display: None;
+	}
+`;
 const EditBtn = styled.button`
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
+	border: none;
+	background-color: #fff;
+	cursor: pointer;
 `;
 const Select = styled.select`
-  border: none;
-  background-color: #fff;
-  cursor: pointer;
-`
+	border: none;
+	background-color: #fff;
+	cursor: pointer;
+`;
 const EditBox = styled.div`
   display flex;
-`
+`;
 function WritingSidebar() {
 	const location = useLocation(); // location.search 함수로 / 뒤의 주소 받아옴
 	const queryArray = decodeURI(location.search).split('='); // 한글 url decode 해주고 = 기준으로 앞뒤로 자르기
@@ -128,7 +128,7 @@ function WritingSidebar() {
 	};
 	useEffect(() => {
 		getListData();
-  }, []);
+	}, []);
 	const [selected, setSelected] = useState('최신');
 	useEffect(() => {
 		let newlist = [];

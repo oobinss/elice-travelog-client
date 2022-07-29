@@ -3,7 +3,13 @@ import styled from 'styled-components';
 import { MdStars } from 'react-icons/md';
 import { BsPlusCircle } from 'react-icons/bs';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { allBookmarkState, bookmarkListState, bookmarkState, listNumberState, viewDetailState } from '../../../recoil/Atom';
+import {
+	allBookmarkState,
+	bookmarkListState,
+	bookmarkState,
+	listNumberState,
+	viewDetailState,
+} from '../../../recoil/Atom';
 import EditBookmark from './EditBookmark';
 
 function BookmarkList(props) {
@@ -29,10 +35,9 @@ function BookmarkList(props) {
 		setListNumber(e.target.id);
 		props.setGetNumber(e.target.id);
 		console.log(props.getNumber);
-		setTimeout(()=>{
+		setTimeout(() => {
 			setViewDetail(false);
-		},200)
-		
+		}, 200);
 	}
 
 	function handleSubmit() {
@@ -156,4 +161,4 @@ const BmListStyle = styled.div`
 	}
 `;
 
-export default BookmarkList; 
+export default BookmarkList;
