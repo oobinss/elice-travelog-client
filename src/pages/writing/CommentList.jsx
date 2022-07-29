@@ -108,7 +108,7 @@ const LikeBtn = styled.div`
     color: red;
     animation: ${MovingHeart} 0.3s linear ;
 `;
-function CommentList({ id, content, createAt, like, userName, userprofile }) {
+function CommentList({ content, createAt, like, userName, userprofile }) {
 	const [heart, setHeart] = useState(false);
 	const [likeCount, setLikeCount] = useState(like);
 	const handleHeart = () => {

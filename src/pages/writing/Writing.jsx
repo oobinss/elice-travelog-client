@@ -13,12 +13,10 @@ import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-sy
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 // recoil
 import { useRecoilState } from 'recoil';
-import { boardState, tagState, CityTagToggleState, dataState } from '../../recoil/Atom.jsx';
-//react dnd
-import { useDrop } from 'react-dnd';
+import { boardState, tagState, dataState } from '../../recoil/Atom.jsx';
 import axios from 'axios';
 //s3
-import { S3Upload, S3deleteObject } from '../../components/S3';
+import { S3Upload } from '../../components/S3';
 import { useBeforeunload } from 'react-beforeunload';
 import { useLocation } from 'react-router';
 
@@ -174,14 +172,6 @@ function Writing() {
 	};
 	// 보드 상태 변경
 	const [board, setBoard] = useRecoilState(boardState);
-	// DnD
-	const [{ isOver }, dropToAdd] = useDrop(() => ({
-		accept: 'card',
-		drop: item => addToBoard(item),
-		collect: monitor => ({
-			isOver: !!monitor.isOver(),
-		}),
-	}));
 	// 보드에 리스트 추가
 	const addToBoard = id => {
 		const items = data.filter(e => id === e.id);
@@ -259,8 +249,8 @@ function Writing() {
 			.slice(1)
 			.map(e => e.split(' ')[0])
 			.map(e => e.substring(0, e.length - 1));
+		// 업로드된 이미지를 삭제하기 위함
 		const difference = imgList.filter(x => !realImg.includes(x));
-		difference.forEach(e => console.log(e));
 		const firstImg = `https://elice-react-project-team1.s3.ap-northeast-2.amazonaws.com/upload/${realImg[0]}`;
 		const postData = async () => {
 			await axios
@@ -291,7 +281,7 @@ function Writing() {
 		<WritingSection>
 			<WritingSidebar />
 			<WritingContainer>
-				<Board ref={dropToAdd}>
+				<Board>
 					{board.length ? (
 						[...new Set(board)].map(e => {
 							return (

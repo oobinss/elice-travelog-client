@@ -221,10 +221,9 @@ function View() {
 							? board.map(e => {
 									return (
 										<ViewBoardList
-											id={e.id}
 											placeName={e.placeName}
 											placeUrl={e.placeUrl}
-											bookmarkMemo={e.bookmarkMemo}
+											categoryGroupName={e.categoryGroupName}
 										/>
 									);
 							  })

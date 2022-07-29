@@ -5,8 +5,6 @@ import CommentList from './CommentList';
 import {
 	IoChatbubbleEllipsesOutline,
 	IoHeartOutline,
-	IoMapOutline,
-	IoPeople,
 	IoEllipsisHorizontalSharp,
 	IoArrowRedoOutline,
 	IoHeartSharp,
@@ -215,7 +213,6 @@ function Comment({ nickname, profileImg, createAt }) {
 	}, [value]);
 	// 사용자로부터 받아오는 값을 commentList에 배열 데이터 추가 & 댓글 초기화
 	const addComment = async e => {
-		console.log('hi');
 		const addCommnetData = async () => {
 			await axios
 				.post(

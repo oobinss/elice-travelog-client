@@ -56,15 +56,23 @@ const ListHeader = styled.h2`
 	text-align: center;
 `;
 
-function ViewBoardList({ id, placeName, placeUrl, bookmarkMemo }) {
+function ViewBoardList({ placeName, placeUrl, categoryGroupName }) {
+	let category;
+	switch (categoryGroupName) {
+		case '카페':
+			category = <IoMdCafe className="icon" />;
+			break;
+		case '음식점':
+			category = <BiRestaurant className="icon" />;
+			break;
+		default:
+			category = <ImLibrary className="icon" />;
+	}
 	return (
 		<LinkToURL href={placeUrl} target="_blank">
 			<ListBox>
-				<IconBox>
-					<IoMdCafe className="icon" />
-				</IconBox>
+				<IconBox>{category}</IconBox>
 				<ListHeader>{placeName.split(' ')[0]}</ListHeader>
-				<p>{bookmarkMemo}</p>
 			</ListBox>
 		</LinkToURL>
 	);

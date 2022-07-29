@@ -65,7 +65,7 @@ const LinkToURL = styled.a`
 	align-items: center;
 	cursor: pointer;
 `;
-function WritingBoardList({ id, placeName, placeUrl, bookmarkMemo, categoryGroupName }) {
+function WritingBoardList({ id, placeName, placeUrl, categoryGroupName }) {
 	const [board, setBoard] = useRecoilState(boardState);
 	const handleButton = () => {
 		const newArr = board.filter(e => id !== e.id);

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useDrag } from 'react-dnd';
 import { toggleState, checkedState, boardState, dataState } from '../../recoil/Atom.jsx';
 import { useRecoilState } from 'recoil';
 import { BiRestaurant, BiPlus } from 'react-icons/bi';
@@ -84,11 +83,6 @@ const LinkToURL = styled.a`
 `;
 function WritingList({ id, placeName, placeUrl, bookmarkMemo, categoryGroupName }) {
 	const [toggle, setToggle] = useRecoilState(toggleState);
-	const [{ isDragging }, drag, previewRef] = useDrag(() => ({
-		type: 'card',
-		item: { id: id },
-		collect: monitor => ({ isDragging: monitor.isDragging() }),
-	}));
 	const [checkedInputs, setCheckedInputs] = useRecoilState(checkedState);
 
 	function handleSelect(checked, id) {
