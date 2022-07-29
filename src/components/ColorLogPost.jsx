@@ -1,9 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-function ColorLogPost({ title, mainImg, tag }) {
+function ColorLogPost({ title, mainImg, tag, id }) {
+	const navigate = useNavigate();
+	const handleClick = () => {
+		navigate(`/views/${id}`);
+	};
 	return (
-		<PostContainer>
+		<PostContainer onClick={handleClick}>
 			<PostThumbnail src={mainImg} />
 			<PostTitle>{title}</PostTitle>
 			<TravelTagBox>

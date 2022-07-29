@@ -4,11 +4,12 @@ import ColorLogPost from './ColorLogPost';
 
 function PostContainerForColorlog({ data }) {
 	const parsedTags = JSON.parse(data.posts[0].tag);
+
 	return (
 		<PostContainer>
 			{data &&
 				data.posts.map((i, idx) => (
-					<ColorLogPost key={idx} mainImg={i.mainImg} title={i.title} tag={parsedTags} />
+					<ColorLogPost key={idx} id={i.id} mainImg={i.mainImg} title={i.title} tag={parsedTags} />
 				))}
 		</PostContainer>
 	);

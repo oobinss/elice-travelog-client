@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import RouteBox from './RouteBox';
 
-function TravelPost({ title, username, profileImg, cateCity, img, markedData }) {
+function TravelPost({ title, username, profileImg, cateCity, img, markedData, id }) {
 	const [placeData, setPlaceData] = useState([]);
+	const navigate = useNavigate();
 	useEffect(() => {
 		const parsedTags = JSON.parse(markedData);
 		const tempArr = [];
@@ -18,14 +20,18 @@ function TravelPost({ title, username, profileImg, cateCity, img, markedData }) 
 		}
 	}, [markedData]);
 
+	const clickHandler = () => {
+		navigate(`/views/${id}`);
+	};
+
 	return (
-		<PostContainer>
+		<PostContainer onClick={clickHandler}>
 			<Thumbnail src={img} />
 			<PositionData>📍{cateCity}</PositionData>
 			<Title>{title}</Title>
 			<ProfilePic src={profileImg} />
 			<PostWriter>{username}</PostWriter>
-			<RouteContainer>
+			<RouteContainer onClick={e => e.stopPropagation()}>
 				{placeData.map((i, idx) => {
 					return <RouteBox key={idx} category={i.category} name={i.name} url={i.placeUrl} />;
 				})}

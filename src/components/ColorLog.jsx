@@ -242,7 +242,11 @@ function ColorLog() {
 					getContent={dataTip => `${isHover.id}`}
 				/>
 			)}
-			{isClick.state && <PostContainerForColorlog data={cityObj[isClick.id]} />}
+			{isClick.state && cityObj[isClick.id].posts.length !== 0 ? (
+				<PostContainerForColorlog data={cityObj[isClick.id]} />
+			) : (
+				isClick.state && <NoPosting>포스팅이 존재하지 않습니다.</NoPosting>
+			)}
 		</div>
 	);
 }
@@ -262,4 +266,17 @@ const Path = styled.path`
 	:hover {
 		fill: #5f6caf !important;
 	}
+`;
+
+const NoPosting = styled.div`
+	width: 20rem;
+	height: 30rem;
+	border-radius: 22px;
+	background-color: #fff;
+	box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.15);
+	text-align: center;
+	line-height: 30rem;
+	position: absolute;
+	top: 5rem;
+	left: 27rem;
 `;

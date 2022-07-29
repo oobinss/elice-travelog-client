@@ -119,9 +119,11 @@ function Navbar() {
 				<NavLi>
 					<NavLink to="/community">community</NavLink>
 				</NavLi>
-				<NavLi>
-					<NavLink to="/mypage">my page</NavLink>
-				</NavLi>
+				{isLoggedIn && (
+					<NavLi>
+						<NavLink to="/mypage">my page</NavLink>
+					</NavLi>
+				)}
 				{!isLoggedIn ? (
 					<NavLi>
 						<LoginBtn to="/login">login</LoginBtn>
