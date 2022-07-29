@@ -30,7 +30,12 @@ export const extendbarState = atom({
 
 export const addBookmarkState = atom({
 	key: 'addBookmarkState',
-	default: false,
+	default: true,
+});
+
+export const allBookmarkState = atom({
+	key: 'allBookmarkState',
+	default: [],
 });
 
 // bookmark에 저장될 data

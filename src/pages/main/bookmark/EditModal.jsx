@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function EditModal(props) {
+function EditModal() {
 	return (
 		<EditModalStyle>
 			<button className="editListBtn">수정하기</button>

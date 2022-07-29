@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import BookmarkInfo from './BookmarkInfo';
 import MessageBox from '../../../components/MessageBox';
 import { BsFillStarFill } from 'react-icons/bs';
 import { MdOutlineClose } from 'react-icons/md';
 import styled from 'styled-components';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import {
-	bookmarkState,
-	bookmarkListState,
-	bookmarkSetState,
-	addBookmarkState,
-	showBmListState,
-} from '../../../recoil/Atom';
+import { bookmarkState, addBookmarkState, showBmListState } from '../../../recoil/Atom';
 
 export default function BookmarkModal() {
 	const bookmark = useRecoilValue(bookmarkState);
@@ -54,6 +48,17 @@ const BmModalStyle = styled.div`
 	width: 20rem;
 	height: 50rem;
 	text-align: center;
+	overflow: scroll;
+
+	overflow-y: auto;
+	overflow-x: none;
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 2px;
+		background: #ccc;
+	}
 
 	.title {
 		display: flex;

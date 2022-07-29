@@ -1,11 +1,10 @@
 import React from 'react';
-import { BsCaretLeftSquare } from 'react-icons/bs';
 import Searchbar from './Searchbar';
 import PlaceInfo from '../../components/PlaceInfo';
 import SetModalBtn from '../../components/SetModalBtn';
 import BookmarkModal from './bookmark/BookmarkModal';
 import styled from 'styled-components';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { extendbarState, addBookmarkState } from '../../recoil/Atom';
 
 function Extendbar() {

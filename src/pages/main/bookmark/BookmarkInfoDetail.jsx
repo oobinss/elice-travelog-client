@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import handleStyle from '../../../function/handleStyle';
 import { AiFillCloseCircle } from 'react-icons/ai';
@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { placeInfoState, bookmarkState, activeState, detailInfoState } from '../../../recoil/Atom';
 import SetComments from './SetComments';
 
-function BookmarkInfoDetail({ width, height }) {
+function BookmarkInfoDetail() {
 	const [placeInfo, setPlaceInfo] = useRecoilState(placeInfoState);
 	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
 	const [, setActive] = useRecoilState(activeState);
@@ -24,19 +24,20 @@ function BookmarkInfoDetail({ width, height }) {
 	}
 
 	function makeBookmarkInfoDetail(bookmark) {
-		return bookmark.map((data, i) => (
-			<div key={i} id={data.id} className="bookmarkBox">
+		return bookmark.map(data => (
+			<div key={Math.random()} id={data.id} className="bookmarkBox">
 				{handleStyle(data)}
 				<button id={data.id} className="deleteBtn" onClick={handleBookmark}>
 					<AiFillCloseCircle className="circleX" color="#5f6caf" />
 				</button>
 				<div onClick={ActivateExtend} style={{ color: '#5f6caf', cursor: 'pointer' }}>
-					<span id={i}>{data.place_name}</span>
+					{data.place_name}
 				</div>
-				<SetComments number={i} />
+				<SetComments />
 			</div>
 		));
 	}
+
 	return <BookmarkInfoDetailStyle>{makeBookmarkInfoDetail(bookmark)}</BookmarkInfoDetailStyle>;
 }
 export default BookmarkInfoDetail;

@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Searchbar from '../Searchbar';
-import { BsCaretLeftSquare } from 'react-icons/bs';
 import { IoMdAirplane } from 'react-icons/io';
 import styled from 'styled-components';
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { bookmarkbarState, viewDetailState } from '../../../recoil/Atom';
+import {
+	allBookmarkState,
+	bookmarkbarState,
+	bookmarkState,
+	bookmarkListState,
+	viewDetailState,
+} from '../../../recoil/Atom';
 import BookmarkList from './BookmarkList';
 import BookmarkDetail from './BookmarkDetail';
 import SetModalBtn from '../../../components/SetModalBtn';

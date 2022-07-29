@@ -2,12 +2,16 @@ import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 import { MdStars } from 'react-icons/md';
 import { BsPlusCircle } from 'react-icons/bs';
-import { useRecoilState } from 'recoil';
-import { bookmarkListState, viewDetailState, listNumberState } from '../../../recoil/Atom';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { allBookmarkState, bookmarkListState, bookmarkState, listNumberState, viewDetailState } from '../../../recoil/Atom';
 import EditBookmark from './EditBookmark';
+
 function BookmarkList(props) {
+	const setListNumber = useSetRecoilState(listNumberState);
+	const setViewDetail = useSetRecoilState(viewDetailState);
+	const setBookmark = useSetRecoilState(bookmarkState);
+	const allBookmark = useRecoilValue(allBookmarkState);
 	const [bmList, setBmList] = useRecoilState(bookmarkListState);
-	const [, setViewDetail] = useRecoilState(viewDetailState);
 	const [edit, setEdit] = useState(false);
 
 	const inputRef = useRef();
@@ -21,9 +25,14 @@ function BookmarkList(props) {
 	}
 
 	function viewMore(e) {
-		setViewDetail(false);
+		setBookmark(allBookmark[e.target.id]);
+		setListNumber(e.target.id);
 		props.setGetNumber(e.target.id);
 		console.log(props.getNumber);
+		setTimeout(()=>{
+			setViewDetail(false);
+		},200)
+		
 	}
 
 	function handleSubmit() {
@@ -147,4 +156,4 @@ const BmListStyle = styled.div`
 	}
 `;
 
-export default BookmarkList;
+export default BookmarkList; 

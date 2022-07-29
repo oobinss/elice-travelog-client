@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import { debounce } from 'lodash';
 import { BsPencilFill } from 'react-icons/bs';
 import { useRecoilState } from 'recoil';
 import { textState } from '../../../recoil/Atom';
@@ -25,17 +26,18 @@ function SetComments(props) {
 		buttonRef.current.style.display = 'none';
 	}
 
-	function handleChange(e) {
+	const handleChange = debounce((e) => {
 		setValue(e.target.value);
-	}
+	}, 500);
+	
 	return (
 		<SetCommentsStyle>
 			<BsPencilFill className="addComments" onClick={handleForm} color="#5f6caf" />
 			<div className="makeFlex">
 				<input
 					type="hidden"
+					id={props.i}
 					onChange={handleChange}
-					value={value}
 					ref={inputRef}
 					placeholder="메모를 등록해 주세요."
 				/>

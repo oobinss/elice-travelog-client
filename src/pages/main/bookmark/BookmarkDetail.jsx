@@ -15,8 +15,9 @@ import {
 	currentListState,
 } from '../../../recoil/Atom';
 import BookmarkInfoDetail from './BookmarkInfoDetail';
+
 function BookmarkDetail(props) {
-	const bookmark = useRecoilValue(bookmarkState);
+	const [bookmark, setBookmark] = useRecoilState(bookmarkState);
 	const text = useRecoilValue(textState);
 	const currentList = useRecoilValue(currentListState);
 	const bmList = useRecoilValue(bookmarkListState);
@@ -25,6 +26,11 @@ function BookmarkDetail(props) {
 	const setViewDetail = useSetRecoilState(viewDetailState);
 
 	let navigate = useNavigate();
+	const token = localStorage.getItem('token');
+	
+	useEffect(()=>{
+			
+	},[listNumber])
 
 	async function sendToWriting() {
 		let newArray = makeBookmark(bookmark, text, bmList, listNumber);
@@ -57,7 +63,7 @@ function BookmarkDetail(props) {
 				<MdArrowBackIos className="backBtn" onClick={() => setViewDetail(true)} />
 			</div>
 			<div className="content">
-				{currentList.includes(props.getNumber) && <BookmarkInfoDetail />}
+				<BookmarkInfoDetail />
 			</div>
 			<button className="redirectTowrite" onClick={sendToWriting}>
 				글쓰기
