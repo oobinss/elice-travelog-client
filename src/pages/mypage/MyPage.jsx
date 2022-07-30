@@ -10,12 +10,13 @@ import { useNavigate } from 'react-router-dom';
 const MyPage = () => {
 	const [usertext, setUserText] = useState('');
 	const [userpost, setUserPost] = useState([]);
+	const [userbookmark, setUserBookmark] = useState([]);
 	const [userId, setUserId] = useState('');
 	const [userprofile, setUserProfile] = useState('');
 	const [editable, setEditable] = useState(false);
 	const [buttonClick, setButtonClick] = useRecoilState(colorLogState);
 	const [userName, setUserName] = useState('');
-	const [userbookmark, setUserBookmark] = useState([]);
+	const navigate = useNavigate();
 	useEffect(() => {
 		axios.get('http://localhost:8000/api/users/user', config).then(({ data }) => {
 			setUserText(data.profileText);
@@ -23,6 +24,10 @@ const MyPage = () => {
 			setUserId(data.id);
 			setUserName(data.name);
 		});
+		const type = 'post';
+		axios
+			.get(`http://localhost:8000/api/posts/user/${type}`, config)
+			.then(({ data }) => setUserPost(data));
 		axios.get('http://localhost:8000/api/posts/user', config).then(({ data }) => setUserPost(data));
 		axios
 			.get('http://localhost:8000/api/bookmarks/folders', config)
@@ -51,7 +56,7 @@ const MyPage = () => {
 	const handleButtonClick = () => {
 		setButtonClick(true);
 	};
-	let navigate = useNavigate();
+
 	return (
 		<Page>
 			<Profile>

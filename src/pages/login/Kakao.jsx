@@ -25,6 +25,7 @@ function Kakao() {
 				console.log(res);
 				const accessToken = res.data.access_token;
 				const userData = await getData(accessToken).get();
+				console.log(userData);
 				const toServer = await axios.post('http://localhost:8000/api/users/kakao', {
 					data: userData,
 				});
