@@ -20,13 +20,12 @@ export function S3Upload(file) {
 		Body: file,
 		Bucket: bucketName,
 		Key: `upload/${file.name}`,
-		Expires: 86400,
 	};
 	myBucket
 		.putObject(params)
 		.on('httpUploadProgress')
 		.send((err, data) => {
-			if (err) alert(err);
+			if (err) alert('오류!');
 		});
 }
 

@@ -44,6 +44,7 @@ const MyPage = () => {
 		});
 		setEditable(!editable);
 	};
+	
 	//axios bearer token
 	const token = window.localStorage.getItem('token');
 	let config = {
@@ -59,9 +60,8 @@ const MyPage = () => {
 	return (
 		<Page>
 			<Profile>
-				<Img src={userprofile || '/img/default.png'} />
+				<Img src={userprofile || ''} />
 				<UserName>{userName}</UserName>
-
 				{!editable ? (
 					<>
 						<ProfileInfoPara>{usertext} </ProfileInfoPara>
@@ -79,7 +79,6 @@ const MyPage = () => {
 						<Pencil onClick={handleKeyDown} style={{ top: '-6.5rem', left: '20rem' }}></Pencil>
 					</>
 				)}
-
 				<MyInfo>
 					<MyInfoBox>
 						<p>내 여행</p>

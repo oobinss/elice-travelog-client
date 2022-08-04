@@ -107,7 +107,6 @@ function EditProfile() {
 	useEffect(() => {
 		axios
 			.get('http://kdt-sw2-busan-team01.elicecoding.com:5000/api/users/user', config)
-			//.then(({ data }) => setUserData(data));
 			.then(({ data }) => {
 				setUserName(data.name);
 				setUserNickname(data.nickname);
@@ -134,7 +133,6 @@ function EditProfile() {
 		} else {
 			profileImg = S3getFileURL(`upload/default.png`);
 		}
-
 		let resultData = { userName, userNickname, phoneNumber, address, profileImg };
 
 		//변경된 값으로 수정
