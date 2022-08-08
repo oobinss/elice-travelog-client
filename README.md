@@ -1,7 +1,7 @@
 # ![travelog](https://user-images.githubusercontent.com/80265536/181826144-fcd582ee-f000-4f4d-a55c-6fc5637d58b6.jpg)
 
 ## URL
-https://www.youtube.com/watch?v=7Ep7jka6ers&ab_channel=oobinss
+https://www.youtube.com/watch?v=7Ep7jka6ers&ab_channel=oobinss <br>
 http://kdt-sw2-busan-team01.elicecoding.com/
 
 ## 서비스 설명
